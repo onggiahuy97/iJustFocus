@@ -7,18 +7,30 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3EB328B528823A0900FC4548 /* Time+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB328B428823A0900FC4548 /* Time+Extension.swift */; };
+		3EB328B928844D0600FC4548 /* TimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB328B828844D0600FC4548 /* TimerView.swift */; };
+		3EB328BB28844D1100FC4548 /* TasksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB328BA28844D1100FC4548 /* TasksView.swift */; };
+		3EB328BF2884606600FC4548 /* TaskCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB328BE2884606600FC4548 /* TaskCellView.swift */; };
 		3EE8E165287522C6008AB34E /* iJustFocusApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE8E164287522C6008AB34E /* iJustFocusApp.swift */; };
 		3EE8E167287522C6008AB34E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE8E166287522C6008AB34E /* ContentView.swift */; };
 		3EE8E169287522C7008AB34E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3EE8E168287522C7008AB34E /* Assets.xcassets */; };
 		3EE8E16C287522C7008AB34E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3EE8E16B287522C7008AB34E /* Preview Assets.xcassets */; };
+		3EE8E173287522E5008AB34E /* Background+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE8E172287522E5008AB34E /* Background+Extension.swift */; };
+		3EE8E17528752491008AB34E /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE8E17428752491008AB34E /* ViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3EB328B428823A0900FC4548 /* Time+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Time+Extension.swift"; sourceTree = "<group>"; };
+		3EB328B828844D0600FC4548 /* TimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerView.swift; sourceTree = "<group>"; };
+		3EB328BA28844D1100FC4548 /* TasksView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksView.swift; sourceTree = "<group>"; };
+		3EB328BE2884606600FC4548 /* TaskCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCellView.swift; sourceTree = "<group>"; };
 		3EE8E161287522C6008AB34E /* iJustFocus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iJustFocus.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3EE8E164287522C6008AB34E /* iJustFocusApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iJustFocusApp.swift; sourceTree = "<group>"; };
 		3EE8E166287522C6008AB34E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		3EE8E168287522C7008AB34E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3EE8E16B287522C7008AB34E /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		3EE8E172287522E5008AB34E /* Background+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Background+Extension.swift"; sourceTree = "<group>"; };
+		3EE8E17428752491008AB34E /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -32,6 +44,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3EB328BC2884605100FC4548 /* Tasks */ = {
+			isa = PBXGroup;
+			children = (
+				3EB328BA28844D1100FC4548 /* TasksView.swift */,
+				3EB328BE2884606600FC4548 /* TaskCellView.swift */,
+			);
+			path = Tasks;
+			sourceTree = "<group>";
+		};
+		3EB328BD2884605A00FC4548 /* Timer */ = {
+			isa = PBXGroup;
+			children = (
+				3EB328B828844D0600FC4548 /* TimerView.swift */,
+			);
+			path = Timer;
+			sourceTree = "<group>";
+		};
 		3EE8E158287522C6008AB34E = {
 			isa = PBXGroup;
 			children = (
@@ -52,7 +81,12 @@
 			isa = PBXGroup;
 			children = (
 				3EE8E164287522C6008AB34E /* iJustFocusApp.swift */,
+				3EE8E172287522E5008AB34E /* Background+Extension.swift */,
+				3EB328B428823A0900FC4548 /* Time+Extension.swift */,
 				3EE8E166287522C6008AB34E /* ContentView.swift */,
+				3EB328BD2884605A00FC4548 /* Timer */,
+				3EB328BC2884605100FC4548 /* Tasks */,
+				3EE8E17428752491008AB34E /* ViewModel.swift */,
 				3EE8E168287522C7008AB34E /* Assets.xcassets */,
 				3EE8E16A287522C7008AB34E /* Preview Content */,
 			);
@@ -137,7 +171,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3EB328B928844D0600FC4548 /* TimerView.swift in Sources */,
 				3EE8E167287522C6008AB34E /* ContentView.swift in Sources */,
+				3EE8E173287522E5008AB34E /* Background+Extension.swift in Sources */,
+				3EB328BF2884606600FC4548 /* TaskCellView.swift in Sources */,
+				3EB328BB28844D1100FC4548 /* TasksView.swift in Sources */,
+				3EB328B528823A0900FC4548 /* Time+Extension.swift in Sources */,
+				3EE8E17528752491008AB34E /* ViewModel.swift in Sources */,
 				3EE8E165287522C6008AB34E /* iJustFocusApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
