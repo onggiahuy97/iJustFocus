@@ -8,7 +8,7 @@
 import Foundation
 import Combine
 
-class ViewModel: ObservableObject {
+class TimerViewModel: ObservableObject {
     @Published var second = 25 * 60
     @Published var timeType = TimeType.Timer
     
@@ -32,7 +32,7 @@ class ViewModel: ObservableObject {
     }
 }
 
-extension ViewModel {
+extension TimerViewModel {
     enum TimeType: String, CaseIterable, Identifiable {
         var id: String { self.rawValue }
         

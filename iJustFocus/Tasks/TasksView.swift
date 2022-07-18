@@ -8,10 +8,17 @@
 import SwiftUI
 
 struct TasksView: View {
+    @EnvironmentObject var model: TaskViewModel
+    
     var body: some View {
         NavigationStack {
-            List(0..<10, id: \.self) { item in
-                TaskCellView()
+            VStack {
+                Section("To-do") {
+                    
+                }
+                Section("Done") {
+                    
+                }
             }
             .listStyle(.plain)
             .navigationTitle("Taks")

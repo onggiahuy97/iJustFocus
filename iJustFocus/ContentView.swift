@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct ContentView: View {
-    @StateObject var model = ViewModel()
+    @StateObject var timerViewModel = TimerViewModel()
+    @StateObject var tasksViewModel = TaskViewModel()
     
     var body: some View {
         GeometryReader { proxy in
@@ -16,8 +17,8 @@ struct ContentView: View {
             let height = proxy.size.height
             let isVertical = width < height
             
-            let timerView = TimerView().environmentObject(model)
-            let tasksView = TasksView()
+            let timerView = TimerView().environmentObject(timerViewModel)
+            let tasksView = TasksView().environmentObject(tasksViewModel)
             
             if isVertical {
                 VStack(spacing: 0) {

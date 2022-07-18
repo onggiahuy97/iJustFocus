@@ -8,14 +8,14 @@
 import SwiftUI
 
 struct TimerView: View {
-    @EnvironmentObject var model: ViewModel
+    @EnvironmentObject var model: TimerViewModel
     
     var body: some View {
         ZStack {
             // Segmented Picker
             VStack {
                 Picker(selection: $model.timeType) {
-                    ForEach(ViewModel.TimeType.allCases) { type in
+                    ForEach(TimerViewModel.TimeType.allCases) { type in
                         Text(type.rawValue).tag(type)
                     }
                 } label: {

@@ -16,7 +16,8 @@
 		3EE8E169287522C7008AB34E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3EE8E168287522C7008AB34E /* Assets.xcassets */; };
 		3EE8E16C287522C7008AB34E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3EE8E16B287522C7008AB34E /* Preview Assets.xcassets */; };
 		3EE8E173287522E5008AB34E /* Background+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE8E172287522E5008AB34E /* Background+Extension.swift */; };
-		3EE8E17528752491008AB34E /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE8E17428752491008AB34E /* ViewModel.swift */; };
+		3EE8E17528752491008AB34E /* TimerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE8E17428752491008AB34E /* TimerViewModel.swift */; };
+		3EF3DD4D2884AF9200DA57DD /* TaskViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EF3DD4C2884AF9200DA57DD /* TaskViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,7 +31,8 @@
 		3EE8E168287522C7008AB34E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3EE8E16B287522C7008AB34E /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		3EE8E172287522E5008AB34E /* Background+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Background+Extension.swift"; sourceTree = "<group>"; };
-		3EE8E17428752491008AB34E /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
+		3EE8E17428752491008AB34E /* TimerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerViewModel.swift; sourceTree = "<group>"; };
+		3EF3DD4C2884AF9200DA57DD /* TaskViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,7 +88,8 @@
 				3EE8E166287522C6008AB34E /* ContentView.swift */,
 				3EB328BD2884605A00FC4548 /* Timer */,
 				3EB328BC2884605100FC4548 /* Tasks */,
-				3EE8E17428752491008AB34E /* ViewModel.swift */,
+				3EE8E17428752491008AB34E /* TimerViewModel.swift */,
+				3EF3DD4C2884AF9200DA57DD /* TaskViewModel.swift */,
 				3EE8E168287522C7008AB34E /* Assets.xcassets */,
 				3EE8E16A287522C7008AB34E /* Preview Content */,
 			);
@@ -177,7 +180,8 @@
 				3EB328BF2884606600FC4548 /* TaskCellView.swift in Sources */,
 				3EB328BB28844D1100FC4548 /* TasksView.swift in Sources */,
 				3EB328B528823A0900FC4548 /* Time+Extension.swift in Sources */,
-				3EE8E17528752491008AB34E /* ViewModel.swift in Sources */,
+				3EE8E17528752491008AB34E /* TimerViewModel.swift in Sources */,
+				3EF3DD4D2884AF9200DA57DD /* TaskViewModel.swift in Sources */,
 				3EE8E165287522C6008AB34E /* iJustFocusApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
