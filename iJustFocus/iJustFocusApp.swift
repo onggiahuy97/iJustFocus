@@ -12,6 +12,7 @@ struct iJustFocusApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .persistentSystemOverlays(.hidden)
         }
     }
 }

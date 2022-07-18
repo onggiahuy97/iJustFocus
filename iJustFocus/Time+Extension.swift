@@ -9,10 +9,9 @@ import Foundation
 
 extension Int {
     var toTimeString: String {
-        let hours = self / 3600
         let minutes = (self / 60) % 60
         let seconds = self % 60
-        let string = NSString(format: "%0.2d:%0.2d:%0.2d",hours,minutes,seconds)
+        let string = NSString(format: "%0.2d:%0.2d", minutes, seconds)
         return string as String
     }
 }

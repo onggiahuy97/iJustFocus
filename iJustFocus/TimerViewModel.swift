@@ -12,23 +12,28 @@ class TimerViewModel: ObservableObject {
     @Published var second = 25 * 60
     @Published var timeType = TimeType.Timer
     
-    let timer = Timer.publish(every: 1.0, on: .main, in: .common).autoconnect()
+//    let timer = Timer.publish(every: 1.0, on: .main, in: .common).autoconnect()
+    var timer: Timer?
     var cancallables = Set<AnyCancellable>()
     
-    init() {
-        start()
-    }
+    init() { }
     
     func stop() {
-        
+        timer?.invalidate()
     }
     
     func start() {
-        timer
-            .sink { _ in
-                self.second -= 1
-            }
-            .store(in: &cancallables)
+        second = 25 * 60
+        if timer == nil {
+            timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(handleSecond), userInfo: nil, repeats: true)
+        }
+    }
+    
+    @objc
+    func handleSecond() {
+        DispatchQueue.main.async {
+            self.second -= 1
+        }
     }
 }
 

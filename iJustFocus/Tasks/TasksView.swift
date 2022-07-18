@@ -29,6 +29,11 @@ struct TasksView: View {
                     } label: {
                         Image(systemName: "plus.circle.fill")
                     }
+                    .foregroundColor(.black)
+                }
+                
+                ToolbarItem(placement: .principal) {
+                    Button("Segmented Picker") {}
                 }
             }
         }
@@ -36,6 +41,7 @@ struct TasksView: View {
     
     func taskView(_ task: TaskViewModel.Task) -> some View {
         Label(task.name, systemImage: task.isDone ? "checkmark.circle.fill" : "circle")
+            .foregroundColor(.black)
             .onTapGesture {
                 withAnimation {
                     model.toggleTask(task)
