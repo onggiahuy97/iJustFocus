@@ -12,12 +12,12 @@ struct TasksView: View {
     
     var body: some View {
         NavigationStack {
-            VStack {
+            Form {
                 Section("To-do") {
-                    
+                    ForEach(model.todoTasks, content: taskView(_:))
                 }
                 Section("Done") {
-                    
+                    ForEach(model.doneTasks, content: taskView(_:))
                 }
             }
             .listStyle(.plain)
@@ -25,13 +25,22 @@ struct TasksView: View {
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button {
-                        
+                        model.tasks = TaskViewModel.createSample()
                     } label: {
                         Image(systemName: "plus.circle.fill")
                     }
                 }
             }
         }
+    }
+    
+    func taskView(_ task: TaskViewModel.Task) -> some View {
+        Label(task.name, systemImage: task.isDone ? "checkmark.circle.fill" : "circle")
+            .onTapGesture {
+                withAnimation {
+                    model.toggleTask(task)
+                }
+            }
     }
 }
 
