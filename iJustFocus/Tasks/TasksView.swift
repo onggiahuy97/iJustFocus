@@ -10,14 +10,19 @@ import SwiftUI
 struct TasksView: View {
     @EnvironmentObject var model: TaskViewModel
     
+    @State private var showAddTask = false
+    @State private var taskName = ""
+    
     var body: some View {
         NavigationStack {
             Form {
                 Section("To-do") {
                     ForEach(model.todoTasks, content: taskView(_:))
+                        .onDelete(perform: deleteTask(_:))
                 }
                 Section("Done") {
                     ForEach(model.doneTasks, content: taskView(_:))
+                        .onDelete(perform: deleteTask(_:))
                 }
             }
             .listStyle(.plain)
@@ -25,11 +30,14 @@ struct TasksView: View {
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button {
-                        model.tasks = TaskViewModel.createSample()
+                        showAddTask.toggle()
                     } label: {
                         Image(systemName: "plus.circle.fill")
                     }
                     .foregroundColor(.black)
+                    .alert("Add Task", isPresented: $showAddTask) {
+                        addTaskAlert
+                    }
                 }
                 
                 ToolbarItem(placement: .principal) {
@@ -37,6 +45,21 @@ struct TasksView: View {
                 }
             }
         }
+    }
+    
+    var addTaskAlert: some View {
+        VStack {
+            TextField("Task name", text: $taskName)
+            Button("Cancel", role: .cancel) { taskName = "" }
+            Button("Add") {
+                model.tasks.append(.init(name: taskName))
+                taskName = ""
+            }
+        }
+    }
+    
+    func deleteTask(_ indexSet: IndexSet) {
+        model.tasks.remove(atOffsets: indexSet)
     }
     
     func taskView(_ task: TaskViewModel.Task) -> some View {

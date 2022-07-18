@@ -12,14 +12,14 @@ class TimerViewModel: ObservableObject {
     @Published var second = 25 * 60
     @Published var timeType = TimeType.Timer
     
-//    let timer = Timer.publish(every: 1.0, on: .main, in: .common).autoconnect()
     var timer: Timer?
-    var cancallables = Set<AnyCancellable>()
     
     init() { }
     
     func stop() {
         timer?.invalidate()
+        timer = nil
+        second = 25 * 60
     }
     
     func start() {
