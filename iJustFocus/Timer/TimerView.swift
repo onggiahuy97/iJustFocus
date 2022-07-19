@@ -11,13 +11,10 @@ struct TimerView: View {
     @EnvironmentObject var model: TimerViewModel
     
     let gradiantBackground = LinearGradient(colors: [.blue.opacity(0.75), .blue], startPoint: .top, endPoint: .bottom)
-    
-    var isIphone: Bool {
-        UIDevice.current.userInterfaceIdiom == .phone
-    }
-    
+
     var textSize: CGFloat {
-        isIphone ? 80 : 120
+        let isPhone = UIDevice.current.userInterfaceIdiom == .phone
+        return isPhone ? 80 : 120
     }
     
     var body: some View {
@@ -64,16 +61,18 @@ struct TimerView: View {
     }
     
     func CircleButton(_ text: String, _ foregroundColor: Color = .white ,action: @escaping (() -> Void)) -> some View{
-        return Button(text, action: action)
-            .bold()
-            .padding(20)
-            .foregroundColor(foregroundColor)
-            .overlay(
-                Circle()
-                    .stroke(lineWidth: 2)
-                    .foregroundColor(.white)
-                    .shadow(color: .gray, radius: 2, x: 0, y: 2)
-            )
+        return Button { action() } label: {
+            Text(text)
+                .padding(18)
+                .bold()
+                .foregroundColor(foregroundColor)
+                .overlay(
+                    Circle()
+                        .stroke(lineWidth: 2)
+                        .foregroundColor(.white)
+                        .shadow(color: .gray, radius: 2, x: 0, y: 2)
+                )
+        }
     }
 }
 
@@ -81,7 +80,7 @@ struct SegmentedControllerViewModifier: ViewModifier {
     func body(content: Content) -> some View {
         content
             .onAppear {
-                UISegmentedControl.appearance().selectedSegmentTintColor = UIColor.systemBlue
+                UISegmentedControl.appearance().selectedSegmentTintColor = UIColor.systemBlue.withAlphaComponent(0.75)
                 UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor: UIColor.white], for: .selected)
                 UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor: UIColor.white], for: .normal)
             }

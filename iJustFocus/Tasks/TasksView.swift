@@ -12,6 +12,11 @@ struct TasksView: View {
     
     @State private var showAddTask = false
     @State private var taskName = ""
+    @State private var selectedTaskViewType = TaskViewType.Tasks
+    
+    enum TaskViewType: String, CaseIterable {
+        case Tasks, Timers
+    }
     
     var body: some View {
         NavigationStack {
@@ -40,7 +45,14 @@ struct TasksView: View {
                 }
                 
                 ToolbarItem(placement: .principal) {
-                    Button("Segmented Picker") {}
+                    Picker(selection: $selectedTaskViewType) {
+                        ForEach(TaskViewType.allCases, id: \.self) { type in
+                            Text(type.rawValue).tag(type)
+                        }
+                    } label: {
+                        Text("Selected Task View Type")
+                    }
+                    .pickerStyle(.segmented)
                 }
             }
         }
