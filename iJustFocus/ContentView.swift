@@ -8,8 +8,11 @@
 import SwiftUI
 
 struct ContentView: View {
-    @StateObject var timerViewModel = TimerViewModel()
-    @StateObject var tasksViewModel = TaskViewModel()
+    @EnvironmentObject var dataController: DataController
+    
+//    @StateObject var timerViewModel: TimerViewModel
+//    @StateObject var tasksViewModel: TaskViewModel
+//    @StateObject var appViewModel: AppViewModel
     
     var body: some View {
         GeometryReader { proxy in
@@ -17,20 +20,31 @@ struct ContentView: View {
             let height = proxy.size.height
             let isVertical = width < height
             
-            let timerView = TimerView().environmentObject(timerViewModel)
-            let tasksView = TasksView().environmentObject(tasksViewModel)
+            let timerViewModel = TimerViewModel()
+            let tasksViewModel = TaskViewModel(dataController: dataController)
+            let appViewModel = AppViewModel()
+            
+            let timerView = TimerView()
+                .environmentObject(timerViewModel)
+                .environmentObject(tasksViewModel)
+                .environmentObject(appViewModel)
+            
+            let homeView = HomeView()
+                .environmentObject(timerViewModel)
+                .environmentObject(tasksViewModel)
+                .environmentObject(appViewModel)
             
             if isVertical {
                 VStack(spacing: 0) {
                     timerView
                         .frame(height: height / 2)
-                    tasksView
+                    homeView
                         .frame(height: height / 2)
                 }
                 .frame(width: width, height: height)
             } else {
                 HStack(spacing: 0) {
-                    tasksView
+                    homeView
                         .frame(width: width / 2)
                     timerView
                         .frame(width: width / 2)

@@ -9,30 +9,41 @@ import Foundation
 import Combine
 
 class TimerViewModel: ObservableObject {
-    @Published var second = 25 * 60
+    @Published var second = TimerViewModel.timerTime
     @Published var timeType = TimeType.Timer
-    
+    @Published var isStopped = false
+
     var timer: Timer?
+    
+    static let timerTime = 25 * 60
     
     init() { }
     
     func stop() {
         timer?.invalidate()
         timer = nil
-        second = 25 * 60
+        self.isStopped = true
     }
     
     func start() {
-        second = 25 * 60
+        if isStopped {
+            reset()
+            isStopped = false
+        }
         if timer == nil {
             timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(handleSecond), userInfo: nil, repeats: true)
         }
+    }
+    
+    func reset() {
+        second = TimerViewModel.timerTime
     }
     
     @objc
     func handleSecond() {
         DispatchQueue.main.async {
             self.second -= 1
+            self.second == 0 ? self.stop() : nil
         }
     }
 }

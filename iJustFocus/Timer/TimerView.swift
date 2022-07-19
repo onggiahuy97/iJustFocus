@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct TimerView: View {
-    @EnvironmentObject var model: TimerViewModel
+    @EnvironmentObject var timerViewModel: TimerViewModel
+    @EnvironmentObject var appViewModel: AppViewModel
     
     let gradiantBackground = LinearGradient(colors: [.blue.opacity(0.75), .blue], startPoint: .top, endPoint: .bottom)
 
@@ -20,7 +21,7 @@ struct TimerView: View {
     var body: some View {
         VStack {
             // Segmented Picker
-            Picker(selection: $model.timeType) {
+            Picker(selection: $timerViewModel.timeType) {
                 ForEach(TimerViewModel.TimeType.allCases) { type in
                     Text(type.rawValue).tag(type)
                 }
@@ -34,7 +35,7 @@ struct TimerView: View {
             Spacer()
             
             // Clock
-            Text(model.second.toTimeString)
+            Text(timerViewModel.second.toTimeString)
                 .font(.system(size: textSize, weight: .bold, design: .rounded))
                 .foregroundColor(.white)
                 .fontWeight(.bold)
@@ -45,13 +46,15 @@ struct TimerView: View {
             // Buttons
             HStack {
                 Spacer()
-                
+    
                 CircleButton("Stop", .red){
-                    model.stop()
+                    timerViewModel.stop()
+                    appViewModel.selectedHomeViewItem = .Timers
                 }
                                 
-                CircleButton("Start") {
-                    model.start()
+                CircleButton(timerViewModel.isStopped ? "Reset" : "Start") {
+                    timerViewModel.start()
+                    appViewModel.selectedHomeViewItem = .Tasks
                 }
             }
             .padding()

@@ -9,10 +9,16 @@ import SwiftUI
 
 @main
 struct iJustFocusApp: App {
+    @StateObject var dataController = DataController()
+    
     var body: some Scene {
         WindowGroup {
             ContentView()
                 .persistentSystemOverlays(.hidden)
+                .environmentObject(dataController)
+                .environment(\.managedObjectContext, DataController.shared.container.viewContext)
         }
     }
 }
+
+

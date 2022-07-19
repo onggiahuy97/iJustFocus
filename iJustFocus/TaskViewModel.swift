@@ -6,33 +6,63 @@
 //
 
 import Foundation
- 
-class TaskViewModel: ObservableObject {
-    @Published var tasks = [Task]()
+import CoreData
+
+class TaskViewModel: NSObject, ObservableObject, NSFetchedResultsControllerDelegate {
+    private let tasksController: NSFetchedResultsController<Tasking>
     
-    var todoTasks: [Task] {
-        tasks.filter { !$0.isDone }.sorted(by: { $0.name < $1.name })
+    var dataController: DataController
+    
+    @Published var tasks = [Tasking]()
+    
+    var todoTasks: [Tasking] {
+        tasks.filter { !$0.isDone }
     }
     
-    var doneTasks: [Task] {
+    var doneTasks: [Tasking] {
         tasks.filter { $0.isDone }
     }
     
-    struct Task: Identifiable {
-        var id = UUID()
-        var name: String
-        var isDone = false
-    }
-    
-    func toggleTask(_ task: TaskViewModel.Task) {
-        if let index = tasks.firstIndex(where: { $0.id == task.id }) {
-            tasks[index].isDone.toggle()
+    init(dataController: DataController) {
+        self.dataController = dataController
+        
+        let tasksRequest: NSFetchRequest<Tasking> = Tasking.fetchRequest()
+        tasksRequest.sortDescriptors = [NSSortDescriptor(keyPath: \Tasking.name, ascending: true)]
+        
+        tasksController = NSFetchedResultsController(
+            fetchRequest: tasksRequest,
+            managedObjectContext: dataController.container.viewContext,
+            sectionNameKeyPath: nil,
+            cacheName: nil)
+        
+        super.init()
+        
+        tasksController.delegate = self
+        
+        do {
+            try tasksController.performFetch()
+            tasks = tasksController.fetchedObjects ?? []
+        } catch {
+            print("Failed to fetch initial data")
         }
     }
-}
-
-extension TaskViewModel {
-    static func createSample() -> [Task] {
-        return (0..<10).map { Task(name: "Task \($0)", isDone: Bool.random()) }
+    
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        tasks = tasksController.fetchedObjects ?? []
+    }
+    
+    func addTask(_ name: String) {
+        let task = Tasking(context: dataController.container.viewContext)
+        task.name = name
+        dataController.save()
+    }
+    
+    func deleteTask(_ indexSet: IndexSet) {
+        for offset in indexSet {
+            let task = tasks[offset]
+            dataController.delete(task)
+        }
+        
+        dataController.save()
     }
 }

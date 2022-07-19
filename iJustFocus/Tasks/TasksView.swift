@@ -9,14 +9,10 @@ import SwiftUI
 
 struct TasksView: View {
     @EnvironmentObject var model: TaskViewModel
+    @EnvironmentObject var dataController: DataController
     
     @State private var showAddTask = false
     @State private var taskName = ""
-    @State private var selectedTaskViewType = TaskViewType.Tasks
-    
-    enum TaskViewType: String, CaseIterable {
-        case Tasks, Timers
-    }
     
     var body: some View {
         NavigationStack {
@@ -31,7 +27,7 @@ struct TasksView: View {
                 }
             }
             .listStyle(.plain)
-            .navigationTitle("Taks")
+            .navigationTitle("Tasks")
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button {
@@ -43,18 +39,8 @@ struct TasksView: View {
                         addTaskAlert
                     }
                 }
-                
-                ToolbarItem(placement: .principal) {
-                    Picker(selection: $selectedTaskViewType) {
-                        ForEach(TaskViewType.allCases, id: \.self) { type in
-                            Text(type.rawValue).tag(type)
-                        }
-                    } label: {
-                        Text("Selected Task View Type")
-                    }
-                    .pickerStyle(.segmented)
-                }
             }
+            .onAppear(perform: setupNav)
         }
     }
     
@@ -63,22 +49,28 @@ struct TasksView: View {
             TextField("Task name", text: $taskName)
             Button("Cancel", role: .cancel) { taskName = "" }
             Button("Add") {
-                model.tasks.append(.init(name: taskName))
+                model.addTask(taskName)
                 taskName = ""
             }
         }
     }
     
-    func deleteTask(_ indexSet: IndexSet) {
-        model.tasks.remove(atOffsets: indexSet)
+    func setupNav() {
+        let navBarAppearance = UINavigationBar.appearance()
+        navBarAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor.systemBlue]
+        navBarAppearance.titleTextAttributes = [.foregroundColor: UIColor.systemBlue]
     }
     
-    func taskView(_ task: TaskViewModel.Task) -> some View {
-        Label(task.name, systemImage: task.isDone ? "checkmark.circle.fill" : "circle")
-            .foregroundColor(.primary)
+    func deleteTask(_ indexSet: IndexSet) {
+        model.deleteTask(indexSet)
+    }
+    
+    func taskView(_ task: Tasking) -> some View {
+        Label(task.unwrappedName, systemImage: task.isDone ? "checkmark.circle.fill" : "circle")
             .onTapGesture {
                 withAnimation {
-                    model.toggleTask(task)
+                    task.isDone.toggle()
+                    dataController.save()
                 }
             }
     }
