@@ -28,7 +28,6 @@ struct ContentView: View {
                         .frame(height: height / 2)
                 }
                 .frame(width: width, height: height)
-                .edgesIgnoringSafeArea(.bottom)
             } else {
                 HStack(spacing: 0) {
                     tasksView
@@ -37,7 +36,6 @@ struct ContentView: View {
                         .frame(width: width / 2)
                 }
                 .frame(width: width, height: height)
-                .edgesIgnoringSafeArea(.bottom)
             }
         }
     }

@@ -34,7 +34,6 @@ struct TasksView: View {
                     } label: {
                         Image(systemName: "plus.circle.fill")
                     }
-                    .foregroundColor(.black)
                     .alert("Add Task", isPresented: $showAddTask) {
                         addTaskAlert
                     }
@@ -64,7 +63,7 @@ struct TasksView: View {
     
     func taskView(_ task: TaskViewModel.Task) -> some View {
         Label(task.name, systemImage: task.isDone ? "checkmark.circle.fill" : "circle")
-            .foregroundColor(.black)
+            .foregroundColor(.primary)
             .onTapGesture {
                 withAnimation {
                     model.toggleTask(task)

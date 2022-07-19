@@ -10,6 +10,16 @@ import SwiftUI
 struct TimerView: View {
     @EnvironmentObject var model: TimerViewModel
     
+    let gradiantBackground = LinearGradient(colors: [.blue.opacity(0.75), .blue], startPoint: .top, endPoint: .bottom)
+    
+    var isIphone: Bool {
+        UIDevice.current.userInterfaceIdiom == .phone
+    }
+    
+    var textSize: CGFloat {
+        isIphone ? 80 : 120
+    }
+    
     var body: some View {
         VStack {
             // Segmented Picker
@@ -28,6 +38,7 @@ struct TimerView: View {
             
             // Clock
             Text(model.second.toTimeString)
+                .font(.system(size: textSize, weight: .bold, design: .rounded))
                 .foregroundColor(.white)
                 .fontWeight(.bold)
                 .font(Font(.init(.message, size: 46)))
@@ -49,16 +60,17 @@ struct TimerView: View {
             .padding()
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(.black)
+        .background(gradiantBackground)
     }
     
     func CircleButton(_ text: String, _ foregroundColor: Color = .white ,action: @escaping (() -> Void)) -> some View{
         return Button(text, action: action)
+            .bold()
             .padding(20)
             .foregroundColor(foregroundColor)
             .overlay(
                 Circle()
-                    .stroke(lineWidth: 1)
+                    .stroke(lineWidth: 2)
                     .foregroundColor(.white)
                     .shadow(color: .gray, radius: 2, x: 0, y: 2)
             )
@@ -69,8 +81,8 @@ struct SegmentedControllerViewModifier: ViewModifier {
     func body(content: Content) -> some View {
         content
             .onAppear {
-                UISegmentedControl.appearance().selectedSegmentTintColor = UIColor.secondarySystemGroupedBackground
-                UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor: UIColor.black], for: .selected)
+                UISegmentedControl.appearance().selectedSegmentTintColor = UIColor.systemBlue
+                UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor: UIColor.white], for: .selected)
                 UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor: UIColor.white], for: .normal)
             }
     }
