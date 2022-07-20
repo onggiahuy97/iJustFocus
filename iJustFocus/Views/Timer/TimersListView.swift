@@ -12,13 +12,15 @@ struct TimersListView: View {
     
     var body: some View {
         NavigationStack {
-            List {
-                
+            List(timerViewModel.times) { timing in
+                TimingCellView(timing: timing)
             }
             .navigationTitle("History")
         }
     }
 }
+
+
 
 struct TimersListView_Previews: PreviewProvider {
     static var previews: some View {
