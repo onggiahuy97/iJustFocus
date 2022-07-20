@@ -66,6 +66,37 @@
 			path = Controllers;
 			sourceTree = "<group>";
 		};
+		3E88E7472888760D0041173A /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				3EE8E172287522E5008AB34E /* Background+Extension.swift */,
+				3EB328B428823A0900FC4548 /* Time+Extension.swift */,
+				3E88E7452887764B0041173A /* Tasking+Extension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		3E88E748288876220041173A /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				3EE8E17428752491008AB34E /* TimerViewModel.swift */,
+				3EF3DD4C2884AF9200DA57DD /* TaskViewModel.swift */,
+				3E88E7432887646E0041173A /* AppViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		3E88E749288876370041173A /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				3EB328BC2884605100FC4548 /* Tasks */,
+				3EB328BD2884605A00FC4548 /* Timer */,
+				3EE8E166287522C6008AB34E /* ContentView.swift */,
+				3E88E739288748FE0041173A /* HomeView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		3EB328BC2884605100FC4548 /* Tasks */ = {
 			isa = PBXGroup;
 			children = (
@@ -104,17 +135,10 @@
 			isa = PBXGroup;
 			children = (
 				3EE8E164287522C6008AB34E /* iJustFocusApp.swift */,
-				3EE8E172287522E5008AB34E /* Background+Extension.swift */,
-				3EB328B428823A0900FC4548 /* Time+Extension.swift */,
-				3EE8E166287522C6008AB34E /* ContentView.swift */,
-				3E88E739288748FE0041173A /* HomeView.swift */,
+				3E88E749288876370041173A /* Views */,
 				3E88E73F288751200041173A /* Controllers */,
-				3EB328BD2884605A00FC4548 /* Timer */,
-				3EB328BC2884605100FC4548 /* Tasks */,
-				3EE8E17428752491008AB34E /* TimerViewModel.swift */,
-				3EF3DD4C2884AF9200DA57DD /* TaskViewModel.swift */,
-				3E88E7432887646E0041173A /* AppViewModel.swift */,
-				3E88E7452887764B0041173A /* Tasking+Extension.swift */,
+				3E88E7472888760D0041173A /* Extensions */,
+				3E88E748288876220041173A /* ViewModels */,
 				3E88E7402887515E0041173A /* Main.xcdatamodeld */,
 				3EE8E168287522C7008AB34E /* Assets.xcassets */,
 				3EE8E16A287522C7008AB34E /* Preview Content */,

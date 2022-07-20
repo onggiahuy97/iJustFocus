@@ -8,8 +8,15 @@
 import SwiftUI
 
 struct TimersListView: View {
+    @EnvironmentObject var timerViewModel: TimerViewModel
+    
     var body: some View {
-        Text("Hello, World!")
+        NavigationStack {
+            List {
+                
+            }
+            .navigationTitle("History")
+        }
     }
 }
 

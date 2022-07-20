@@ -9,18 +9,24 @@ import Foundation
 import Combine
 import CoreData
 
-class TimerViewModellll: NSObject, ObservableObject, NSFetchedResultsControllerDelegate {
+class TimerViewModel: NSObject, ObservableObject, NSFetchedResultsControllerDelegate {
     private let timesController: NSFetchedResultsController<Timing>
     
     var dataController: DataController
+    var timer: Timer?
+    
+    static let timerTimeDefault = 25 * 60
     
     @Published var times = [Timing]()
+    @Published var isStopped = false
+    @Published var second = TimerViewModel.timerTimeDefault
+    @Published var timeType = TimeType.Timer
     
     init(dataController: DataController) {
         self.dataController = dataController
         
         let timesRequest: NSFetchRequest<Timing> = Timing.fetchRequest()
-        timesRequest.sortDescriptors = [NSSortDescriptor(keyPath: \Timing.date, ascending: true)]
+        timesRequest.sortDescriptors = [NSSortDescriptor(keyPath: \Timing.date, ascending: false)]
         
         timesController = NSFetchedResultsController(
             fetchRequest: timesRequest,
@@ -37,6 +43,35 @@ class TimerViewModellll: NSObject, ObservableObject, NSFetchedResultsControllerD
             times = timesController.fetchedObjects ?? []
         } catch {
             print("Failed to fetch initial timing data")
+        }
+    }
+    
+    func stop() {
+        timer?.invalidate()
+        timer = nil
+        self.isStopped = true
+        addTiming(TimerViewModel.timerTimeDefault - second)
+    }
+    
+    func start() {
+        if isStopped {
+            reset()
+            isStopped = false
+        }
+        
+        if timer == nil {
+            timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(handleSecond), userInfo: nil, repeats: true)
+        }
+    }
+    
+    func reset() {
+        self.second = TimerViewModel.timerTimeDefault
+    }
+    @objc
+    func handleSecond() {
+        DispatchQueue.main.async {
+            self.second -= 1
+            self.second == 0 ? self.stop() : nil
         }
     }
     
@@ -58,50 +93,6 @@ class TimerViewModellll: NSObject, ObservableObject, NSFetchedResultsControllerD
         }
         
         dataController.save()
-    }
-}
-
-class TimerViewModel: ObservableObject {
-    @Published var second = TimerViewModel.timerTime
-    @Published var timeType = TimeType.Timer
-    @Published var isStopped = false
-
-    var timer: Timer?
-    
-    static let timerTime = 25 * 60
-    
-    init() { }
-    
-    deinit {
-        fatalError()
-    }
-    
-    func stop() {
-        timer?.invalidate()
-        timer = nil
-        self.isStopped = true
-    }
-    
-    func start() {
-        if isStopped {
-            reset()
-            isStopped = false
-        }
-        if timer == nil {
-            timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(handleSecond), userInfo: nil, repeats: true)
-        }
-    }
-    
-    func reset() {
-        second = TimerViewModel.timerTime
-    }
-    
-    @objc
-    func handleSecond() {
-        DispatchQueue.main.async {
-            self.second -= 1
-            self.second == 0 ? self.stop() : nil
-        }
     }
 }
 
