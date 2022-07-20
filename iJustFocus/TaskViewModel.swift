@@ -43,7 +43,7 @@ class TaskViewModel: NSObject, ObservableObject, NSFetchedResultsControllerDeleg
             try tasksController.performFetch()
             tasks = tasksController.fetchedObjects ?? []
         } catch {
-            print("Failed to fetch initial data")
+            print("Failed to fetch initial tasking data")
         }
     }
     

@@ -7,6 +7,59 @@
 
 import Foundation
 import Combine
+import CoreData
+
+class TimerViewModellll: NSObject, ObservableObject, NSFetchedResultsControllerDelegate {
+    private let timesController: NSFetchedResultsController<Timing>
+    
+    var dataController: DataController
+    
+    @Published var times = [Timing]()
+    
+    init(dataController: DataController) {
+        self.dataController = dataController
+        
+        let timesRequest: NSFetchRequest<Timing> = Timing.fetchRequest()
+        timesRequest.sortDescriptors = [NSSortDescriptor(keyPath: \Timing.date, ascending: true)]
+        
+        timesController = NSFetchedResultsController(
+            fetchRequest: timesRequest,
+            managedObjectContext: dataController.container.viewContext,
+            sectionNameKeyPath: nil,
+            cacheName: nil)
+        
+        super.init()
+        
+        timesController.delegate = self
+        
+        do {
+            try timesController.performFetch()
+            times = timesController.fetchedObjects ?? []
+        } catch {
+            print("Failed to fetch initial timing data")
+        }
+    }
+    
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        times = timesController.fetchedObjects ?? []
+    }
+    
+    func addTiming(_ second: Int) {
+        let timing = Timing(context: dataController.container.viewContext)
+        timing.second = Int64(second)
+        timing.date = Date()
+        dataController.save()
+    }
+    
+    func deleteTiming(_ indexSet: IndexSet) {
+        for offset in indexSet {
+            let timing = times[offset]
+            dataController.delete(timing)
+        }
+        
+        dataController.save()
+    }
+}
 
 class TimerViewModel: ObservableObject {
     @Published var second = TimerViewModel.timerTime
@@ -18,6 +71,10 @@ class TimerViewModel: ObservableObject {
     static let timerTime = 25 * 60
     
     init() { }
+    
+    deinit {
+        fatalError()
+    }
     
     func stop() {
         timer?.invalidate()
