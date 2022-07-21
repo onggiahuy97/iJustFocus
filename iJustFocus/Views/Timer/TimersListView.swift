@@ -12,12 +12,28 @@ struct TimersListView: View {
     
     var body: some View {
         NavigationStack {
-            List(timerViewModel.times) { timing in
+            List(timerViewModel.timingGroup) { timing in
                 TimingCellView(timing: timing)
             }
             .navigationTitle("History")
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button("Add Sample") {
+                        Timing.createSample()
+                    }
+                }
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button("Delete All") {
+                        timerViewModel.deleteAll()
+                    }
+                }
+            }
         }
     }
+}
+
+extension TimersListView {
+    static let tag: String? = "TimersListView"
 }
 
 

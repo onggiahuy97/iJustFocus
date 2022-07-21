@@ -11,15 +11,17 @@ struct HomeView: View {
     
     @EnvironmentObject var appViewModel: AppViewModel
     
+    @SceneStorage("selectedTab") var selectedTab: String?
+    
     var body: some View {
-        TabView(selection: $appViewModel.selectedHomeViewItem) {
+        TabView(selection: $selectedTab) {
             TasksView()
                 .tabItem { Label("Tasks", systemImage: "checklist") }
-                .tag(AppViewModel.HomeViewItem.Tasks)
+                .tag(TasksView.tag)
             
             TimersListView()
                 .tabItem { Label("List", systemImage: "list.bullet.clipboard") }
-                .tag(AppViewModel.HomeViewItem.Timers)
+                .tag(TimersListView.tag)
         }
     }
 }

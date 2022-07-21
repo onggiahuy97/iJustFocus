@@ -17,10 +17,27 @@ class TimerViewModel: NSObject, ObservableObject, NSFetchedResultsControllerDele
     
     static let timerTimeDefault = 25 * 60
     
-    @Published var times = [Timing]()
+    @Published var times = [Timing]() { didSet { reloadTimingGroup() } }
     @Published var isStopped = false
     @Published var second = TimerViewModel.timerTimeDefault
     @Published var timeType = TimeType.Timer
+    @Published var timingGroup = [TimingGroup]()
+    
+    func reloadTimingGroup() {
+        for time in times {
+            if let index = timingGroup.firstIndex(where: { Date.compareTwoDate($0.date, time.unwrappedDate) }) {
+                timingGroup[index].seconds.append(Int(time.second))
+            } else {
+                timingGroup.append(.init(date: time.unwrappedDate, seconds: [Int(time.second)]))
+            }
+        }
+    }
+    
+    struct TimingGroup: Identifiable {
+        let id = UUID()
+        let date: Date
+        var seconds: [Int]
+    }
     
     init(dataController: DataController) {
         self.dataController = dataController
@@ -41,6 +58,7 @@ class TimerViewModel: NSObject, ObservableObject, NSFetchedResultsControllerDele
         do {
             try timesController.performFetch()
             times = timesController.fetchedObjects ?? []
+            reloadTimingGroup()
         } catch {
             print("Failed to fetch initial timing data")
         }
@@ -77,6 +95,7 @@ class TimerViewModel: NSObject, ObservableObject, NSFetchedResultsControllerDele
     
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         times = timesController.fetchedObjects ?? []
+        reloadTimingGroup()
     }
     
     func addTiming(_ second: Int) {
@@ -92,6 +111,14 @@ class TimerViewModel: NSObject, ObservableObject, NSFetchedResultsControllerDele
             dataController.delete(timing)
         }
         
+        dataController.save()
+        reloadTimingGroup()
+    }
+    
+    func deleteAll() {
+        for timing in times {
+            dataController.delete(timing)
+        }
         dataController.save()
     }
 }

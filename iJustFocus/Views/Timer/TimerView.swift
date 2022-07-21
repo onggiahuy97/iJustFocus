@@ -66,15 +66,12 @@ struct TimerView: View {
     func CircleButton(_ text: String, _ foregroundColor: Color = .white ,action: @escaping (() -> Void)) -> some View{
         return Button { action() } label: {
             Text(text)
-                .padding(18)
+                .padding(12)
                 .bold()
                 .foregroundColor(foregroundColor)
-                .overlay(
-                    Circle()
-                        .stroke(lineWidth: 2)
-                        .foregroundColor(.white)
-                        .shadow(color: .gray, radius: 2, x: 0, y: 2)
-                )
+                .background(foregroundColor.opacity(0.75))
+                .cornerRadius(10)
+                .shadow(radius: 2, x: 0, y: 2)
         }
     }
 }

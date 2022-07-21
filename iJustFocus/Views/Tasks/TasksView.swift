@@ -76,6 +76,10 @@ struct TasksView: View {
     }
 }
 
+extension TasksView {
+    static let tag: String? = "TasksView"
+}
+
 struct TasksView_Previews: PreviewProvider {
     static var previews: some View {
         TasksView()

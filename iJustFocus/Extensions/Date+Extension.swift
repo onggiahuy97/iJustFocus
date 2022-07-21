@@ -19,4 +19,12 @@ extension Date {
         let span = TimeInterval.random(in: date1.timeIntervalSinceNow...date2.timeIntervalSinceNow)
         return Date(timeIntervalSinceNow: span)
     }
+    
+    static func toDayMonthYearString(date: Date) -> String {
+        return self.init().formatted(.dateTime.day().month().year())
+    }
+    
+    static func compareTwoDate(_ date1: Date, _ date2: Date) -> Bool {
+        return toDayMonthYearString(date: date1) == toDayMonthYearString(date: date2)
+    }
 }
