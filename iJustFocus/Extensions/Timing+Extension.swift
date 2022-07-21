@@ -26,7 +26,7 @@ extension Timing {
         for _ in 1...10 {
             let timing = Timing(context: viewContext)
             timing.second = Int64(Int.random(in: 300...3000))
-            timing.date = Date.randoomBetween(start: .init(timeIntervalSinceNow: 600000), end: .init())
+            timing.date = Date.randomBetween(start: Date(), end: Date().addingTimeInterval(86400*7))
             timings.append(timing)
         }
         
@@ -35,15 +35,15 @@ extension Timing {
         return timings
     }
     
-    static func createSample() {
-        let viewContext = DataController.shared.container.viewContext
+    static func createSample(dataController: DataController) {
+        let viewContext = dataController.container.viewContext
         
         var timings = [Timing]()
         
         for _ in 1...10 {
             let timing = Timing(context: viewContext)
             timing.second = Int64(Int.random(in: 300...3000))
-            timing.date = Date.randoomBetween(start: .init(timeIntervalSinceNow: 600000), end: .init())
+            timing.date = Date.randomBetween(start: Date(), end: Date().addingTimeInterval(86400*7))
             timings.append(timing)
         }
         

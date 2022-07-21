@@ -49,12 +49,10 @@ struct TimerView: View {
     
                 CircleButton("Stop", .red){
                     timerViewModel.stop()
-                    appViewModel.selectedHomeViewItem = .Timers
                 }
                                 
                 CircleButton(timerViewModel.isStopped ? "Reset" : "Start") {
                     timerViewModel.start()
-                    appViewModel.selectedHomeViewItem = .Tasks
                 }
             }
             .padding()

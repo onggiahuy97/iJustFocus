@@ -17,26 +17,32 @@ class TimerViewModel: NSObject, ObservableObject, NSFetchedResultsControllerDele
     
     static let timerTimeDefault = 25 * 60
     
-    @Published var times = [Timing]() { didSet { reloadTimingGroup() } }
+    var times = [Timing]() {
+        didSet {
+            reloadTimingGroup()
+        }
+    }
+    
     @Published var isStopped = false
     @Published var second = TimerViewModel.timerTimeDefault
     @Published var timeType = TimeType.Timer
     @Published var timingGroup = [TimingGroup]()
     
-    func reloadTimingGroup() {
-        for time in times {
-            if let index = timingGroup.firstIndex(where: { Date.compareTwoDate($0.date, time.unwrappedDate) }) {
-                timingGroup[index].seconds.append(Int(time.second))
-            } else {
-                timingGroup.append(.init(date: time.unwrappedDate, seconds: [Int(time.second)]))
-            }
-        }
-    }
-    
     struct TimingGroup: Identifiable {
         let id = UUID()
         let date: Date
         var seconds: [Int]
+    }
+    
+    func reloadTimingGroup() {
+        timingGroup = times.reduce(into: [TimingGroup]()) { res, par in
+            if let index = res.firstIndex(where: { Date.compareTwoDate($0.date, par.unwrappedDate)}) {
+                res[index].seconds.append(Int(par.second))
+            } else {
+                res.append(.init(date: par.unwrappedDate, seconds: [Int(par.second)]))
+            }
+        }
+        .sorted(by: { $0.date > $1.date })
     }
     
     init(dataController: DataController) {
@@ -58,17 +64,18 @@ class TimerViewModel: NSObject, ObservableObject, NSFetchedResultsControllerDele
         do {
             try timesController.performFetch()
             times = timesController.fetchedObjects ?? []
-            reloadTimingGroup()
         } catch {
             print("Failed to fetch initial timing data")
         }
     }
     
     func stop() {
-        timer?.invalidate()
-        timer = nil
-        self.isStopped = true
-        addTiming(TimerViewModel.timerTimeDefault - second)
+        if !isStopped && second != TimerViewModel.timerTimeDefault {
+            timer?.invalidate()
+            timer = nil
+            self.isStopped = true
+            addTiming(TimerViewModel.timerTimeDefault - second)
+        }
     }
     
     func start() {
@@ -95,7 +102,6 @@ class TimerViewModel: NSObject, ObservableObject, NSFetchedResultsControllerDele
     
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         times = timesController.fetchedObjects ?? []
-        reloadTimingGroup()
     }
     
     func addTiming(_ second: Int) {
@@ -112,7 +118,6 @@ class TimerViewModel: NSObject, ObservableObject, NSFetchedResultsControllerDele
         }
         
         dataController.save()
-        reloadTimingGroup()
     }
     
     func deleteAll() {

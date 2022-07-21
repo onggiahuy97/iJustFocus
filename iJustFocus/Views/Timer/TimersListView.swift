@@ -9,17 +9,22 @@ import SwiftUI
 
 struct TimersListView: View {
     @EnvironmentObject var timerViewModel: TimerViewModel
+    @EnvironmentObject var dataController: DataController
     
     var body: some View {
         NavigationStack {
             List(timerViewModel.timingGroup) { timing in
-                TimingCellView(timing: timing)
+                Section("\(timing.date.toDayMonthYearString())") {
+                    ForEach(timing.seconds, id: \.self) { second in
+                        Text("\(second)")
+                    }
+                }
             }
             .navigationTitle("History")
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button("Add Sample") {
-                        Timing.createSample()
+                        Timing.createSample(dataController: dataController)
                     }
                 }
                 ToolbarItem(placement: .navigationBarLeading) {
