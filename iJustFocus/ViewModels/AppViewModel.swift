@@ -8,7 +8,11 @@
 import SwiftUI
 
 class AppViewModel: ObservableObject {
-    @Published var linearGradient = LinearGradient(colors: [.blue.opacity(0.75), .blue.opacity(0.85)], startPoint: .topLeading, endPoint: .bottomTrailing)
+    @Published var linearGradient = LinearGradient(
+        colors: [.blue.opacity(0.75), .blue.opacity(0.85)],
+        startPoint: .topLeading,
+        endPoint: .bottomTrailing
+    )
     
     @Published var color: UIColor = .systemBlue {
         didSet {
@@ -20,8 +24,6 @@ class AppViewModel: ObservableObject {
     
     var boolCheck: Bool = false
     
-    var colors: [Coloring] = AppViewModel.sampleColors
-    
     struct Coloring: Identifiable {
         var id = UUID()
         var text: String
@@ -30,6 +32,8 @@ class AppViewModel: ObservableObject {
 }
 
 extension AppViewModel {
+    static let colors: [Coloring] = AppViewModel.sampleColors
+
     static let sampleColors: [Coloring] = [
         .init(text: "Red", uiColor: .systemRed),
         .init(text: "Pink", uiColor: .systemPink),

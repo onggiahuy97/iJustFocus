@@ -12,7 +12,7 @@ struct SettingView: View {
     
     var colorPicker: some View {
         List {
-            ForEach(appViewModel.colors) { color in
+            ForEach(AppViewModel.colors) { color in
                 Button {
                     appViewModel.color = color.uiColor
                 } label: {
