@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct TasksView: View {
-    @EnvironmentObject var model: TaskViewModel
+    @EnvironmentObject var tasksViewModel: TaskViewModel
     @EnvironmentObject var dataController: DataController
     
     @State private var showAddTask = false
@@ -18,12 +18,12 @@ struct TasksView: View {
         NavigationStack {
             Form {
                 Section("To-do") {
-                    ForEach(model.todoTasks, content: taskView(_:))
-                        .onDelete(perform: deleteTask(_:))
+                    ForEach(tasksViewModel.todoTasks, content: taskView(_:))
+                        .onDelete(perform: tasksViewModel.deleteTask(_:))
                 }
                 Section("Done") {
-                    ForEach(model.doneTasks, content: taskView(_:))
-                        .onDelete(perform: deleteTask(_:))
+                    ForEach(tasksViewModel.doneTasks, content: taskView(_:))
+                        .onDelete(perform: tasksViewModel.deleteTask(_:))
                 }
             }
             .listStyle(.plain)
@@ -40,7 +40,6 @@ struct TasksView: View {
                     }
                 }
             }
-            .onAppear(perform: setupNav)
         }
     }
     
@@ -49,20 +48,10 @@ struct TasksView: View {
             TextField("Task name", text: $taskName)
             Button("Cancel", role: .cancel) { taskName = "" }
             Button("Add") {
-                model.addTask(taskName)
+                tasksViewModel.addTask(taskName)
                 taskName = ""
             }
         }
-    }
-    
-    func setupNav() {
-        let navBarAppearance = UINavigationBar.appearance()
-        navBarAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor.systemBlue]
-        navBarAppearance.titleTextAttributes = [.foregroundColor: UIColor.systemBlue]
-    }
-    
-    func deleteTask(_ indexSet: IndexSet) {
-        model.deleteTask(indexSet)
     }
     
     func taskView(_ task: Tasking) -> some View {

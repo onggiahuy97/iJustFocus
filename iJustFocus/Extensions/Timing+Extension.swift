@@ -40,9 +40,9 @@ extension Timing {
         
         var timings = [Timing]()
         
-        for _ in 1...10 {
+        for _ in 0..<5 {
             let timing = Timing(context: viewContext)
-            timing.second = Int64(Int.random(in: 300...3000))
+            timing.second = Int64(Int.random(in: 300...30000))
             timing.date = Date.randomBetween(start: Date(), end: Date().addingTimeInterval(86400*7))
             timings.append(timing)
         }

@@ -21,6 +21,7 @@ struct iJustFocusApp: App {
         _timerViewModel = StateObject(wrappedValue: .init(dataController: dataController))
         _tasksViewModel = StateObject(wrappedValue: .init(dataController: dataController))
     }
+    
     var body: some Scene {
         WindowGroup {
             ContentView()
@@ -30,6 +31,7 @@ struct iJustFocusApp: App {
                 .environmentObject(appViewModel)
                 .environmentObject(dataController)
                 .environment(\.managedObjectContext, DataController.shared.container.viewContext)
+                .statusBarHidden()
         }
     }
 }

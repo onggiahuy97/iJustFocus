@@ -64,6 +64,7 @@ class TimerViewModel: NSObject, ObservableObject, NSFetchedResultsControllerDele
         do {
             try timesController.performFetch()
             times = timesController.fetchedObjects ?? []
+            reloadTimingGroup()
         } catch {
             print("Failed to fetch initial timing data")
         }

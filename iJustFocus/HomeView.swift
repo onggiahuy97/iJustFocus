@@ -12,7 +12,7 @@ struct HomeView: View {
     @EnvironmentObject var appViewModel: AppViewModel
     
     @SceneStorage("selectedTab") var selectedTab: String?
-    
+        
     var body: some View {
         TabView(selection: $selectedTab) {
             TasksView()
@@ -22,7 +22,20 @@ struct HomeView: View {
             TimersListView()
                 .tabItem { Label("List", systemImage: "list.bullet.clipboard") }
                 .tag(TimersListView.tag)
+            
+            SettingView()
+                .tabItem { Label("System", systemImage: "gear") }
+                .tag(SettingView.tag)
+            
         }
+        .onAppear(perform: configNav)
+        .onChange(of: appViewModel.color) { _ in configNav() }
+        .accentColor(Color(appViewModel.color))
+    }
+    
+    func configNav() {
+        UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: appViewModel.color]
+        UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: appViewModel.color]
     }
 }
 

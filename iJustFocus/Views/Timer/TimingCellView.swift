@@ -11,10 +11,11 @@ struct TimingCellView: View {
     var timing: TimerViewModel.TimingGroup
     
     var body: some View {
-        Section("\(timing.date)") {
+        Section("\(timing.date.toDayMonthYearString())") {
             ForEach(timing.seconds, id: \.self) { second in
-                Text("\(second)")
+                Text(second.toTimeString([.hour, .minute, .second]))
             }
         }
     }
 }
+

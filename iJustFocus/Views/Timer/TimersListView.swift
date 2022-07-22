@@ -10,29 +10,29 @@ import SwiftUI
 struct TimersListView: View {
     @EnvironmentObject var timerViewModel: TimerViewModel
     @EnvironmentObject var dataController: DataController
+    @EnvironmentObject var appViewModel: AppViewModel
     
     var body: some View {
         NavigationStack {
-            List(timerViewModel.timingGroup) { timing in
-                Section("\(timing.date.toDayMonthYearString())") {
-                    ForEach(timing.seconds, id: \.self) { second in
-                        Text("\(second)")
-                    }
+            List {
+                ForEach(timerViewModel.timingGroup) { timing in
+                    TimingCellView(timing: timing)
                 }
+                .onDelete(perform: timerViewModel.deleteTiming(_:))
             }
-            .navigationTitle("History")
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button("Add Sample") {
-                        Timing.createSample(dataController: dataController)
-                    }
-                }
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Button("Delete All") {
-                        timerViewModel.deleteAll()
-                    }
-                }
-            }
+            .navigationTitle(Text("History"))
+//            .toolbar {
+//                ToolbarItem(placement: .navigationBarLeading) {
+//                    Button("Add Sample") {
+//                        Timing.createSample(dataController: dataController)
+//                    }
+//                }
+//                ToolbarItem(placement: .navigationBarLeading) {
+//                    Button("Delete All") {
+//                        timerViewModel.deleteAll()
+//                    }
+//                }
+//            }
         }
     }
 }
