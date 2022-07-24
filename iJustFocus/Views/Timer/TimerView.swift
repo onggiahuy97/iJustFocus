@@ -48,7 +48,7 @@ struct TimerView: View {
             Spacer()
             
             // Clock
-            Text(timerViewModel.second.toTimeString([.minute, .second]))
+            Text(timerViewModel.pickedTimer.toTimeString([.hour, .minute, .second]))
                 .font(.system(size: textSize, weight: .bold, design: .rounded))
                 .foregroundColor(.white)
                 .fontWeight(.bold)
@@ -87,7 +87,7 @@ struct TimerView: View {
                 .padding(12)
                 .bold()
                 .foregroundColor(.white)
-                .foregroundColor(Color((foregroundColor != nil) ? foregroundColor! : appViewModel.color))
+                .background(Color((foregroundColor != nil) ? foregroundColor! : appViewModel.color))
                 .cornerRadius(10)
                 .shadow(radius: 2, x: 0, y: 2)
         }

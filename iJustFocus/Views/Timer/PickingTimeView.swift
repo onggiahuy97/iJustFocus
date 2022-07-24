@@ -9,9 +9,15 @@ import SwiftUI
 
 struct PickingTimeView: View {
     @EnvironmentObject var timerViewModel: TimerViewModel
-    
+   
     var body: some View {
-        Text("Hello, World!")
+        Picker("Timer Picker", selection: $timerViewModel.currentPickedTime) {
+            ForEach(TimerViewModel.timingRange) { timing in
+                Text("\(timing.minutes) minutes")
+                    .tag(timing.inSecond)
+            }
+        }
+        .pickerStyle(.wheel)
     }
 }
 
