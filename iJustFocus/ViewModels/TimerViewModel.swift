@@ -8,6 +8,7 @@
 import Foundation
 import Combine
 import CoreData
+import SwiftUI
 
 class TimerViewModel: NSObject, ObservableObject, NSFetchedResultsControllerDelegate {
     private let timesController: NSFetchedResultsController<Timing>
@@ -91,7 +92,9 @@ class TimerViewModel: NSObject, ObservableObject, NSFetchedResultsControllerDele
     }
     
     func reset() {
-        self.second = TimerViewModel.timerTimeDefault
+        withAnimation {
+            self.second = TimerViewModel.timerTimeDefault
+        }
     }
     @objc
     func handleSecond() {
@@ -106,19 +109,23 @@ class TimerViewModel: NSObject, ObservableObject, NSFetchedResultsControllerDele
     }
     
     func addTiming(_ second: Int) {
-        let timing = Timing(context: dataController.container.viewContext)
-        timing.second = Int64(second)
-        timing.date = Date()
-        dataController.save()
+        withAnimation {
+            let timing = Timing(context: dataController.container.viewContext)
+            timing.second = Int64(second)
+            timing.date = Date()
+            dataController.save()
+        }
     }
     
     func deleteTiming(_ indexSet: IndexSet) {
-        for offset in indexSet {
-            let timing = times[offset]
-            dataController.delete(timing)
+        withAnimation {
+            for offset in indexSet {
+                let timing = times[offset]
+                dataController.delete(timing)
+            }
+            
+            dataController.save()
         }
-        
-        dataController.save()
     }
     
     func deleteAll() {

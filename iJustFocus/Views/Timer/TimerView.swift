@@ -11,6 +11,8 @@ struct TimerView: View {
     @EnvironmentObject var timerViewModel: TimerViewModel
     @EnvironmentObject var appViewModel: AppViewModel
     
+    @State private var showPickingTime = false
+    
     var textSize: CGFloat {
         let isPhone = UIDevice.current.userInterfaceIdiom == .phone
         return isPhone ? 80 : 120
@@ -56,13 +58,20 @@ struct TimerView: View {
             
             // Buttons
             HStack {
+                CircleButton("Timing") {
+                    showPickingTime.toggle()
+                }
+                .sheet(isPresented: $showPickingTime) {
+                    PickingTimeView()
+                }
+                
                 Spacer()
     
-                CircleButton("Stop", appViewModel.color){
+                CircleButton("Stop"){
                     timerViewModel.stop()
                 }
                                 
-                CircleButton(timerViewModel.isStopped ? "Reset" : "Start", appViewModel.color) {
+                CircleButton(timerViewModel.isStopped ? "Reset" : "Start") {
                     timerViewModel.start()
                 }
             }
@@ -72,13 +81,13 @@ struct TimerView: View {
         .background(appViewModel.linearGradient)
     }
     
-    func CircleButton(_ text: String, _ foregroundColor: UIColor = .white ,action: @escaping (() -> Void)) -> some View{
+    func CircleButton(_ text: String, _ foregroundColor: UIColor? = nil ,action: @escaping (() -> Void)) -> some View{
         return Button { action() } label: {
             Text(text)
                 .padding(12)
                 .bold()
                 .foregroundColor(.white)
-                .background(Color(foregroundColor))
+                .foregroundColor(Color((foregroundColor != nil) ? foregroundColor! : appViewModel.color))
                 .cornerRadius(10)
                 .shadow(radius: 2, x: 0, y: 2)
         }

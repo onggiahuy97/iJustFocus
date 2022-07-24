@@ -36,13 +36,13 @@ extension AppViewModel {
 
     static let sampleColors: [Coloring] = [
         .init(text: "Red", uiColor: .systemRed),
-        .init(text: "Pink", uiColor: .systemPink),
+        .init(text: "Pink", uiColor: .systemPink.withAlphaComponent(0.8)),
         .init(text: "Blue", uiColor: .systemBlue),
         .init(text: "Cyan", uiColor: .systemCyan),
         .init(text: "Teal", uiColor: .systemTeal),
         .init(text: "Mint", uiColor: .systemMint),
-        .init(text: "Orange", uiColor: .systemOrange),
-        .init(text: "Yellow", uiColor: .systemYellow),
+        .init(text: "Orange", uiColor: .systemOrange.withAlphaComponent(0.8)),
+        .init(text: "Yellow", uiColor: .systemYellow.withAlphaComponent(0.8)),
         .init(text: "Brown", uiColor: .systemBrown),
         .init(text: "Gray", uiColor: .systemGray),
         .init(text: "Purple", uiColor: .systemPurple),

@@ -14,6 +14,7 @@
 		3E88E7442887646E0041173A /* AppViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E88E7432887646E0041173A /* AppViewModel.swift */; };
 		3E88E7462887764B0041173A /* Tasking+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E88E7452887764B0041173A /* Tasking+Extension.swift */; };
 		3EA2B77A288B1994008A0852 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EA2B779288B1994008A0852 /* SettingView.swift */; };
+		3EA2B77C288C6F93008A0852 /* PickingTimeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EA2B77B288C6F93008A0852 /* PickingTimeView.swift */; };
 		3EA4305E2888989D00AB687F /* TimingCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EA4305D2888989D00AB687F /* TimingCellView.swift */; };
 		3EA43060288898ED00AB687F /* Timing+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EA4305F288898ED00AB687F /* Timing+Extension.swift */; };
 		3EA430622888A66F00AB687F /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EA430612888A66F00AB687F /* Date+Extension.swift */; };
@@ -38,6 +39,7 @@
 		3E88E7432887646E0041173A /* AppViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppViewModel.swift; sourceTree = "<group>"; };
 		3E88E7452887764B0041173A /* Tasking+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Tasking+Extension.swift"; sourceTree = "<group>"; };
 		3EA2B779288B1994008A0852 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
+		3EA2B77B288C6F93008A0852 /* PickingTimeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickingTimeView.swift; sourceTree = "<group>"; };
 		3EA4305D2888989D00AB687F /* TimingCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimingCellView.swift; sourceTree = "<group>"; };
 		3EA4305F288898ED00AB687F /* Timing+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Timing+Extension.swift"; sourceTree = "<group>"; };
 		3EA430612888A66F00AB687F /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
@@ -118,6 +120,7 @@
 			isa = PBXGroup;
 			children = (
 				3EB328B828844D0600FC4548 /* TimerView.swift */,
+				3EA2B77B288C6F93008A0852 /* PickingTimeView.swift */,
 				3E88E73B28874DDF0041173A /* TimersListView.swift */,
 				3EA4305D2888989D00AB687F /* TimingCellView.swift */,
 			);
@@ -247,6 +250,7 @@
 				3E88E7462887764B0041173A /* Tasking+Extension.swift in Sources */,
 				3E88E73A288748FE0041173A /* HomeView.swift in Sources */,
 				3EA2B77A288B1994008A0852 /* SettingView.swift in Sources */,
+				3EA2B77C288C6F93008A0852 /* PickingTimeView.swift in Sources */,
 				3EB328BF2884606600FC4548 /* TaskCellView.swift in Sources */,
 				3EB328BB28844D1100FC4548 /* TasksView.swift in Sources */,
 				3E88E7422887515E0041173A /* Main.xcdatamodeld in Sources */,
