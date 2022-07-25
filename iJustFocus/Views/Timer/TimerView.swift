@@ -58,20 +58,21 @@ struct TimerView: View {
             
             // Buttons
             HStack {
-                CircleButton("Timing") {
+                CircleButton("Timing", appViewModel.color) {
                     showPickingTime.toggle()
                 }
-                .sheet(isPresented: $showPickingTime) {
+                .popover(isPresented: $showPickingTime) {
                     PickingTimeView()
+                        .presentationDetents([.medium])
                 }
                 
                 Spacer()
     
-                CircleButton("Stop"){
+                CircleButton("Stop", appViewModel.color){
                     timerViewModel.stop()
                 }
                                 
-                CircleButton(timerViewModel.isStopped ? "Reset" : "Start") {
+                CircleButton(timerViewModel.isStopped ? "Reset" : "Start", appViewModel.color) {
                     timerViewModel.start()
                 }
             }
@@ -79,18 +80,6 @@ struct TimerView: View {
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(appViewModel.linearGradient)
-    }
-    
-    func CircleButton(_ text: String, _ foregroundColor: UIColor? = nil ,action: @escaping (() -> Void)) -> some View{
-        return Button { action() } label: {
-            Text(text)
-                .padding(12)
-                .bold()
-                .foregroundColor(.white)
-                .background(Color((foregroundColor != nil) ? foregroundColor! : appViewModel.color))
-                .cornerRadius(10)
-                .shadow(radius: 2, x: 0, y: 2)
-        }
     }
 }
 
