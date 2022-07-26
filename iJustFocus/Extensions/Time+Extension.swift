@@ -12,12 +12,18 @@ extension Int {
         let hour = self / 3600
         let minutes = (self / 60) % 60
         let seconds = self % 60
-        let string = NSString(format: "%0.2d:%0.2d:%0.2d", hour, minutes, seconds)
+        var string = NSString()
+        if hour != 0 {
+            string = NSString(format: "%0.2d:%0.2d:%0.2d", hour, minutes, seconds)
+        } else {
+            string = NSString(format: "%0.2d:%0.2d", minutes, seconds)
+        }
+        
         return string as String
     }
     
     func toTimeString(_ format: [TimeType] = []) -> String {
-        guard !format.isEmpty else { return toTimeString }
+        guard format.count != 3 else { return toTimeString }
         let string = format.reduce(into: "") { res, par in
             res.append(String(format: "%0.2d:", par.toString(second: self)))
         }

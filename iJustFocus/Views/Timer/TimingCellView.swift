@@ -13,7 +13,7 @@ struct TimingCellView: View {
     var body: some View {
         Section("\(timing.date.toDayMonthYearString())") {
             ForEach(timing.seconds, id: \.self) { second in
-                Text(second.toTimeString([.hour, .minute, .second]))
+                Text(second.toTimeString)
             }
         }
     }

@@ -12,6 +12,7 @@ struct PickingTimeView: View {
     @EnvironmentObject var appViewModel: AppViewModel
     @Environment(\.dismiss) private var dismiss
     
+    
     var body: some View {
         Picker("Timer Picker", selection: $timerViewModel.currentPickedTime) {
             ForEach(TimerViewModel.timingRange) { timing in
@@ -21,13 +22,8 @@ struct PickingTimeView: View {
             }
         }
         .frame(maxHeight: .infinity)
+        .foregroundColor(.white)
         .pickerStyle(.wheel)
         .background(appViewModel.linearGradient)
-    }
-}
-
-struct PickingTimeView_Previews: PreviewProvider {
-    static var previews: some View {
-        PickingTimeView()
     }
 }

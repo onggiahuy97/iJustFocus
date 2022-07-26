@@ -21,10 +21,15 @@ class TimerViewModel: NSObject, ObservableObject, NSFetchedResultsControllerDele
         }
     }
    
+    @Published var stopWatch = 0
     @Published var isStopped = false
     @Published var pickedTimer = TimerViewModel.timerTimeDefault
-    @Published var timeType = TimeType.Timer
     @Published var timingGroup = [TimingGroup]()
+    @Published var timeType = TimeType.Timer {
+        didSet {
+            stop()
+        }
+    }
     @Published var currentPickedTime = TimerViewModel.timerTimeDefault {
         didSet {
             UserDefaults.standard.set(currentPickedTime, forKey: "CurrentPickedTime")
@@ -72,11 +77,21 @@ class TimerViewModel: NSObject, ObservableObject, NSFetchedResultsControllerDele
     }
     
     func stop() {
-        if !isStopped && pickedTimer != currentPickedTime {
-            timer?.invalidate()
-            timer = nil
-            self.isStopped = true
-            addTiming(currentPickedTime - pickedTimer)
+        switch timeType {
+        case .Timer:
+            if !isStopped && pickedTimer != currentPickedTime {
+                timer?.invalidate()
+                timer = nil
+                self.isStopped = true
+                addTiming(currentPickedTime - pickedTimer)
+            }
+        case .Stopwatch:
+            if stopWatch != 0 {
+                timer?.invalidate()
+                timer = nil
+                self.isStopped = true
+                addTiming(stopWatch)
+            }
         }
     }
     
@@ -92,16 +107,24 @@ class TimerViewModel: NSObject, ObservableObject, NSFetchedResultsControllerDele
     }
     
     func reset() {
-        withAnimation {
+        switch timeType {
+        case .Timer:
             self.pickedTimer = currentPickedTime
+        case .Stopwatch:
+            self.stopWatch = 0
         }
     }
     
     @objc
     func handleSecond() {
         DispatchQueue.main.async {
-            self.pickedTimer -= 1
-            self.pickedTimer == 0 ? self.stop() : nil
+            switch self.timeType {
+            case .Timer:
+                self.pickedTimer -= 1
+                self.pickedTimer == 0 ? self.stop() : nil
+            case .Stopwatch:
+                self.stopWatch += 1
+            }
         }
     }
     
@@ -135,7 +158,11 @@ class TimerViewModel: NSObject, ObservableObject, NSFetchedResultsControllerDele
 
 extension TimerViewModel {
     static let timerTimeDefault = 25 * 60
-    static let timingRange: [PickedTimer] = [5, 10, 15, 25, 30, 45, 60].map { PickedTimer(minutes: $0) }
+    static let timingRange: [PickedTimer] = stride(from: 5, through: 60, by: 5).map { PickedTimer(minutes: $0) }
+    
+    enum TimingSetting {
+        case stopWatch, timer
+    }
 
     enum TimeType: String, CaseIterable, Identifiable {
         case Stopwatch, Timer

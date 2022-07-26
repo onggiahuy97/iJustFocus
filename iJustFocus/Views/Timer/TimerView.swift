@@ -18,6 +18,13 @@ struct TimerView: View {
         return isPhone ? 80 : 120
     }
     
+    var clockString: String {
+        switch timerViewModel.timeType {
+        case .Timer: return timerViewModel.pickedTimer.toTimeString
+        case .Stopwatch: return timerViewModel.stopWatch.toTimeString
+        }
+    }
+    
     var segmentedController: some View {
         Picker(selection: $timerViewModel.timeType) {
             ForEach(TimerViewModel.TimeType.allCases) { type in
@@ -38,7 +45,7 @@ struct TimerView: View {
     
     var body: some View {
         VStack {
-            #warning("Temperary checking")
+#warning("Temperary checking")
             if appViewModel.boolCheck {
                 segmentedController
             } else {
@@ -48,7 +55,7 @@ struct TimerView: View {
             Spacer()
             
             // Clock
-            Text(timerViewModel.pickedTimer.toTimeString([.hour, .minute, .second]))
+            Text(clockString)
                 .font(.system(size: textSize, weight: .bold, design: .rounded))
                 .foregroundColor(.white)
                 .fontWeight(.bold)
@@ -58,20 +65,22 @@ struct TimerView: View {
             
             // Buttons
             HStack {
-                CircleButton("Timing", appViewModel.color) {
-                    showPickingTime.toggle()
-                }
-                .popover(isPresented: $showPickingTime) {
-                    PickingTimeView()
-                        .presentationDetents([.medium])
+                if timerViewModel.timeType == .Timer {
+                    CircleButton("Timing", appViewModel.color) {
+                        showPickingTime.toggle()
+                    }
+                    .sheet(isPresented: $showPickingTime) {
+                        PickingTimeView()
+                            .presentationDetents([.medium])
+                    }
                 }
                 
                 Spacer()
-    
+                
                 CircleButton("Stop", appViewModel.color){
                     timerViewModel.stop()
                 }
-                                
+                
                 CircleButton(timerViewModel.isStopped ? "Reset" : "Start", appViewModel.color) {
                     timerViewModel.start()
                 }
