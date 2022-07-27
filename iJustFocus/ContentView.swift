@@ -16,7 +16,7 @@ struct ContentView: View {
             
             let timerView = TimerView()
             let homeView = HomeView()
-               
+        
             if isVertical {
                 VStack(spacing: 0) {
                     timerView

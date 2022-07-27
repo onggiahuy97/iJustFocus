@@ -52,6 +52,7 @@ class TaskViewModel: NSObject, ObservableObject, NSFetchedResultsControllerDeleg
     }
     
     func addTask(_ name: String) {
+        guard !name.isEmpty else { return }
         let task = Tasking(context: dataController.container.viewContext)
         task.name = name
         dataController.save()

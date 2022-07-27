@@ -55,13 +55,20 @@ struct TasksView: View {
     }
     
     func taskView(_ task: Tasking) -> some View {
-        Label(task.unwrappedName, systemImage: task.isDone ? "checkmark.circle.fill" : "circle")
-            .onTapGesture {
-                withAnimation {
-                    task.isDone.toggle()
-                    dataController.save()
-                }
+        Button {
+            withAnimation {
+                task.isDone.toggle()
+                dataController.save()
             }
+        } label: {
+            Label {
+                Text(task.unwrappedName)
+                    .foregroundColor(.black)
+            } icon: {
+                Image(systemName: task.isDone ? "checkmark.circle.fill" : "circle")
+            }
+
+        }
     }
 }
 
