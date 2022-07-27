@@ -22,7 +22,7 @@ class TimerViewModel: NSObject, ObservableObject, NSFetchedResultsControllerDele
     }
    
     @Published var stopWatch = 0
-    @Published var isStopped = false
+    @Published var isStopped = true
     @Published var pickedTimer = TimerViewModel.timerTimeDefault
     @Published var timingGroup = [TimingGroup]()
     @Published var timeType = TimeType.Timer {

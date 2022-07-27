@@ -76,13 +76,9 @@ struct TimerView: View {
                 }
                 
                 Spacer()
-                
-                CircleButton("Stop", appViewModel.color){
-                    timerViewModel.stop()
-                }
-                
-                CircleButton(timerViewModel.isStopped ? "Reset" : "Start", appViewModel.color) {
-                    timerViewModel.start()
+                let isStopped = timerViewModel.isStopped
+                CircleButton(isStopped ? "Start" : "Stop", appViewModel.color){
+                    isStopped ? timerViewModel.start() : timerViewModel.stop()
                 }
             }
             .padding()
