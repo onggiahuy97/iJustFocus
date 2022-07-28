@@ -10,6 +10,7 @@ import SwiftUI
 struct HomeView: View {
     
     @EnvironmentObject var appViewModel: AppViewModel
+    @Environment(\.colorScheme) private var colorScheme
     
     @SceneStorage("selectedTab") var selectedTab: String?
         
@@ -30,12 +31,14 @@ struct HomeView: View {
         }
         .onAppear(perform: configNav)
         .onChange(of: appViewModel.color) { _ in configNav() }
+        .onChange(of: colorScheme) { _ in configNav() }
         .accentColor(Color(appViewModel.color))
     }
     
     func configNav() {
-        UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: appViewModel.color]
-        UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: appViewModel.color]
+        let color = (appViewModel.color == UIColor.black && colorScheme == .dark) ? UIColor.white : appViewModel.color
+        UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: color]
+        UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: color]
     }
 }
 

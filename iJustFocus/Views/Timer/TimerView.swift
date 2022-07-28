@@ -56,7 +56,7 @@ struct TimerView: View {
             
             // Clock
             Text(clockString)
-                .font(.system(size: textSize, weight: .bold, design: .rounded))
+                .font(.system(size: textSize, weight: .bold, design: .rounded).monospacedDigit())
                 .foregroundColor(.white)
                 .fontWeight(.bold)
                 .font(Font(.init(.message, size: 46)))

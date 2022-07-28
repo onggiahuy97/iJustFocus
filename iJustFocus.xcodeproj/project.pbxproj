@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		3E0537B1288F0C7E004570D4 /* View+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E0537B0288F0C7E004570D4 /* View+Extension.swift */; };
 		3E0537B3288F3097004570D4 /* Color+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E0537B2288F3097004570D4 /* Color+Extension.swift */; };
+		3E0537B5289182F1004570D4 /* HistoryBarChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E0537B4289182F1004570D4 /* HistoryBarChart.swift */; };
 		3E88E73A288748FE0041173A /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E88E739288748FE0041173A /* HomeView.swift */; };
 		3E88E73C28874DDF0041173A /* TimersListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E88E73B28874DDF0041173A /* TimersListView.swift */; };
 		3E88E73E2887511D0041173A /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E88E73D2887511D0041173A /* DataController.swift */; };
@@ -36,6 +37,7 @@
 /* Begin PBXFileReference section */
 		3E0537B0288F0C7E004570D4 /* View+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extension.swift"; sourceTree = "<group>"; };
 		3E0537B2288F3097004570D4 /* Color+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extension.swift"; sourceTree = "<group>"; };
+		3E0537B4289182F1004570D4 /* HistoryBarChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryBarChart.swift; sourceTree = "<group>"; };
 		3E88E739288748FE0041173A /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		3E88E73B28874DDF0041173A /* TimersListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimersListView.swift; sourceTree = "<group>"; };
 		3E88E73D2887511D0041173A /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
@@ -156,6 +158,7 @@
 				3EE8E166287522C6008AB34E /* ContentView.swift */,
 				3E88E739288748FE0041173A /* HomeView.swift */,
 				3EA2B779288B1994008A0852 /* SettingView.swift */,
+				3E0537B4289182F1004570D4 /* HistoryBarChart.swift */,
 				3E88E749288876370041173A /* Views */,
 				3E88E73F288751200041173A /* Controllers */,
 				3E88E7472888760D0041173A /* Extensions */,
@@ -258,6 +261,7 @@
 				3E88E73A288748FE0041173A /* HomeView.swift in Sources */,
 				3EA2B77A288B1994008A0852 /* SettingView.swift in Sources */,
 				3EA2B77C288C6F93008A0852 /* PickingTimeView.swift in Sources */,
+				3E0537B5289182F1004570D4 /* HistoryBarChart.swift in Sources */,
 				3EB328BF2884606600FC4548 /* TaskCellView.swift in Sources */,
 				3EB328BB28844D1100FC4548 /* TasksView.swift in Sources */,
 				3E88E7422887515E0041173A /* Main.xcdatamodeld in Sources */,

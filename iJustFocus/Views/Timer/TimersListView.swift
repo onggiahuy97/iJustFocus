@@ -12,6 +12,8 @@ struct TimersListView: View {
     @EnvironmentObject var dataController: DataController
     @EnvironmentObject var appViewModel: AppViewModel
     
+    @State private var showBarChart = false
+    
     var body: some View {
         NavigationStack {
             List {
@@ -21,18 +23,18 @@ struct TimersListView: View {
                 .onDelete(perform: timerViewModel.deleteTiming(_:))
             }
             .navigationTitle(Text("History"))
-//            .toolbar {
-//                ToolbarItem(placement: .navigationBarLeading) {
-//                    Button("Add Sample") {
-//                        Timing.createSample(dataController: dataController)
-//                    }
-//                }
-//                ToolbarItem(placement: .navigationBarLeading) {
-//                    Button("Delete All") {
-//                        timerViewModel.deleteAll()
-//                    }
-//                }
-//            }
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button {
+                        showBarChart.toggle()
+                    } label: {
+                        Image(systemName: "chart.bar.xaxis")
+                    }
+                    .sheet(isPresented: $showBarChart) {
+                        HistoryBarChart()
+                    }
+                }
+            }
         }
     }
 }

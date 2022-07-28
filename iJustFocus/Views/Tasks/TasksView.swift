@@ -63,7 +63,7 @@ struct TasksView: View {
         } label: {
             Label {
                 Text(task.unwrappedName)
-                    .foregroundColor(.black)
+                    .foregroundColor(Color(uiColor: .label))
             } icon: {
                 Image(systemName: task.isDone ? "checkmark.circle.fill" : "circle")
             }

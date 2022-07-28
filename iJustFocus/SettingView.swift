@@ -10,37 +10,69 @@ import SwiftUI
 struct SettingView: View {
     @EnvironmentObject var appViewModel: AppViewModel
     
-    let columns: [GridItem] = Array.init(repeating: GridItem(.flexible()), count: 1)
+    @State private var bgColor = Color.white
     
     var colorPicker: some View {
-        LazyVGrid(columns: columns, spacing: 0) {
-            ForEach(AppViewModel.colors) { color in
-                Button {
-                    appViewModel.color = color.uiColor
-                } label: {
-                    Rectangle()
-                        .fill(
-                            LinearGradient(
-                                colors: [Color(color.uiColor).opacity(0.75), Color(color.uiColor)],
-                                startPoint: .top,
-                                endPoint: .bottom)
-                        )
-                        .frame(height: 120)
-                        .overlay(alignment: .leading) {
-                            Text(color.text)
-                                .padding()
-                                .foregroundColor(.white)
-                                .font(.system(size: 16))
-                        }
-                }
+        ForEach(AppViewModel.colors) { color in
+            Button {
+                appViewModel.color = color.uiColor
+            } label: {
+                colorCell(color)
             }
+        }
+    }
+    
+    var customColor: some View {
+        Button {
+            appViewModel.color = UIColor(bgColor)
+        } label: {
+            Rectangle()
+                .fill(
+                    LinearGradient(
+                        colors: [bgColor.opacity(0.75), bgColor],
+                        startPoint: .top,
+                        endPoint: .bottom)
+                )
+                .frame(height: 120)
+        }
+        .overlay(alignment: .leading) {
+            ColorPicker("Pick a color", selection: $bgColor)
+                .padding()
+                .foregroundColor(.white)
+                .font(.system(size: 16))
+                .onAppear {
+                    bgColor = Color(appViewModel.color)
+                }
+                .onChange(of: bgColor) { newValue in
+                    appViewModel.color = UIColor(bgColor)
+                }
         }
     }
     
     var body: some View {
         ScrollView(showsIndicators: false) {
-            colorPicker
+            VStack(spacing: 0) {
+                colorPicker
+                customColor
+            }
         }
+    }
+    
+    func colorCell(_ color: AppViewModel.Coloring) -> some View {
+        Rectangle()
+            .fill(
+                LinearGradient(
+                    colors: [Color(color.uiColor).opacity(0.75), Color(color.uiColor)],
+                    startPoint: .top,
+                    endPoint: .bottom)
+            )
+            .frame(height: 120)
+            .overlay(alignment: .leading) {
+                Text(color.text)
+                    .padding()
+                    .foregroundColor(.white)
+                    .font(.system(size: 16))
+            }
     }
 }
 
