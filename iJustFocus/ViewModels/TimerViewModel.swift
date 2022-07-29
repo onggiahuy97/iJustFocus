@@ -180,5 +180,6 @@ extension TimerViewModel {
         let id = UUID()
         let date: Date
         var seconds: [Int]
+        var isExpanded = false
     }
 }

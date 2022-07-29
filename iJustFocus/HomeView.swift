@@ -20,9 +20,9 @@ struct HomeView: View {
                 .tabItem { Label("Tasks", systemImage: "checklist") }
                 .tag(TasksView.tag)
             
-            TimersListView()
+            HistoryTimerListView()
                 .tabItem { Label("List", systemImage: "list.bullet.clipboard") }
-                .tag(TimersListView.tag)
+                .tag(HistoryTimerListView.tag)
             
             SettingView()
                 .tabItem { Label("System", systemImage: "gear") }

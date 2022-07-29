@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct TimersListView: View {
+struct HistoryTimerListView: View {
     @EnvironmentObject var timerViewModel: TimerViewModel
     @EnvironmentObject var dataController: DataController
     @EnvironmentObject var appViewModel: AppViewModel
@@ -17,8 +17,12 @@ struct TimersListView: View {
     var body: some View {
         NavigationStack {
             List {
-                ForEach(timerViewModel.timingGroup) { timing in
-                    TimingCellView(timing: timing)
+                ForEach($timerViewModel.timingGroup) { timing in
+                    DisclosureGroup(isExpanded: timing.isExpanded) {
+                        TimingCellView(timing: timing.wrappedValue)
+                    } label: {
+                        Text(timing.wrappedValue.date.toDayMonthYearString())
+                    }
                 }
                 .onDelete(perform: timerViewModel.deleteTiming(_:))
             }
@@ -39,14 +43,8 @@ struct TimersListView: View {
     }
 }
 
-extension TimersListView {
+extension HistoryTimerListView {
     static let tag: String? = "TimersListView"
 }
 
 
-
-struct TimersListView_Previews: PreviewProvider {
-    static var previews: some View {
-        TimersListView()
-    }
-}

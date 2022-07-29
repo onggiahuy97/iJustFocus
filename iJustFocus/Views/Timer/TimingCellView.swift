@@ -11,7 +11,7 @@ struct TimingCellView: View {
     var timing: TimerViewModel.TimingGroup
     
     var body: some View {
-        Section("\(timing.date.toDayMonthYearString())") {
+        Section("Total of focus times: \(timing.seconds.count)") {
             ForEach(timing.seconds, id: \.self) { second in
                 Text(second.toTimeString)
             }
