@@ -22,6 +22,11 @@ struct iJustFocusApp: App {
         _tasksViewModel = StateObject(wrappedValue: .init(dataController: dataController))
     }
     
+    var drag: some Gesture {
+        DragGesture()
+            .onEnded(appViewModel.calculateGestureOnEnded(_:))
+    }
+    
     var body: some Scene {
         WindowGroup {
             ContentView()
@@ -32,6 +37,7 @@ struct iJustFocusApp: App {
                 .environmentObject(dataController)
                 .environment(\.managedObjectContext, DataController.shared.container.viewContext)
                 .statusBarHidden()
+                .gesture(drag)
         }
     }
 }

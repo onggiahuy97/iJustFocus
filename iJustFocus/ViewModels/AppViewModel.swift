@@ -22,8 +22,72 @@ class AppViewModel: ObservableObject {
         }
     }
     
+    @Published var tupleWidthRatio = (0.5, 0.5)
+    @Published var currentSizeRation = CurrentSizeRation.mid
+    
+    enum CurrentSizeRation {
+        case leftOrUp, mid, rightOrDown
+    }
+    
+    var isVertical: Bool = false
+        
     init() {
         loadMainColor()
+    }
+    
+    func calculateGestureOnEnded(_ value: DragGesture.Value) {
+        let horizontal = value.translation.width
+        let vertical = value.translation.height
+        
+        withAnimation {
+            if isVertical {
+                // Swipe down
+                if vertical > 150 {
+                    tupleWidthRatio = (0.8, 0.2)
+                    currentSizeRation = .rightOrDown
+                }
+                // Swipe up
+                else if vertical < -150 {
+                    tupleWidthRatio = (0.2, 0.8)
+                    currentSizeRation = .leftOrUp
+                }
+                // To mid
+                else {
+                    tupleWidthRatio = (0.5, 0.5)
+                    currentSizeRation = .mid
+                }
+            } else {
+                // Swipe right
+                if horizontal > 150 {
+                    tupleWidthRatio = (0.8, 0.2)
+                    currentSizeRation = .rightOrDown
+                }
+                // Swipe left
+                else if horizontal < -150 {
+                    tupleWidthRatio = (0.2, 0.8)
+                    currentSizeRation = .leftOrUp
+                }
+                // To the mid
+                else {
+                    tupleWidthRatio = (0.5, 0.5)
+                    currentSizeRation = .mid
+                }
+            }
+        }
+        
+    }
+    
+    func calculateGeometryProxy(_ proxy: GeometryProxy) -> CGSize {
+        let width = proxy.size.width
+        let height = proxy.size.height
+        return CGSize(width: width, height: height)
+    }
+    
+    func isVertical(_ proxy: GeometryProxy) -> Bool {
+        let width = proxy.size.width
+        let height = proxy.size.height
+        isVertical = width < height
+        return width < height
     }
     
     func loadLinearGradient() {

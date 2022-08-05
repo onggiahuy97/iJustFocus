@@ -8,29 +8,35 @@
 import SwiftUI
 
 struct ContentView: View {
+    @EnvironmentObject var appViewModel: AppViewModel
+    
     var body: some View {
         GeometryReader { proxy in
-            let width = proxy.size.width
-            let height = proxy.size.height
-            let isVertical = width < height
             
             let timerView = TimerView()
             let homeView = HomeView()
         
-            if isVertical {
+            let width = appViewModel.calculateGeometryProxy(proxy).width
+            let height = appViewModel.calculateGeometryProxy(proxy).height
+            
+            if appViewModel.isVertical(proxy) {
                 VStack(spacing: 0) {
                     timerView
-                        .frame(height: height / 2)
+                        .frame(height: height * appViewModel.tupleWidthRatio.0)
+                        .blur(radius: appViewModel.currentSizeRation == .leftOrUp ? 1 : 0)
                     homeView
-                        .frame(height: height / 2)
+                        .frame(height: height * appViewModel.tupleWidthRatio.1)
+                        .blur(radius: appViewModel.currentSizeRation == .rightOrDown ? 1 : 0)
                 }
                 .frame(width: width, height: height)
             } else {
                 HStack(spacing: 0) {
                     homeView
-                        .frame(width: width / 2)
+                        .frame(width: width * appViewModel.tupleWidthRatio.0)
+                        .blur(radius: appViewModel.currentSizeRation == .leftOrUp ? 1 : 0)
                     timerView
-                        .frame(width: width / 2)
+                        .frame(width: width * appViewModel.tupleWidthRatio.1)
+                        .blur(radius: appViewModel.currentSizeRation == .rightOrDown ? 1 : 0)
                 }
                 .frame(width: width, height: height)
             }
