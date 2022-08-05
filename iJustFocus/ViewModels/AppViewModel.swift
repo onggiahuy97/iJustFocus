@@ -27,6 +27,16 @@ class AppViewModel: ObservableObject {
     
     enum CurrentSizeRation {
         case leftOrUp, mid, rightOrDown
+        var tupleWithRatio: (Double, Double) {
+            switch self {
+            case .rightOrDown:
+                return (0.9, 0.1)
+            case .leftOrUp:
+                return (0.1, 0.9)
+            case .mid:
+                return (0.5, 0.5)
+            }
+        }
     }
     
     var isVertical: Bool = false
@@ -43,38 +53,32 @@ class AppViewModel: ObservableObject {
             if isVertical {
                 // Swipe down
                 if vertical > 150 {
-                    tupleWidthRatio = (0.8, 0.2)
                     currentSizeRation = .rightOrDown
                 }
                 // Swipe up
                 else if vertical < -150 {
-                    tupleWidthRatio = (0.2, 0.8)
                     currentSizeRation = .leftOrUp
                 }
                 // To mid
                 else {
-                    tupleWidthRatio = (0.5, 0.5)
                     currentSizeRation = .mid
                 }
             } else {
                 // Swipe right
                 if horizontal > 150 {
-                    tupleWidthRatio = (0.8, 0.2)
                     currentSizeRation = .rightOrDown
                 }
                 // Swipe left
                 else if horizontal < -150 {
-                    tupleWidthRatio = (0.2, 0.8)
                     currentSizeRation = .leftOrUp
                 }
                 // To the mid
                 else {
-                    tupleWidthRatio = (0.5, 0.5)
                     currentSizeRation = .mid
                 }
             }
+            tupleWidthRatio = currentSizeRation.tupleWithRatio
         }
-        
     }
     
     func calculateGeometryProxy(_ proxy: GeometryProxy) -> CGSize {
