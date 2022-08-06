@@ -24,9 +24,9 @@ struct HomeView: View {
                 .tabItem { Label("List", systemImage: "list.bullet.clipboard") }
                 .tag(HistoryTimerListView.tag)
             
-            SettingView()
+            SettingsView()
                 .tabItem { Label("System", systemImage: "gear") }
-                .tag(SettingView.tag)
+                .tag(ColorSettingView.tag)
             
         }
         .onAppear(perform: configNav)

@@ -14,14 +14,6 @@ struct ContentView: View {
         GeometryReader { proxy in
             
             let timerView = TimerView()
-                .overlay(
-                    Rectangle()
-                        .foregroundColor(appViewModel.currentSizeRation == .rightOrDown ? .clear : .clear)
-                        .blur(radius: appViewModel.currentSizeRation == .rightOrDown ? 1 : 0)
-                        .background(
-                            Rectangle()
-                        )
-                )
             let homeView = HomeView()
             
             let width = appViewModel.calculateGeometryProxy(proxy).width

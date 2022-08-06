@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct SettingView: View {
+struct ColorSettingView: View {
     @EnvironmentObject var appViewModel: AppViewModel
     
     @State private var bgColor = Color.white
@@ -56,6 +56,7 @@ struct SettingView: View {
                 customColor
             }
         }
+        .navigationBarTitleDisplayMode(.inline)
     }
     
     func colorCell(_ color: AppViewModel.Coloring) -> some View {
@@ -76,6 +77,6 @@ struct SettingView: View {
     }
 }
 
-extension SettingView {
+extension ColorSettingView {
     static let tag: String? = "SettingView"
 }

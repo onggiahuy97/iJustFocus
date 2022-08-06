@@ -24,6 +24,7 @@ class AppViewModel: ObservableObject {
     
     @Published var tupleWidthRatio = (0.5, 0.5)
     @Published var currentSizeRation = CurrentSizeRation.mid
+    @Published var fontDesign: Font.Design?
     
     enum CurrentSizeRation {
         case leftOrUp, mid, rightOrDown
