@@ -17,7 +17,7 @@ struct SettingsView: View {
                     ColorSettingView()
                 }
                 SettingCellView("Timer Font", "f.square") {
-                    FontSettingView()
+                    FontDesignSettingView()
                 }
             }
             .navigationTitle("Settings")
@@ -45,7 +45,8 @@ struct SettingCellView<Content: View>: View {
             Image(systemName: systemImage)
                 .imageScale(.large)
                 .symbolVariant(.square.fill)
-                .foregroundStyle(Color(iconColor), Color(iconColor))
+//                .foregroundStyle(Color(iconColor), Color(iconColor))
+                .symbolRenderingMode(.monochrome)
         }
     }
     

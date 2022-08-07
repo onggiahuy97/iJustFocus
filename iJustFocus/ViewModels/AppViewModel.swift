@@ -22,9 +22,14 @@ class AppViewModel: ObservableObject {
         }
     }
     
+    @Published var fontDesign: Font.Design? {
+        didSet {
+            
+        }
+    }
+    
     @Published var tupleWidthRatio = (0.5, 0.5)
     @Published var currentSizeRation = CurrentSizeRation.mid
-    @Published var fontDesign: Font.Design?
     
     enum CurrentSizeRation {
         case leftOrUp, mid, rightOrDown
@@ -40,10 +45,13 @@ class AppViewModel: ObservableObject {
         }
     }
     
+    let ud = UserDefaults()
+    
     var isVertical: Bool = false
         
     init() {
         loadMainColor()
+        loadFontDesign()
     }
     
     func calculateGestureOnEnded(_ value: DragGesture.Value) {
@@ -108,8 +116,13 @@ class AppViewModel: ObservableObject {
         }
     }
     
+    func loadFontDesign() {
+        if let fontDesign = ud.getGenericData(key: "FontDesign") as? Font.Design {
+            
+        }
+    }
+    
     func saveColor() {
-        let ud = UserDefaults()
         ud.setColor(color: color, forKey: Self.colorKey)
     }
     
