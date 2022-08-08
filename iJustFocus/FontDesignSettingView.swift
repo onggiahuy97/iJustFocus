@@ -17,24 +17,39 @@ struct FontDesignSettingView: View {
     
     func fontDesignButton(_ design: FontingDesign) -> some View {
         Button {
-            appViewModel.fontDesign = design.font
+            appViewModel.fontDesign = design
         } label: {
             HStack {
                 Text(design.name)
-                    .font(.system(size: 16, design: design.font))
+                    .font(.system(size: 16, design: design.toFontCase()))
                     .foregroundColor(.black)
                 Spacer()
                 Image(systemName: "checkmark")
-                    .opacity(appViewModel.fontDesign == design.font ? 1 : 0)
+                    .opacity(appViewModel.fontDesign?.name == design.name ? 1 : 0)
             }
         }
     }
 }
 
-struct FontingDesign: Identifiable {
+struct FontingDesign: Identifiable, Codable {
     var id = UUID()
-    let name: String
-    let font: Font.Design
+    var name: String
+    let font: FontCase
+    
+    enum FontCase: String, Codable {
+        case `default`, monospaced, rounded, serif
+    }
+    
+    func toFontCase() -> Font.Design {
+        switch self.font {
+        case .default: return Font.Design.default
+        case .monospaced: return Font.Design.monospaced
+        case .rounded: return Font.Design.rounded
+        case .serif: return Font.Design.serif
+        }
+    }
+    
+    static let forKey: String = "FontingDesign"
     
     static let fontDesigns: [FontingDesign] = [
         .init(name: "Default", font: .default),

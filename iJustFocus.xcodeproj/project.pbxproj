@@ -27,6 +27,7 @@
 		3EB328BF2884606600FC4548 /* TaskCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB328BE2884606600FC4548 /* TaskCellView.swift */; };
 		3EBD7F97289DF4AB00E4353C /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EBD7F96289DF4AB00E4353C /* SettingsView.swift */; };
 		3EBD7F99289E04C300E4353C /* FontDesignSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EBD7F98289E04C300E4353C /* FontDesignSettingView.swift */; };
+		3EBD7F9B28A1833E00E4353C /* UserDefault+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EBD7F9A28A1833E00E4353C /* UserDefault+Extension.swift */; };
 		3EE8E165287522C6008AB34E /* iJustFocusApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE8E164287522C6008AB34E /* iJustFocusApp.swift */; };
 		3EE8E167287522C6008AB34E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE8E166287522C6008AB34E /* ContentView.swift */; };
 		3EE8E169287522C7008AB34E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3EE8E168287522C7008AB34E /* Assets.xcassets */; };
@@ -57,6 +58,7 @@
 		3EB328BE2884606600FC4548 /* TaskCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCellView.swift; sourceTree = "<group>"; };
 		3EBD7F96289DF4AB00E4353C /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		3EBD7F98289E04C300E4353C /* FontDesignSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontDesignSettingView.swift; sourceTree = "<group>"; };
+		3EBD7F9A28A1833E00E4353C /* UserDefault+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefault+Extension.swift"; sourceTree = "<group>"; };
 		3EE8E161287522C6008AB34E /* iJustFocus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iJustFocus.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3EE8E164287522C6008AB34E /* iJustFocusApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iJustFocusApp.swift; sourceTree = "<group>"; };
 		3EE8E166287522C6008AB34E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -96,6 +98,7 @@
 				3EA430612888A66F00AB687F /* Date+Extension.swift */,
 				3E0537B0288F0C7E004570D4 /* View+Extension.swift */,
 				3E0537B2288F3097004570D4 /* Color+Extension.swift */,
+				3EBD7F9A28A1833E00E4353C /* UserDefault+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -165,10 +168,10 @@
 				3EA2B779288B1994008A0852 /* ColorSettingView.swift */,
 				3EBD7F98289E04C300E4353C /* FontDesignSettingView.swift */,
 				3E0537B4289182F1004570D4 /* HistoryBarChart.swift */,
+				3E88E748288876220041173A /* ViewModels */,
 				3E88E749288876370041173A /* Views */,
 				3E88E73F288751200041173A /* Controllers */,
 				3E88E7472888760D0041173A /* Extensions */,
-				3E88E748288876220041173A /* ViewModels */,
 				3E88E7402887515E0041173A /* Main.xcdatamodeld */,
 				3EE8E168287522C7008AB34E /* Assets.xcassets */,
 				3EE8E16A287522C7008AB34E /* Preview Content */,
@@ -266,6 +269,7 @@
 				3EBD7F97289DF4AB00E4353C /* SettingsView.swift in Sources */,
 				3E0537B3288F3097004570D4 /* Color+Extension.swift in Sources */,
 				3E88E73A288748FE0041173A /* HomeView.swift in Sources */,
+				3EBD7F9B28A1833E00E4353C /* UserDefault+Extension.swift in Sources */,
 				3EA2B77A288B1994008A0852 /* ColorSettingView.swift in Sources */,
 				3EA2B77C288C6F93008A0852 /* PickingTimeView.swift in Sources */,
 				3E0537B5289182F1004570D4 /* HistoryBarChart.swift in Sources */,

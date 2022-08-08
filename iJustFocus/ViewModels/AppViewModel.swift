@@ -13,7 +13,6 @@ class AppViewModel: ObservableObject {
         startPoint: .topLeading,
         endPoint: .bottomTrailing
     )
-    
     @Published var color: UIColor = .systemBlue {
         didSet {
             boolCheck.toggle()
@@ -21,32 +20,15 @@ class AppViewModel: ObservableObject {
             loadLinearGradient()
         }
     }
-    
-    @Published var fontDesign: Font.Design? {
+    @Published var fontDesign: FontingDesign? {
         didSet {
-            
+            setFontDesign()
         }
     }
-    
     @Published var tupleWidthRatio = (0.5, 0.5)
     @Published var currentSizeRation = CurrentSizeRation.mid
     
-    enum CurrentSizeRation {
-        case leftOrUp, mid, rightOrDown
-        var tupleWithRatio: (Double, Double) {
-            switch self {
-            case .rightOrDown:
-                return (0.9, 0.1)
-            case .leftOrUp:
-                return (0.1, 0.9)
-            case .mid:
-                return (0.5, 0.5)
-            }
-        }
-    }
-    
-    let ud = UserDefaults()
-    
+    var boolCheck: Bool = false
     var isVertical: Bool = false
         
     init() {
@@ -110,34 +92,64 @@ class AppViewModel: ObservableObject {
     
     func loadMainColor() {
         let ud = UserDefaults()
-        if let color = ud.colorForKey(key: Self.colorKey) {
+        if let color = ud.colorForKey(key: Coloring.forKey) {
             self.color = color
             loadLinearGradient()
         }
     }
     
     func loadFontDesign() {
-        if let fontDesign = ud.getGenericData(key: "FontDesign") as? Font.Design {
-            
+        if let savedData = UserDefaults.standard.object(forKey: FontingDesign.forKey) as? Data {
+            if let fonting = try? JSONDecoder().decode(FontingDesign.self, from: savedData) {
+                fontDesign = fonting
+            }
         }
     }
     
-    func saveColor() {
-        ud.setColor(color: color, forKey: Self.colorKey)
+    func setFontDesign() {
+        UserDefaults().setCodableObject(fontDesign, forKey: FontingDesign.forKey)
     }
     
-    var boolCheck: Bool = false
+    func saveColor() {
+        UserDefaults().setColor(color: color, forKey: Coloring.forKey)
+    }
     
+   
+}
+
+// MARK: - Define Enum
+extension AppViewModel {
+    enum CurrentSizeRation {
+        case leftOrUp, mid, rightOrDown
+        var tupleWithRatio: (Double, Double) {
+            switch self {
+            case .rightOrDown:
+                return (0.9, 0.1)
+            case .leftOrUp:
+                return (0.1, 0.9)
+            case .mid:
+                return (0.5, 0.5)
+            }
+        }
+    }
+}
+
+// MARK: - Define struct
+extension AppViewModel {
     struct Coloring: Identifiable {
         var id = UUID()
         var text: String
         var uiColor: UIColor
+        
+        static let forKey = "Coloring"
     }
+    
+    
 }
 
+// MARK: - Define static variables
 extension AppViewModel {
     static let colors: [Coloring] = AppViewModel.sampleColors
-    static let colorKey = "Color Key"
     static let sampleColors: [Coloring] = [
         .init(text: "Red", uiColor: .systemRed),
         .init(text: "Pink", uiColor: .systemPink.withAlphaComponent(0.8)),

@@ -31,7 +31,11 @@ struct SettingCellView<Content: View>: View {
     let iconColor: UIColor
     let content: () -> Content
     
-    init(_ title: String, _ systemImage: String, _ iconColor: UIColor = .black, _ content: @escaping () -> Content) {
+    init(_ title: String,
+         _ systemImage: String,
+         _ iconColor: UIColor = .black,
+         _ content: @escaping () -> Content
+    ) {
         self.title = title
         self.systemImage = systemImage
         self.iconColor = iconColor
