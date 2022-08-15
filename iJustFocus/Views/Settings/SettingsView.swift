@@ -13,10 +13,13 @@ struct SettingsView: View {
     var body: some View {
         NavigationStack {
             List {
+                SettingCellView("Theme Color", "rectangle.leadinghalf.inset.filled", appViewModel.color) {
+                    Text("")
+                }
                 SettingCellView("Theme Color", "paintbrush", appViewModel.color) {
                     ColorSettingView()
                 }
-                SettingCellView("Timer Font", "f.square") {
+                SettingCellView("Timer Font", "f.square", appViewModel.color) {
                     FontDesignSettingView()
                 }
             }
@@ -49,8 +52,8 @@ struct SettingCellView<Content: View>: View {
             Image(systemName: systemImage)
                 .imageScale(.large)
                 .symbolVariant(.square.fill)
-//                .foregroundStyle(Color(iconColor), Color(iconColor))
                 .symbolRenderingMode(.monochrome)
+                .foregroundColor(Color(iconColor))
         }
     }
     

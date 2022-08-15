@@ -181,5 +181,10 @@ extension TimerViewModel {
         let date: Date
         var seconds: [Int]
         var isExpanded = false
+        
+        var totalTimes: String {
+            let total = seconds.reduce(0, +)
+            return "\(total/60) minutes"
+        }
     }
 }

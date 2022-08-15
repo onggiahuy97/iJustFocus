@@ -66,6 +66,10 @@ struct TimerView: View {
             
             // Buttons
             HStack {
+                
+                
+                Spacer()
+                
                 if timerViewModel.timeType == .Timer {
                     CircleButton("Timing", appViewModel.color) {
                         showPickingTime.toggle()
@@ -76,7 +80,6 @@ struct TimerView: View {
                     }
                 }
                 
-                Spacer()
                 let isStopped = timerViewModel.isStopped
                 CircleButton(isStopped ? "Start" : "Stop", appViewModel.color){
                     isStopped ? timerViewModel.start() : timerViewModel.stop()

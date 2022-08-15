@@ -12,31 +12,53 @@ struct HistoryTimerListView: View {
     @EnvironmentObject var dataController: DataController
     @EnvironmentObject var appViewModel: AppViewModel
     
-    @State private var showBarChart = false
+    @State private var viewType = ViewType.List
+    
+    enum ViewType {
+        case List, Chart
+    }
+    
+    var gridView: some View {
+        Grid {
+            GridRow {
+                Text("Date")
+                Text("Focus Times")
+                Text("Total Times")
+            }
+            .bold()
+            .foregroundColor(Color(appViewModel.color))
+            
+            Divider()
+            
+            ForEach(timerViewModel.timingGroup) { timing in
+                GridRow {
+                    Text(timing.date.toDayMonthYearString())
+                    Text("\(timing.seconds.count)")
+                    Text(timing.totalTimes)
+                }
+                Divider()
+            }
+        }
+    }
     
     var body: some View {
         NavigationStack {
-            List {
-                ForEach($timerViewModel.timingGroup) { timing in
-                    DisclosureGroup(isExpanded: timing.isExpanded) {
-                        TimingCellView(timing: timing.wrappedValue)
-                    } label: {
-                        Text(timing.wrappedValue.date.toDayMonthYearString())
-                    }
+            ScrollView {
+                switch viewType {
+                case .List: gridView
+                case .Chart: HistoryBarChart()
                 }
-                .onDelete(perform: timerViewModel.deleteTiming(_:))
             }
             .navigationTitle(Text("History"))
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    Button {
-                        showBarChart.toggle()
-                    } label: {
-                        Image(systemName: "chart.bar.xaxis")
+                    Picker("Picker", selection: $viewType) {
+                        Text("List").tag(ViewType.List)
+                        Text("Chart").tag(ViewType.Chart)
                     }
-                    .sheet(isPresented: $showBarChart) {
-                        HistoryBarChart()
-                    }
+                    .pickerStyle(.segmented)
+                    .padding()
+                    .padding(.top, 12)
                 }
             }
         }
