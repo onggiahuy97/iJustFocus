@@ -10,6 +10,7 @@ import SwiftUI
 struct TasksView: View {
     @EnvironmentObject var tasksViewModel: TaskViewModel
     @EnvironmentObject var dataController: DataController
+    @EnvironmentObject var appViewModel: AppViewModel
     
     @State private var showAddTask = false
     @State private var taskName = ""
@@ -37,6 +38,11 @@ struct TasksView: View {
                     }
                     .alert("Add Task", isPresented: $showAddTask) {
                         addTaskAlert
+                    }
+                }
+                ToolbarItem(placement: .navigationBarLeading) {
+                    if appViewModel.currentOrientation == .focusTodos {
+                        MenuButton(false)
                     }
                 }
             }

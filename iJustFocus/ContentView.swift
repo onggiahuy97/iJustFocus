@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     @EnvironmentObject var appViewModel: AppViewModel
+    @EnvironmentObject var tasksViewModel: TaskViewModel
     
     var body: some View {
         GeometryReader { proxy in
@@ -19,7 +20,12 @@ struct ContentView: View {
             let width = appViewModel.calculateGeometryProxy(proxy).width
             let height = appViewModel.calculateGeometryProxy(proxy).height
             
-            Group {
+            switch appViewModel.currentOrientation {
+            case .focusTodos:
+                homeView
+            case .focusTimer:
+                timerView
+            case .halfHalf:
                 if appViewModel.isVertical(proxy) {
                     VStack(spacing: 0) {
                         timerView
@@ -37,6 +43,8 @@ struct ContentView: View {
                     }
                     .frame(width: width, height: height)
                 }
+                
+                Using animation firework
             }
         }
     }

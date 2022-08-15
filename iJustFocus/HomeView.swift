@@ -13,7 +13,7 @@ struct HomeView: View {
     @Environment(\.colorScheme) private var colorScheme
     
     @SceneStorage("selectedTab") var selectedTab: String?
-        
+    
     var body: some View {
         TabView(selection: $selectedTab) {
             TasksView()
@@ -27,7 +27,6 @@ struct HomeView: View {
             SettingsView()
                 .tabItem { Label("System", systemImage: "gear") }
                 .tag(ColorSettingView.tag)
-            
         }
         .onAppear(perform: configNav)
         .onChange(of: appViewModel.color) { _ in configNav() }

@@ -10,6 +10,7 @@
 		3E0537B1288F0C7E004570D4 /* View+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E0537B0288F0C7E004570D4 /* View+Extension.swift */; };
 		3E0537B3288F3097004570D4 /* Color+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E0537B2288F3097004570D4 /* Color+Extension.swift */; };
 		3E0537B5289182F1004570D4 /* HistoryBarChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E0537B4289182F1004570D4 /* HistoryBarChart.swift */; };
+		3E1F777828AAC30800B2867D /* Button+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E1F777728AAC30800B2867D /* Button+Extension.swift */; };
 		3E88E73A288748FE0041173A /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E88E739288748FE0041173A /* HomeView.swift */; };
 		3E88E73C28874DDF0041173A /* HistoryTimerListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E88E73B28874DDF0041173A /* HistoryTimerListView.swift */; };
 		3E88E73E2887511D0041173A /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E88E73D2887511D0041173A /* DataController.swift */; };
@@ -40,6 +41,7 @@
 		3E0537B0288F0C7E004570D4 /* View+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extension.swift"; sourceTree = "<group>"; };
 		3E0537B2288F3097004570D4 /* Color+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extension.swift"; sourceTree = "<group>"; };
 		3E0537B4289182F1004570D4 /* HistoryBarChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryBarChart.swift; sourceTree = "<group>"; };
+		3E1F777728AAC30800B2867D /* Button+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Button+Extension.swift"; sourceTree = "<group>"; };
 		3E88E739288748FE0041173A /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		3E88E73B28874DDF0041173A /* HistoryTimerListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryTimerListView.swift; sourceTree = "<group>"; };
 		3E88E73D2887511D0041173A /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
@@ -97,6 +99,7 @@
 				3E0537B0288F0C7E004570D4 /* View+Extension.swift */,
 				3E0537B2288F3097004570D4 /* Color+Extension.swift */,
 				3EBD7F9A28A1833E00E4353C /* UserDefault+Extension.swift */,
+				3E1F777728AAC30800B2867D /* Button+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -289,6 +292,7 @@
 				3EB328BB28844D1100FC4548 /* TasksView.swift in Sources */,
 				3E88E7422887515E0041173A /* Main.xcdatamodeld in Sources */,
 				3EB328B528823A0900FC4548 /* Time+Extension.swift in Sources */,
+				3E1F777828AAC30800B2867D /* Button+Extension.swift in Sources */,
 				3EBD7F99289E04C300E4353C /* FontDesignSettingView.swift in Sources */,
 				3EE8E17528752491008AB34E /* TimerViewModel.swift in Sources */,
 				3EF3DD4D2884AF9200DA57DD /* TaskViewModel.swift in Sources */,

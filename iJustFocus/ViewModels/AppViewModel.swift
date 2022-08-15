@@ -26,7 +26,7 @@ class AppViewModel: ObservableObject {
         }
     }
     @Published var tupleWidthRatio = (0.5, 0.5)
-    @Published var currentSizeRation = CurrentSizeRation.mid
+    @Published var currentOrientation = CurrentSizeRation.halfHalf
     
     var boolCheck: Bool = false
     var isVertical: Bool = false
@@ -44,31 +44,30 @@ class AppViewModel: ObservableObject {
             if isVertical {
                 // Swipe down
                 if vertical > 150 {
-                    currentSizeRation = .rightOrDown
+                    currentOrientation = .focusTodos
                 }
                 // Swipe up
                 else if vertical < -150 {
-                    currentSizeRation = .leftOrUp
+                    currentOrientation = .focusTimer
                 }
                 // To mid
                 else {
-                    currentSizeRation = .mid
+                    currentOrientation = .halfHalf
                 }
             } else {
                 // Swipe right
                 if horizontal > 150 {
-                    currentSizeRation = .rightOrDown
+                    currentOrientation = .focusTodos
                 }
                 // Swipe left
                 else if horizontal < -150 {
-                    currentSizeRation = .leftOrUp
+                    currentOrientation = .focusTimer
                 }
                 // To the mid
                 else {
-                    currentSizeRation = .mid
+                    currentOrientation = .halfHalf
                 }
             }
-            tupleWidthRatio = currentSizeRation.tupleWithRatio
         }
     }
     
@@ -120,14 +119,14 @@ class AppViewModel: ObservableObject {
 // MARK: - Define Enum
 extension AppViewModel {
     enum CurrentSizeRation {
-        case leftOrUp, mid, rightOrDown
+        case focusTimer, halfHalf, focusTodos
         var tupleWithRatio: (Double, Double) {
             switch self {
-            case .rightOrDown:
+            case .focusTodos:
                 return (0.9, 0.1)
-            case .leftOrUp:
+            case .focusTimer:
                 return (0.1, 0.9)
-            case .mid:
+            case .halfHalf:
                 return (0.5, 0.5)
             }
         }

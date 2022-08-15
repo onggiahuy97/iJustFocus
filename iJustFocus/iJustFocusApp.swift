@@ -37,7 +37,7 @@ struct iJustFocusApp: App {
                 .environmentObject(dataController)
                 .environment(\.managedObjectContext, DataController.shared.container.viewContext)
                 .statusBarHidden()
-                .gesture(drag)
+//                .gesture(drag)
         }
     }
 }
