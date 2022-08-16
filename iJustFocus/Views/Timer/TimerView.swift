@@ -12,6 +12,9 @@ struct TimerView: View {
     @EnvironmentObject var appViewModel: AppViewModel
     
     @State private var showPickingTime = false
+    @State private var showPickingImage = false
+    
+    var proxy: GeometryProxy
     
     var textSize: CGFloat {
         let isPhone = UIDevice.current.userInterfaceIdiom == .phone
@@ -43,6 +46,23 @@ struct TimerView: View {
         }
     }
     
+    var tabViewBackgroundTimer: some View {
+        TabView {
+            Image(uiImage: appViewModel.backgroundImage ?? .init(named: "placeholder")!)
+                .resizable()
+                .scaledToFit()
+                .ignoresSafeArea(.all)
+                .cornerRadius(12)
+                .padding()
+                .onTapGesture { showPickingImage.toggle() }
+                .sheet(isPresented: $showPickingImage) {
+                    ImagePickerView(image: $appViewModel.backgroundImage)
+                }
+            Image("")
+        }
+        .tabViewStyle(.page(indexDisplayMode: .automatic))
+    }
+    
     var body: some View {
         VStack {
 #warning("Temperary checking")
@@ -52,17 +72,20 @@ struct TimerView: View {
                 segmentedController
             }
             
-            Spacer()
-            
-            // Clock
-            Text(clockString)
-                .font(.system(size: textSize, weight: .bold, design: appViewModel.fontDesign?.toFontCase()).monospacedDigit())
-                .foregroundColor(.white)
-                .fontWeight(.bold)
-                .font(Font(.init(.message, size: 46)))
+            VStack {
+                Spacer()
                 
-            
-            Spacer()
+                // Clock
+                Text(clockString)
+                    .font(.system(size: textSize, weight: .bold, design: appViewModel.fontDesign?.toFontCase()).monospacedDigit())
+                    .foregroundColor(.white)
+                    .fontWeight(.bold)
+                    .font(Font(.init(.message, size: 46)))
+                
+                Spacer()
+            }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .background(tabViewBackgroundTimer)
             
             // Buttons
             HStack {
@@ -133,11 +156,5 @@ struct SegmentedControllerViewModifier: ViewModifier {
                 UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor: UIColor.white], for: .selected)
                 UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor: UIColor.white], for: .normal)
             }
-    }
-}
-
-struct TimerView_Previews: PreviewProvider {
-    static var previews: some View {
-        TimerView()
     }
 }

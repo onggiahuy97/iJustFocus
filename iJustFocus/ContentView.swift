@@ -14,7 +14,7 @@ struct ContentView: View {
     var body: some View {
         GeometryReader { proxy in
             
-            let timerView = TimerView()
+            let timerView = TimerView(proxy: proxy)
             let homeView = HomeView()
             
             let width = appViewModel.calculateGeometryProxy(proxy).width
@@ -43,8 +43,6 @@ struct ContentView: View {
                     }
                     .frame(width: width, height: height)
                 }
-                
-                Using animation firework
             }
         }
     }

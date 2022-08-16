@@ -27,6 +27,7 @@ class AppViewModel: ObservableObject {
     }
     @Published var tupleWidthRatio = (0.5, 0.5)
     @Published var currentOrientation = CurrentSizeRation.halfHalf
+    @Published var backgroundImage: UIImage?
     
     var boolCheck: Bool = false
     var isVertical: Bool = false
