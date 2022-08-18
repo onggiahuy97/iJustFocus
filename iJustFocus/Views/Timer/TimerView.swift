@@ -94,7 +94,7 @@ struct TimerView: View {
                 Spacer()
                 
                 if timerViewModel.timeType == .Timer {
-                    CircleButton("Timing", appViewModel.color) {
+                    SystemImageButton("timer", appViewModel.color) {
                         showPickingTime.toggle()
                     }
                     .sheet(isPresented: $showPickingTime) {
@@ -104,7 +104,7 @@ struct TimerView: View {
                 }
                 
                 let isStopped = timerViewModel.isStopped
-                CircleButton(isStopped ? "Start" : "Stop", appViewModel.color){
+                SystemImageButton(isStopped ? "play.circle" : "pause.circle", appViewModel.color){
                     isStopped ? timerViewModel.start() : timerViewModel.stop()
                 }
             }
@@ -137,7 +137,7 @@ struct MenuButton: View {
             }
         } label: {
             if isCustomziedCircle {
-                CircleButton("Menu", appViewModel.color) {}
+                SystemImageButton("list.number", appViewModel.color) {}
             } else {
                 Text("Menu")
                     .bold()
