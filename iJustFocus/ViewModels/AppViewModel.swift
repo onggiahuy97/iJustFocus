@@ -13,6 +13,7 @@ class AppViewModel: ObservableObject {
         startPoint: .topLeading,
         endPoint: .bottomTrailing
     )
+    
     @Published var color: UIColor = .systemBlue {
         didSet {
             boolCheck.toggle()
@@ -28,6 +29,7 @@ class AppViewModel: ObservableObject {
     @Published var tupleWidthRatio = (0.5, 0.5)
     @Published var currentOrientation = CurrentSizeRation.halfHalf
     @Published var backgroundImage: UIImage?
+    @Published var isShowingTimerBackground = false 
     
     var boolCheck: Bool = false
     var isVertical: Bool = false

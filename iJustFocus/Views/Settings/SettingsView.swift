@@ -9,18 +9,18 @@ import SwiftUI
 
 struct SettingsView: View {
     @EnvironmentObject var appViewModel: AppViewModel
-    
+        
     var body: some View {
         NavigationStack {
             List {
-                SettingCellView("Theme Color", "rectangle.leadinghalf.inset.filled", appViewModel.color) {
-                    Text("")
-                }
                 SettingCellView("Theme Color", "paintbrush", appViewModel.color) {
                     ColorSettingView()
                 }
                 SettingCellView("Timer Font", "f.square", appViewModel.color) {
                     FontDesignSettingView()
+                }
+                SettingCellView("Background", "photo", appViewModel.color) {
+                    TimerBackgroundSettingView()
                 }
             }
             .navigationTitle("Settings")

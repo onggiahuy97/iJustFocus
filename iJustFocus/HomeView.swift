@@ -8,10 +8,6 @@
 import SwiftUI
 
 struct HomeView: View {
-    
-    @EnvironmentObject var appViewModel: AppViewModel
-    @Environment(\.colorScheme) private var colorScheme
-    
     @SceneStorage("selectedTab") var selectedTab: String?
     
     var body: some View {
@@ -28,21 +24,6 @@ struct HomeView: View {
                 .tabItem { Label("System", systemImage: "gear") }
                 .tag(ColorSettingView.tag)
         }
-        .onAppear(perform: configNav)
-        .onChange(of: appViewModel.color) { _ in configNav() }
-        .onChange(of: colorScheme) { _ in configNav() }
-        .accentColor(Color(appViewModel.color))
-    }
-    
-    func configNav() {
-        let color = (appViewModel.color == UIColor.black && colorScheme == .dark) ? UIColor.white : appViewModel.color
-        UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: color]
-        UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: color]
     }
 }
 
-struct HomeView_Previews: PreviewProvider {
-    static var previews: some View {
-        HomeView()
-    }
-}

@@ -29,6 +29,8 @@
 		3EBD7F97289DF4AB00E4353C /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EBD7F96289DF4AB00E4353C /* SettingsView.swift */; };
 		3EBD7F99289E04C300E4353C /* FontDesignSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EBD7F98289E04C300E4353C /* FontDesignSettingView.swift */; };
 		3EBD7F9B28A1833E00E4353C /* UserDefault+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EBD7F9A28A1833E00E4353C /* UserDefault+Extension.swift */; };
+		3EDE818928AEAE5600CC99AD /* MenuButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EDE818828AEAE5600CC99AD /* MenuButton.swift */; };
+		3EDE818B28AEB10400CC99AD /* TimerBackgroundSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EDE818A28AEB10400CC99AD /* TimerBackgroundSettingView.swift */; };
 		3EE8E165287522C6008AB34E /* iJustFocusApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE8E164287522C6008AB34E /* iJustFocusApp.swift */; };
 		3EE8E167287522C6008AB34E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE8E166287522C6008AB34E /* ContentView.swift */; };
 		3EE8E169287522C7008AB34E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3EE8E168287522C7008AB34E /* Assets.xcassets */; };
@@ -61,6 +63,8 @@
 		3EBD7F96289DF4AB00E4353C /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		3EBD7F98289E04C300E4353C /* FontDesignSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontDesignSettingView.swift; sourceTree = "<group>"; };
 		3EBD7F9A28A1833E00E4353C /* UserDefault+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefault+Extension.swift"; sourceTree = "<group>"; };
+		3EDE818828AEAE5600CC99AD /* MenuButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuButton.swift; sourceTree = "<group>"; };
+		3EDE818A28AEB10400CC99AD /* TimerBackgroundSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerBackgroundSettingView.swift; sourceTree = "<group>"; };
 		3EE8E161287522C6008AB34E /* iJustFocus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iJustFocus.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3EE8E164287522C6008AB34E /* iJustFocusApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iJustFocusApp.swift; sourceTree = "<group>"; };
 		3EE8E166287522C6008AB34E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -119,6 +123,7 @@
 		3E88E749288876370041173A /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				3EDE818728AEAE3D00CC99AD /* Helper Views */,
 				3ECFC7AA28A69C860035EB77 /* Charts */,
 				3ECFC7A928A69C760035EB77 /* Settings */,
 				3EB328BC2884605100FC4548 /* Tasks */,
@@ -152,6 +157,7 @@
 				3EBD7F96289DF4AB00E4353C /* SettingsView.swift */,
 				3EA2B779288B1994008A0852 /* ColorSettingView.swift */,
 				3EBD7F98289E04C300E4353C /* FontDesignSettingView.swift */,
+				3EDE818A28AEB10400CC99AD /* TimerBackgroundSettingView.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -162,6 +168,14 @@
 				3E0537B4289182F1004570D4 /* HistoryBarChart.swift */,
 			);
 			path = Charts;
+			sourceTree = "<group>";
+		};
+		3EDE818728AEAE3D00CC99AD /* Helper Views */ = {
+			isa = PBXGroup;
+			children = (
+				3EDE818828AEAE5600CC99AD /* MenuButton.swift */,
+			);
+			path = "Helper Views";
 			sourceTree = "<group>";
 		};
 		3EE8E158287522C6008AB34E = {
@@ -280,6 +294,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3EDE818B28AEB10400CC99AD /* TimerBackgroundSettingView.swift in Sources */,
 				3E88E73C28874DDF0041173A /* HistoryTimerListView.swift in Sources */,
 				3EA43060288898ED00AB687F /* Timing+Extension.swift in Sources */,
 				3E88E73E2887511D0041173A /* DataController.swift in Sources */,
@@ -296,6 +311,7 @@
 				3EA2B77C288C6F93008A0852 /* PickingTimeView.swift in Sources */,
 				3E0537B5289182F1004570D4 /* HistoryBarChart.swift in Sources */,
 				3EB328BF2884606600FC4548 /* TaskCellView.swift in Sources */,
+				3EDE818928AEAE5600CC99AD /* MenuButton.swift in Sources */,
 				3EB328BB28844D1100FC4548 /* TasksView.swift in Sources */,
 				3E88E7422887515E0041173A /* Main.xcdatamodeld in Sources */,
 				3EB328B528823A0900FC4548 /* Time+Extension.swift in Sources */,

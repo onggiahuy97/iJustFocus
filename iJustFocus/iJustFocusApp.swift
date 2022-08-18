@@ -14,6 +14,8 @@ struct iJustFocusApp: App {
     @StateObject var tasksViewModel: TaskViewModel
     @StateObject var appViewModel: AppViewModel
     
+    @Environment(\.colorScheme) private var colorScheme
+    
     init() {
         let dataController = DataController()
         _appViewModel = StateObject(wrappedValue: .init())
@@ -37,9 +39,21 @@ struct iJustFocusApp: App {
                 .environmentObject(dataController)
                 .environment(\.managedObjectContext, DataController.shared.container.viewContext)
                 .statusBarHidden()
-//                .gesture(drag)
+                .onAppear(perform: configNav)
+                .onChange(of: appViewModel.color) { _ in configNav() }
+                .onChange(of: colorScheme) { _ in configNav() }
+                .accentColor(Color(appViewModel.color))
+            
         }
     }
+    
+    func configNav() {
+        let color = (appViewModel.color == UIColor.black && colorScheme == .dark) ? UIColor.white : appViewModel.color
+        UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: color]
+        UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: color]
+    }
 }
+
+
 
 

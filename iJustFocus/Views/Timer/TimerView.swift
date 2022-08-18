@@ -47,20 +47,23 @@ struct TimerView: View {
     }
     
     var tabViewBackgroundTimer: some View {
-        TabView {
+        TabView(selection: $appViewModel.isShowingTimerBackground) {
             Image(uiImage: appViewModel.backgroundImage ?? .init(named: "placeholder")!)
                 .resizable()
                 .scaledToFit()
                 .ignoresSafeArea(.all)
                 .cornerRadius(12)
                 .padding()
+                .opacity(appViewModel.isShowingTimerBackground ? 1 : 0)
                 .onTapGesture { showPickingImage.toggle() }
                 .sheet(isPresented: $showPickingImage) {
                     ImagePickerView(image: $appViewModel.backgroundImage)
                 }
-            Image("")
+                .tag(true)
+            
+            Rectangle().fill(.clear).tag(false)
         }
-        .tabViewStyle(.page(indexDisplayMode: .automatic))
+        .tabViewStyle(.page(indexDisplayMode: .never))
     }
     
     var body: some View {
@@ -112,37 +115,6 @@ struct TimerView: View {
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(appViewModel.linearGradient)
-    }
-}
-
-struct MenuButton: View {
-    var isCustomziedCircle: Bool
-    
-    init(_ isCustomziedCircle: Bool = true) {
-        self.isCustomziedCircle = isCustomziedCircle
-    }
-    
-    @EnvironmentObject var appViewModel: AppViewModel
-    
-    var body: some View {
-        Menu {
-            ButtonLabelView(title: "Half Half", systemImage: "rectangle.leadinghalf.inset.filled") {
-                withAnimation { appViewModel.currentOrientation = .halfHalf }
-            }
-            ButtonLabelView(title: "Focus Timer", systemImage: "rectangle.inset.topleft.filled") {
-                withAnimation { appViewModel.currentOrientation = .focusTimer }
-            }
-            ButtonLabelView(title: "Focus Todos", systemImage: "rectangle.inset.topright.filled") {
-                withAnimation { appViewModel.currentOrientation = .focusTodos }
-            }
-        } label: {
-            if isCustomziedCircle {
-                SystemImageButton("list.number", appViewModel.color) {}
-            } else {
-                Text("Menu")
-                    .bold()
-            }
-        }
     }
 }
 

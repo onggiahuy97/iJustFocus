@@ -17,7 +17,9 @@ struct FontDesignSettingView: View {
     
     func fontDesignButton(_ design: FontingDesign) -> some View {
         Button {
-            appViewModel.fontDesign = design
+            DispatchQueue.main.async {
+                appViewModel.fontDesign = design
+            }
         } label: {
             HStack {
                 Text(design.name)
