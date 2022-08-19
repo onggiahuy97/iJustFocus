@@ -22,6 +22,9 @@ struct iJustFocusApp: App {
         _dataController = StateObject(wrappedValue: dataController)
         _timerViewModel = StateObject(wrappedValue: .init(dataController: dataController))
         _tasksViewModel = StateObject(wrappedValue: .init(dataController: dataController))
+        
+        // Turn of auto turn off / dim screen
+        UIApplication.shared.isIdleTimerDisabled = true
     }
     
     var drag: some Gesture {
@@ -44,6 +47,8 @@ struct iJustFocusApp: App {
                 .onChange(of: colorScheme) { _ in configNav() }
                 .accentColor(Color(appViewModel.color))
                 .edgesIgnoringSafeArea(.all)
+                .gesture(drag)
+                .persistentSystemOverlays(.hidden)
         }
     }
     

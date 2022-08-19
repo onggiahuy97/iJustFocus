@@ -67,11 +67,11 @@ class AppViewModel: ObservableObject {
             if isVertical {
                 // Swipe down
                 if vertical > 150 {
-                    currentOrientation = .focusTodos
+                    currentOrientation = .focusTimer
                 }
                 // Swipe up
                 else if vertical < -150 {
-                    currentOrientation = .focusTimer
+                    currentOrientation = .focusTodos
                 }
                 // To mid
                 else {
@@ -125,6 +125,8 @@ class AppViewModel: ObservableObject {
             if let fonting = try? JSONDecoder().decode(FontingDesign.self, from: savedData) {
                 fontDesign = fonting
             }
+        } else {
+            fontDesign = FontingDesign.fontDesigns.first
         }
     }
     

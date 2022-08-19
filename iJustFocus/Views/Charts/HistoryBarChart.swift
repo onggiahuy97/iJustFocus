@@ -14,23 +14,37 @@ struct HistoryBarChart: View {
     
     var body: some View {
         NavigationStack {
-            Chart(timerViewModel.timingGroup.prefix(7)) { id in
-                BarMark(
-                    x: .value("Date", id.date, unit: .day),
-                    y: .value("Times", id.seconds.count),
-                    width: 15
-                )
+            ScrollView {
+                VStack(alignment: .leading) {
+                    Text("Focus Times")
+                    Chart(timerViewModel.timingGroup.prefix(7)) { id in
+                        BarMark(
+                            x: .value("Date", id.date, unit: .day),
+                            y: .value("Times", id.seconds.count),
+                            width: 15
+                        )
+                    }
+                }
+                .padding()
+                .frame(height: 200)
+                
+                VStack(alignment: .leading) {
+                    Text("Minutes")
+                    Chart(timerViewModel.timingGroup.prefix(7)) { id in
+                        BarMark(
+                            x: .value("Date", id.date, unit: .day),
+                            y: .value("Minutes", id.totalMinute),
+                            width: 15
+                        )
+                    }
+                }
+                .padding()
+                .frame(height: 200)
             }
             .navigationTitle("Chart History")
             .foregroundColor(Color(appViewModel.color))
-            .padding()
-            .frame(height: 240)
+            .bold()
         }
     }
 }
 
-struct HistoryBarChart_Previews: PreviewProvider {
-    static var previews: some View {
-        HistoryBarChart()
-    }
-}

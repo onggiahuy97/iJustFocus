@@ -33,7 +33,7 @@ struct TimerView: View {
             width = size.width
             height = size.height
         }
-        
+                
         return (width, height)
     }
     

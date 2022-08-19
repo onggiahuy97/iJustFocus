@@ -12,7 +12,7 @@ struct HistoryTimerListView: View {
     @EnvironmentObject var dataController: DataController
     @EnvironmentObject var appViewModel: AppViewModel
     
-    @State private var viewType = ViewType.List
+    @State private var viewType = ViewType.Chart
     
     enum ViewType {
         case List, Chart

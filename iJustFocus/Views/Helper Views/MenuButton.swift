@@ -29,7 +29,7 @@ struct MenuButton: View {
             }
         } label: {
             if isCustomziedCircle {
-                SystemImageButton("list.number", appViewModel.color) {}
+                SystemImageButton("list.bullet", appViewModel.color) {}
             } else {
                 Text("Menu")
                     .bold()
