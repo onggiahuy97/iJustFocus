@@ -13,7 +13,6 @@ extension View {
     @ViewBuilder
     func defaultBackground() -> some View {
         self
-            .edgesIgnoringSafeArea(.all)
             .background(
                 Color.blue.opacity(0.3)
             )

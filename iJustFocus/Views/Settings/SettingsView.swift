@@ -9,7 +9,7 @@ import SwiftUI
 
 struct SettingsView: View {
     @EnvironmentObject var appViewModel: AppViewModel
-        
+    @Environment(\.dismiss) var dismiss
     var body: some View {
         NavigationStack {
             List {
@@ -24,6 +24,16 @@ struct SettingsView: View {
                 }
             }
             .navigationTitle("Settings")
+            .toolbar {
+                if appViewModel.currentOrientation == .focusTimer {
+                    ToolbarItem(placement: .navigationBarTrailing) {
+                        Button("Done") {
+                            dismiss.callAsFunction()
+                        }
+                        .foregroundColor(Color(appViewModel.color))
+                    }
+                }
+            }
         }
     }
 }

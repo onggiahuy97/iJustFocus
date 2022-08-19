@@ -13,12 +13,33 @@ struct TimerView: View {
     
     @State private var showPickingTime = false
     @State private var showPickingImage = false
+    @State private var showSetting = false
     
     var proxy: GeometryProxy
     
+    var tupleSize: (CGFloat, CGFloat) {
+        let size = proxy.size
+        var width: CGFloat = 0
+        var height: CGFloat = 0
+        if appViewModel.isVertical {
+            width = size.width
+            height = size.height/2
+        } else {
+            width = size.width/2
+            height = size.height
+        }
+        
+        if appViewModel.currentOrientation == .focusTimer {
+            width = size.width
+            height = size.height
+        }
+        
+        return (width, height)
+    }
+    
     var textSize: CGFloat {
         let isPhone = UIDevice.current.userInterfaceIdiom == .phone
-        return isPhone ? 80 : 120
+        return isPhone ? 800 : 1200
     }
     
     var clockString: String {
@@ -46,64 +67,76 @@ struct TimerView: View {
         }
     }
     
-    var tabViewBackgroundTimer: some View {
-        TabView(selection: $appViewModel.isShowingTimerBackground) {
+//    var tabViewBackgroundTimer: some View {
+//        TabView(selection: $appViewModel.isShowingTimerBackground) {
+//            Image(uiImage: appViewModel.backgroundImage ?? .init(named: "placeholder")!)
+//                .resizable()
+//                .frame(maxWidth: .infinity, maxHeight: .infinity)
+//                .scaledToFill()
+//                .ignoresSafeArea(.all)
+//                .cornerRadius(12)
+//                .padding()
+//                .opacity(appViewModel.isShowingTimerBackground ? 1 : 0)
+//                .onTapGesture { showPickingImage.toggle() }
+//                .sheet(isPresented: $showPickingImage) {
+//                    ImagePickerView(image: $appViewModel.backgroundImage)
+//                }
+//                .tag(true)
+//
+//            Rectangle().fill(.clear).tag(false)
+//        }
+//        .tabViewStyle(.page(indexDisplayMode: .never))
+//    }
+    
+    @ViewBuilder
+    func timerBackground() -> some View {
+        if appViewModel.isShowingTimerBackground {
             Image(uiImage: appViewModel.backgroundImage ?? .init(named: "placeholder")!)
                 .resizable()
-                .scaledToFit()
-                .ignoresSafeArea(.all)
-                .cornerRadius(12)
-                .padding()
-                .opacity(appViewModel.isShowingTimerBackground ? 1 : 0)
-                .onTapGesture { showPickingImage.toggle() }
-                .sheet(isPresented: $showPickingImage) {
-                    ImagePickerView(image: $appViewModel.backgroundImage)
-                }
-                .tag(true)
-            
-            Rectangle().fill(.clear).tag(false)
+                .aspectRatio(contentMode: .fill)
+                .frame(width: tupleSize.0, height: tupleSize.1)
+                .clipped()
+        } else {
+            appViewModel.linearGradient
         }
-        .tabViewStyle(.page(indexDisplayMode: .never))
     }
     
     var body: some View {
-        VStack {
-#warning("Temperary checking")
-            if appViewModel.boolCheck {
-                segmentedController
-            } else {
-                segmentedController
-            }
-            
+        ZStack(alignment: .bottom) {
             VStack {
                 Spacer()
                 
                 // Clock
                 Text(clockString)
+                    .padding(50)
                     .font(.system(size: textSize, weight: .bold, design: appViewModel.fontDesign?.toFontCase()).monospacedDigit())
-                    .foregroundColor(.white)
+                    .foregroundColor(appViewModel.isShowingTimerBackground ? Color(appViewModel.color) : .white)
                     .fontWeight(.bold)
-                    .font(Font(.init(.message, size: 46)))
+//                    .font(Font(.init(.message, size: 46)))
+                    .minimumScaleFactor(0.01)
                 
                 Spacer()
             }
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .background(tabViewBackgroundTimer)
-            
             // Buttons
-            HStack {
+            HStack(alignment: .center) {
                 MenuButton()
                 
                 Spacer()
                 
-                if timerViewModel.timeType == .Timer {
-                    SystemImageButton("timer", appViewModel.color) {
-                        showPickingTime.toggle()
-                    }
-                    .sheet(isPresented: $showPickingTime) {
-                        PickingTimeView()
-                            .presentationDetents([.medium])
-                    }
+                if appViewModel.boolCheck {
+                    segmentedController
+                } else {
+                    segmentedController
+                }
+                
+                
+                SystemImageButton("timer", appViewModel.color) {
+                    showPickingTime.toggle()
+                }
+                .opacity(timerViewModel.timeType == .Timer ? 1 : 0)
+                .sheet(isPresented: $showPickingTime) {
+                    PickingTimeView()
+                        .presentationDetents([.medium])
                 }
                 
                 let isStopped = timerViewModel.isStopped
@@ -112,9 +145,24 @@ struct TimerView: View {
                 }
             }
             .padding()
+            
+            if appViewModel.currentOrientation == .focusTimer {
+                VStack {
+                    HStack {
+                        SystemImageButton("gear", appViewModel.color) {
+                            showSetting.toggle()
+                        }
+                        .sheet(isPresented: $showSetting) {
+                            SettingsView()
+                        }
+                        Spacer()
+                    }
+                    Spacer()
+                }
+                .padding()
+            }
         }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(appViewModel.linearGradient)
+        .background(timerBackground())
     }
 }
 

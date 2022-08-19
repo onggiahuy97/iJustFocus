@@ -43,7 +43,7 @@ struct iJustFocusApp: App {
                 .onChange(of: appViewModel.color) { _ in configNav() }
                 .onChange(of: colorScheme) { _ in configNav() }
                 .accentColor(Color(appViewModel.color))
-            
+                .edgesIgnoringSafeArea(.all)
         }
     }
     

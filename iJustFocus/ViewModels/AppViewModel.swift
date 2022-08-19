@@ -28,8 +28,19 @@ class AppViewModel: ObservableObject {
     }
     @Published var tupleWidthRatio = (0.5, 0.5)
     @Published var currentOrientation = CurrentSizeRation.halfHalf
-    @Published var backgroundImage: UIImage?
-    @Published var isShowingTimerBackground = false 
+    @Published var backgroundImage: UIImage? {
+        didSet {
+            guard let imageData = backgroundImage?.jpegData(compressionQuality: 0.5) else { return }
+            let encoded = try! PropertyListEncoder().encode(imageData)
+            UserDefaults.standard.set(encoded, forKey: "BackgroundImage")
+        }
+    }
+    
+    @Published var isShowingTimerBackground: Bool = false {
+        didSet {
+            UserDefaults.standard.setValue(isShowingTimerBackground, forKey: "isShowingTimerBackground")
+        }
+    }
     
     var boolCheck: Bool = false
     var isVertical: Bool = false
@@ -37,6 +48,15 @@ class AppViewModel: ObservableObject {
     init() {
         loadMainColor()
         loadFontDesign()
+        loadBackgroundImage()
+        isShowingTimerBackground = UserDefaults.standard.bool(forKey: "isShowingTimerBackground")
+    }
+    
+    func loadBackgroundImage() {
+        guard let data = UserDefaults.standard.data(forKey: "BackgroundImage") else { return }
+        let decoded = try! PropertyListDecoder().decode(Data.self, from: data)
+        let image = UIImage(data: decoded)
+        backgroundImage = image
     }
     
     func calculateGestureOnEnded(_ value: DragGesture.Value) {

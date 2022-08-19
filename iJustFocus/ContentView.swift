@@ -29,17 +29,17 @@ struct ContentView: View {
                 if appViewModel.isVertical(proxy) {
                     VStack(spacing: 0) {
                         timerView
-                            .frame(height: height * appViewModel.tupleWidthRatio.0)
+                            .frame(maxHeight: height * 0.5)
                         homeView
-                            .frame(height: height * appViewModel.tupleWidthRatio.1)
+                            .frame(maxHeight: height * 0.5)
                     }
                     .frame(width: width, height: height)
                 } else {
                     HStack(spacing: 0) {
                         homeView
-                            .frame(width: width * appViewModel.tupleWidthRatio.0)
+                            .frame(maxWidth: width * 0.5)
                         timerView
-                            .frame(width: width * appViewModel.tupleWidthRatio.1)
+                            .frame(maxWidth: width * 0.5)
                     }
                     .frame(width: width, height: height)
                 }

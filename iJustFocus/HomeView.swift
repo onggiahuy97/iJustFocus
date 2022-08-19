@@ -15,11 +15,9 @@ struct HomeView: View {
             TasksView()
                 .tabItem { Label("Tasks", systemImage: "checklist") }
                 .tag(TasksView.tag)
-            
             HistoryTimerListView()
                 .tabItem { Label("List", systemImage: "list.bullet.clipboard") }
                 .tag(HistoryTimerListView.tag)
-            
             SettingsView()
                 .tabItem { Label("System", systemImage: "gear") }
                 .tag(ColorSettingView.tag)

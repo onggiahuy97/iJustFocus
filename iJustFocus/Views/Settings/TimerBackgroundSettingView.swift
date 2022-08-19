@@ -13,66 +13,40 @@ struct TimerBackgroundSettingView: View {
     @State private var showPickingImage = false
     
     var body: some View {
-        Form {
-            Section("Choose Option") {
-                VStack {
-                    Button {
-                        appViewModel.isShowingTimerBackground = true
-                    } label: {
-                        VStack(alignment: .leading) {
-                            HStack {
-                                Text("No Image")
-                                Spacer()
-                                Image(systemName: "checkmark")
-                                    .opacity(appViewModel.isShowingTimerBackground ? 1 : 0)
-                            }
-                            Image(uiImage: appViewModel.backgroundImage ?? UIImage(named: "placeholder")!)
-                                .resizable()
-                                .cornerRadius(12)
-                                .scaledToFit()
-                            Spacer()
-                        }
-                    }
-                    .padding([.top, .leading, .trailing])
-                    
-                    CircleButton("Pick Image", appViewModel.color) {
-                        showPickingImage.toggle()
-                    }
-                    .sheet(isPresented: $showPickingImage) {
-                        ImagePickerView(image: $appViewModel.backgroundImage)
-                    }
-                }
-                .padding(.bottom)
-                
-                Button {
-                    appViewModel.isShowingTimerBackground = false
-                } label: {
-                    VStack(alignment: .leading) {
-                        HStack {
-                            Text("No Image")
-                            Spacer()
-                            Image(systemName: "checkmark")
-                                .opacity(appViewModel.isShowingTimerBackground ? 0 : 1)
-                        }
-                        Image("placeholder")
-                            .resizable()
-                            .cornerRadius(12)
-                            .scaledToFit()
-                            .opacity(0)
-                            .overlay(
-                                Rectangle()
-                                    .fill(Color(appViewModel.color))
-                                    .cornerRadius(12)
-                            )
-                        Spacer()
-                    }
-                }
-                .padding()
-                
+        List {
+            checkMarkButton("No Background Image", appViewModel.isShowingTimerBackground ? 0 : 1) {
+                appViewModel.isShowingTimerBackground = false
+            }
+            
+            checkMarkButton("Pick Image", appViewModel.isShowingTimerBackground ? 1 : 0) {
+                appViewModel.isShowingTimerBackground = true
+            }
+            
+            CircleButton("Pick Image", appViewModel.color) {
+                showPickingImage.toggle()
+            }
+            .sheet(isPresented: $showPickingImage) {
+                ImagePickerView(image: $appViewModel.backgroundImage)
+            }
+            .frame(maxWidth: .infinity, alignment: .center)
+        }
+        .navigationTitle("Background")
+    }
+    
+    func checkMarkButton(_ text: String, _ opacity: Double, action: @escaping (() -> Void)) -> some View {
+        Button {
+            DispatchQueue.main.async(execute: action)
+        } label: {
+            HStack {
+                Text(text)
+                    .font(.system(size: 16))
+                    .foregroundColor(.black)
+                Spacer()
+                Image(systemName: "checkmark")
+                    .opacity(opacity)
             }
             .buttonStyle(.plain)
             .bold()
-            .navigationTitle("Background")
         }
     }
 }
