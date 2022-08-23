@@ -67,26 +67,12 @@ struct TimerView: View {
         }
     }
     
-//    var tabViewBackgroundTimer: some View {
-//        TabView(selection: $appViewModel.isShowingTimerBackground) {
-//            Image(uiImage: appViewModel.backgroundImage ?? .init(named: "placeholder")!)
-//                .resizable()
-//                .frame(maxWidth: .infinity, maxHeight: .infinity)
-//                .scaledToFill()
-//                .ignoresSafeArea(.all)
-//                .cornerRadius(12)
-//                .padding()
-//                .opacity(appViewModel.isShowingTimerBackground ? 1 : 0)
-//                .onTapGesture { showPickingImage.toggle() }
-//                .sheet(isPresented: $showPickingImage) {
-//                    ImagePickerView(image: $appViewModel.backgroundImage)
-//                }
-//                .tag(true)
-//
-//            Rectangle().fill(.clear).tag(false)
-//        }
-//        .tabViewStyle(.page(indexDisplayMode: .never))
-//    }
+    var progressGoal: Double {
+        let todayTime = timerViewModel.timingGroup.first?.seconds.reduce(0, +) ?? 0
+        let goal = appViewModel.goalInMinutes * 60
+        let ratio = Double(todayTime) / Double(goal)
+        return ratio > 1 ? 1 : ratio
+    }
     
     @ViewBuilder
     func timerBackground() -> some View {
@@ -146,21 +132,24 @@ struct TimerView: View {
             }
             .padding()
             
-            if appViewModel.currentOrientation == .focusTimer {
-                VStack {
-                    HStack {
-                        SystemImageButton("gear", appViewModel.color) {
-                            showSetting.toggle()
-                        }
-                        .sheet(isPresented: $showSetting) {
-                            SettingsView()
-                        }
-                        Spacer()
+            VStack {
+                HStack {
+                    SystemImageButton("gear", appViewModel.color) {
+                        showSetting.toggle()
                     }
+                    .sheet(isPresented: $showSetting) {
+                        SettingsView()
+                    }
+                    .opacity(appViewModel.currentOrientation == .focusTimer ? 1 : 0)
                     Spacer()
+                    ProgressView(value: progressGoal)
+                        .foregroundColor(Color(appViewModel.color))
+                        .frame(width: proxy.size.width * 0.15)
                 }
-                .padding()
+                Spacer()
             }
+            .padding()
+            
         }
         .background(timerBackground())
     }

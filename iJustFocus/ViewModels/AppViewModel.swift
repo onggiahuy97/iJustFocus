@@ -42,6 +42,9 @@ class AppViewModel: ObservableObject {
         }
     }
     
+    @Published var goalInMinutes = 5
+    @Published var enableGesture = true
+    
     var boolCheck: Bool = false
     var isVertical: Bool = false
         
@@ -60,6 +63,7 @@ class AppViewModel: ObservableObject {
     }
     
     func calculateGestureOnEnded(_ value: DragGesture.Value) {
+        guard enableGesture else { return }
         let horizontal = value.translation.width
         let vertical = value.translation.height
         

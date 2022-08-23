@@ -10,9 +10,13 @@ import SwiftUI
 struct SettingsView: View {
     @EnvironmentObject var appViewModel: AppViewModel
     @Environment(\.dismiss) var dismiss
+    @State private var showGestureGuide = false
     var body: some View {
         NavigationStack {
             List {
+                SettingCellView("Goal in Minutes", "checkmark.square.fill", appViewModel.color) {
+                    SetGoalView()
+                }
                 SettingCellView("Theme Color", "paintbrush", appViewModel.color) {
                     ColorSettingView()
                 }
@@ -22,6 +26,23 @@ struct SettingsView: View {
                 SettingCellView("Background", "photo", appViewModel.color) {
                     TimerBackgroundSettingView()
                 }
+                
+                Toggle(isOn: $appViewModel.enableGesture) {
+                    HStack {
+                        Label("Gesture", systemImage: "hand.draw.fill")
+                        Spacer()
+                        Image(systemName: "info.circle")
+                            .imageScale(.small)
+                            .foregroundColor(Color(appViewModel.color))
+                            .onTapGesture {
+                                showGestureGuide.toggle()
+                            }
+                            .sheet(isPresented: $showGestureGuide) {
+                                ShowGestureGuideView()
+                            }
+                    }
+                }
+                .tint(Color(appViewModel.color))
             }
             .navigationTitle("Settings")
             .toolbar {
