@@ -42,8 +42,17 @@ class AppViewModel: ObservableObject {
         }
     }
     
-    @Published var goalInMinutes = 5
-    @Published var enableGesture = true
+    @Published var goalInMinutes = 5 {
+        didSet {
+            UserDefaults.standard.setValue(goalInMinutes, forKey: "goalInMinutes")
+        }
+    }
+    
+    @Published var enableGesture = true {
+        didSet {
+            UserDefaults.standard.setValue(enableGesture, forKey: "enableGesture")
+        }
+    }
     
     var boolCheck: Bool = false
     var isVertical: Bool = false
@@ -53,6 +62,8 @@ class AppViewModel: ObservableObject {
         loadFontDesign()
         loadBackgroundImage()
         isShowingTimerBackground = UserDefaults.standard.bool(forKey: "isShowingTimerBackground")
+        goalInMinutes = UserDefaults.standard.integer(forKey: "goalInMinutes")
+        enableGesture = UserDefaults.standard.bool(forKey: "enableGesture")
     }
     
     func loadBackgroundImage() {

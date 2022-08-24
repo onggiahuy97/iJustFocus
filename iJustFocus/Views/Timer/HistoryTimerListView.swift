@@ -12,9 +12,9 @@ struct HistoryTimerListView: View {
     @EnvironmentObject var dataController: DataController
     @EnvironmentObject var appViewModel: AppViewModel
     
-    @State private var viewType = ViewType.Chart
+    @SceneStorage(ViewType.List.rawValue) var selectedViewType = ViewType.List.rawValue
     
-    enum ViewType {
+    enum ViewType: String {
         case List, Chart
     }
     
@@ -44,17 +44,18 @@ struct HistoryTimerListView: View {
     var body: some View {
         NavigationStack {
             ScrollView {
-                switch viewType {
-                case .List: gridView
-                case .Chart: HistoryBarChart()
+                if selectedViewType == ViewType.List.rawValue {
+                    gridView
+                } else {
+                    HistoryBarChart()
                 }
             }
             .navigationTitle(Text("History"))
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    Picker("Picker", selection: $viewType) {
-                        Text("List").tag(ViewType.List)
-                        Text("Chart").tag(ViewType.Chart)
+                    Picker("Picker", selection: $selectedViewType) {
+                        Text("List").tag(ViewType.List.rawValue)
+                        Text("Chart").tag(ViewType.Chart.rawValue)
                     }
                     .pickerStyle(.segmented)
                     .padding()

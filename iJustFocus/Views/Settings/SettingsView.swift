@@ -9,8 +9,11 @@ import SwiftUI
 
 struct SettingsView: View {
     @EnvironmentObject var appViewModel: AppViewModel
+    
     @Environment(\.dismiss) var dismiss
+    
     @State private var showGestureGuide = false
+    
     var body: some View {
         NavigationStack {
             List {
@@ -29,7 +32,15 @@ struct SettingsView: View {
                 
                 Toggle(isOn: $appViewModel.enableGesture) {
                     HStack {
-                        Label("Gesture", systemImage: "hand.draw.fill")
+                        Label {
+                            Text("Gesture")
+                        } icon: {
+                            Image(systemName: "hand.draw.fill")
+                                .imageScale(.large)
+                                .symbolVariant(.square.fill)
+                                .symbolRenderingMode(.monochrome)
+                                .foregroundColor(Color(appViewModel.color))
+                        }
                         Spacer()
                         Image(systemName: "info.circle")
                             .imageScale(.small)

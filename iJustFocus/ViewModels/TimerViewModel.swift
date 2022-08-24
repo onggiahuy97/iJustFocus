@@ -30,6 +30,7 @@ class TimerViewModel: NSObject, ObservableObject, NSFetchedResultsControllerDele
             stop()
         }
     }
+    
     @Published var currentPickedTime = TimerViewModel.timerTimeDefault {
         didSet {
             UserDefaults.standard.set(currentPickedTime, forKey: "CurrentPickedTime")
@@ -184,7 +185,7 @@ extension TimerViewModel {
         
         var totalTimes: String {
             let total = seconds.reduce(0, +)
-            return "\(total/60) minutes"
+            return total < 60 ? "\(total) seconds" : "\(total/60) minutes"
         }
         
         var totalMinute: Int {
