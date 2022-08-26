@@ -61,6 +61,11 @@ struct HistoryTimerListView: View {
                     .padding()
                     .padding(.top, 12)
                 }
+                ToolbarItem(placement: .navigationBarLeading) {
+                    if appViewModel.currentOrientation == .focusTodos {
+                        MenuButton(false)
+                    }
+                }
             }
         }
     }

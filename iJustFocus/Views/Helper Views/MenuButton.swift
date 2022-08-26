@@ -18,7 +18,7 @@ struct MenuButton: View {
     
     var body: some View {
         Menu {
-            ButtonLabelView(title: "Half Half", systemImage: "rectangle.leadinghalf.inset.filled") {
+            ButtonLabelView(title: "Split", systemImage: "rectangle.leadinghalf.inset.filled") {
                 withAnimation { appViewModel.currentOrientation = .halfHalf }
             }
             ButtonLabelView(title: "Timer", systemImage: "timer") {

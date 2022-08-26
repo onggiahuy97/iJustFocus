@@ -15,6 +15,9 @@ struct iJustFocusApp: App {
     @StateObject var appViewModel: AppViewModel
     
     @Environment(\.colorScheme) private var colorScheme
+    @Environment(\.scenePhase) private var scenePhase
+    
+    @UIApplicationDelegateAdaptor private var appDelegate: AppDeletegate
     
     init() {
         let dataController = DataController()
@@ -49,6 +52,18 @@ struct iJustFocusApp: App {
                 .edgesIgnoringSafeArea(.all)
                 .gesture(drag)
                 .persistentSystemOverlays(.hidden)
+                .onChange(of: scenePhase) { newSP in
+                    switch newSP {
+                    case .active:
+                        print("active")
+                    case .background:
+                        print("background")
+                    case .inactive:
+                        print("inactive")
+                    @unknown default:
+                        print("defualt unknown")
+                    }
+                }
         }
     }
     
@@ -59,6 +74,13 @@ struct iJustFocusApp: App {
     }
 }
 
-
-
+class AppDeletegate: NSObject, UIApplicationDelegate, ObservableObject {
+    func applicationDidFinishLaunching(_ application: UIApplication) {
+        print("Did finish launching")
+    }
+    
+    func applicationDidEnterBackground(_ application: UIApplication) {
+        print("Hello enter background")
+    }
+}
 

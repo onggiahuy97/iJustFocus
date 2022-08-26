@@ -65,6 +65,11 @@ struct SettingsView: View {
                         .foregroundColor(Color(appViewModel.color))
                     }
                 }
+                ToolbarItem(placement: .navigationBarLeading) {
+                    if appViewModel.currentOrientation == .focusTodos {
+                        MenuButton(false)
+                    }
+                }
             }
         }
     }

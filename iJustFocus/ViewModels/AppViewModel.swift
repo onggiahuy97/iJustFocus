@@ -26,8 +26,10 @@ class AppViewModel: ObservableObject {
             setFontDesign()
         }
     }
+    
     @Published var tupleWidthRatio = (0.5, 0.5)
     @Published var currentOrientation = CurrentSizeRation.halfHalf
+    
     @Published var backgroundImage: UIImage? {
         didSet {
             guard let imageData = backgroundImage?.jpegData(compressionQuality: 0.5) else { return }
@@ -42,7 +44,7 @@ class AppViewModel: ObservableObject {
         }
     }
     
-    @Published var goalInMinutes = 5 {
+    @Published var goalInMinutes = 25 {
         didSet {
             UserDefaults.standard.setValue(goalInMinutes, forKey: "goalInMinutes")
         }

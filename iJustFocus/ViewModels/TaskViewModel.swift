@@ -48,7 +48,9 @@ class TaskViewModel: NSObject, ObservableObject, NSFetchedResultsControllerDeleg
     }
     
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        tasks = tasksController.fetchedObjects ?? []
+        DispatchQueue.main.async {
+            self.tasks = self.tasksController.fetchedObjects ?? []
+        }
     }
     
     func addTask(_ name: String) {

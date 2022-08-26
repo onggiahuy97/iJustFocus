@@ -12,12 +12,14 @@ struct HistoryBarChart: View {
     @EnvironmentObject var appViewModel: AppViewModel
     @EnvironmentObject var timerViewModel: TimerViewModel
     
+    let numberOfPrefix = 5
+    
     var body: some View {
         NavigationStack {
             ScrollView {
                 VStack(alignment: .leading) {
                     Text("Focus Times")
-                    Chart(timerViewModel.timingGroup.prefix(7)) { id in
+                    Chart(timerViewModel.timingGroup.prefix(numberOfPrefix)) { id in
                         BarMark(
                             x: .value("Date", id.date, unit: .day),
                             y: .value("Times", id.seconds.count),
@@ -30,7 +32,7 @@ struct HistoryBarChart: View {
                 
                 VStack(alignment: .leading) {
                     Text("Minutes")
-                    Chart(timerViewModel.timingGroup.prefix(7)) { id in
+                    Chart(timerViewModel.timingGroup.prefix(numberOfPrefix)) { id in
                         BarMark(
                             x: .value("Date", id.date, unit: .day),
                             y: .value("Minutes", id.totalMinute),

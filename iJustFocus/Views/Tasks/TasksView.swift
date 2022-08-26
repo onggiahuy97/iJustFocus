@@ -41,8 +41,11 @@ struct TasksView: View {
                     }
                 }
                 ToolbarItem(placement: .navigationBarLeading) {
-                    if appViewModel.currentOrientation == .focusTodos {
-                        MenuButton(false)
+                    HStack {
+                        if appViewModel.currentOrientation == .focusTodos {
+                            MenuButton(false)
+                        }
+                        EditButton()
                     }
                 }
             }
