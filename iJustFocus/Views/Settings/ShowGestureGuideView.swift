@@ -9,16 +9,6 @@ import SwiftUI
 
 struct ShowGestureGuideView: View {
     @EnvironmentObject var appViewModel: AppViewModel
-//
-//    var verticalGuide: some View {
-//        VStack {
-//
-//        }
-//    }
-//
-//    var horizontalGuide: some View {
-//
-//    }
     
     var body: some View {
         ScrollView {

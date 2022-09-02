@@ -21,6 +21,18 @@ struct TasksView: View {
                 Section("To-do") {
                     ForEach(tasksViewModel.todoTasks, content: taskView(_:))
                         .onDelete(perform: tasksViewModel.deleteTask(_:))
+                    
+                    Label {
+                        TextField("New Task", text: $taskName)
+                            .onSubmit {
+                                guard !taskName.isEmpty else { return }
+                                tasksViewModel.addTask(taskName)
+                                taskName = ""
+                            }
+                    } icon: {
+                        Image(systemName: "pencil")
+                            .foregroundColor(Color(appViewModel.color))
+                    }
                 }
                 Section("Done") {
                     ForEach(tasksViewModel.doneTasks, content: taskView(_:))
@@ -30,39 +42,43 @@ struct TasksView: View {
             .listStyle(.plain)
             .navigationTitle("Tasks")
             .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button {
-                        showAddTask.toggle()
-                    } label: {
-                        Image(systemName: "plus.circle.fill")
-                    }
-                    .alert("Add Task", isPresented: $showAddTask) {
-                        addTaskAlert
-                    }
-                }
                 ToolbarItem(placement: .navigationBarLeading) {
                     HStack {
                         if appViewModel.currentOrientation == .focusTodos {
                             MenuButton(false)
                         }
-                        EditButton()
+                        
+                        Menu("Edit") {
+                            Button(action: tasksViewModel.deleteAllTasks) {
+                                Label {
+                                    Text("Delete All Tasks")
+                                } icon: {
+                                    Image(systemName: "checklist")
+                                }
+                            }
+                            Button(action: tasksViewModel.deleteDoneTasks) {
+                                Label {
+                                    Text("Delete All Done Tasks")
+                                } icon: {
+                                    Image(systemName: "checkmark.circle.fill")
+                                }
+                            }
+                            Button(action: tasksViewModel.deleteToDoTasks) {
+                                Label {
+                                    Text("Delete All To-Do Tasks")
+                                } icon: {
+                                    Image(systemName: "circle")
+                                }
+                            }
+                            
+                            Text("Swipe On Task to Delete")
+                        }
                     }
                 }
             }
         }
     }
-    
-    var addTaskAlert: some View {
-        VStack {
-            TextField("Task name", text: $taskName)
-            Button("Cancel", role: .cancel) { taskName = "" }
-            Button("Add") {
-                tasksViewModel.addTask(taskName)
-                taskName = ""
-            }
-        }
-    }
-    
+        
     func taskView(_ task: Tasking) -> some View {
         Button {
             withAnimation {

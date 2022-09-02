@@ -68,4 +68,25 @@ class TaskViewModel: NSObject, ObservableObject, NSFetchedResultsControllerDeleg
         
         dataController.save()
     }
+    
+    func deleteDoneTasks() {
+        for task in doneTasks {
+            dataController.delete(task)
+        }
+        dataController.save()
+    }
+    
+    func deleteToDoTasks() {
+        for task in todoTasks {
+            dataController.delete(task)
+        }
+        dataController.save()
+    }
+    
+    func deleteAllTasks() {
+        for task in tasks {
+            dataController.delete(task)
+        }
+        dataController.save()
+    }
 }

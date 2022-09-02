@@ -22,8 +22,8 @@ struct HistoryTimerListView: View {
         Grid {
             GridRow {
                 Text("Date")
-                Text("Focus Times")
-                Text("Total Times")
+                Text("Focus")
+                Text("Times")
             }
             .bold()
             .foregroundColor(Color(appViewModel.color))
