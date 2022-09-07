@@ -13,9 +13,13 @@ struct ShowGestureGuideView: View {
     var body: some View {
         ScrollView {
             if appViewModel.isVertical {
-                
+                VStack {
+                    
+                }
             } else {
-                
+                VStack {
+                    
+                }
             }
         }
     }
@@ -26,3 +30,4 @@ struct ShowGestureGuideView_Previews: PreviewProvider {
         ShowGestureGuideView()
     }
 }
+
