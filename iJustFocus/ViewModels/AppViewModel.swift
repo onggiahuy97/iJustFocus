@@ -75,6 +75,11 @@ class AppViewModel: ObservableObject {
         backgroundImage = image
     }
     
+    func calculateMagnificationGestureOnEnded(_ value: MagnificationGesture.Value) {
+        guard value > 1.6 || value < 0.7 else { return }
+        currentOrientation = .halfHalf
+    }
+    
     func calculateGestureOnEnded(_ value: DragGesture.Value) {
         guard enableGesture else { return }
         let horizontal = value.translation.width
@@ -92,7 +97,7 @@ class AppViewModel: ObservableObject {
                 }
                 // To mid
                 else {
-                    currentOrientation = .halfHalf
+
                 }
             } else {
                 // Swipe right
@@ -105,7 +110,7 @@ class AppViewModel: ObservableObject {
                 }
                 // To the mid
                 else {
-                    currentOrientation = .halfHalf
+
                 }
             }
         }

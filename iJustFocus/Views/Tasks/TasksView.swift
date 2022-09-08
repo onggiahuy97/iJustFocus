@@ -49,6 +49,7 @@ struct TasksView: View {
                         }
                         
                         Menu("Edit") {
+                            EditButton()
                             Button(action: tasksViewModel.deleteAllTasks) {
                                 Label {
                                     Text("Delete All Tasks")

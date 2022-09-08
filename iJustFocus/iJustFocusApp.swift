@@ -30,9 +30,14 @@ struct iJustFocusApp: App {
         UIApplication.shared.isIdleTimerDisabled = true
     }
     
-    var drag: some Gesture {
+    var swipeGesture: some Gesture {
         DragGesture()
             .onEnded(appViewModel.calculateGestureOnEnded(_:))
+    }
+    
+    var magnificationGesture: some Gesture {
+        MagnificationGesture()
+            .onEnded(appViewModel.calculateMagnificationGestureOnEnded(_:))
     }
     
     var body: some Scene {
@@ -50,7 +55,8 @@ struct iJustFocusApp: App {
                 .onChange(of: colorScheme) { _ in configNav() }
                 .accentColor(Color(appViewModel.color))
                 .edgesIgnoringSafeArea(.all)
-                .gesture(drag)
+                .gesture(swipeGesture)
+                .gesture(magnificationGesture)
                 .persistentSystemOverlays(.hidden)
                 .onChange(of: scenePhase) { newSP in
                     switch newSP {

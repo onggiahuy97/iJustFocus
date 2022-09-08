@@ -9,18 +9,37 @@ import SwiftUI
 
 struct ShowGestureGuideView: View {
     @EnvironmentObject var appViewModel: AppViewModel
-    
+    private let fraction = 0.3
     var body: some View {
-        ScrollView {
-            if appViewModel.isVertical {
-                VStack {
-                    
-                }
-            } else {
-                VStack {
-                    
+        GeometryReader { proxy in
+            ScrollView {
+                if appViewModel.isVertical {
+                    VStack(alignment: .leading) {
+                        HStack {
+                            Text("Swipe Down").font(.headline)
+                            
+                            TimerView(proxy: proxy).disabled(true)
+                                .frame(width: proxy.size.width * fraction, height: proxy.size.height * fraction)
+                        }
+                        HStack {
+                            Text("Swipe Up").font(.headline)
+                            TasksView().disabled(true)
+                                .frame(width: proxy.size.width * fraction, height: proxy.size.height * fraction)
+                        }
+                        HStack {
+                            Text("Zoom In/Out").font(.headline)
+                            ContentView().disabled(true)
+                                .frame(width: proxy.size.width * fraction, height: proxy.size.height * fraction)
+                        }
+                    }
+                    .padding()
+                } else {
+                    VStack {
+                        
+                    }
                 }
             }
+            .frame(maxWidth: .infinity)
         }
     }
 }
