@@ -9,37 +9,27 @@ import SwiftUI
 
 struct ShowGestureGuideView: View {
     @EnvironmentObject var appViewModel: AppViewModel
-    private let fraction = 0.3
+    @Environment(\.dismiss) private var dismiss
+        
     var body: some View {
-        GeometryReader { proxy in
-            ScrollView {
+        NavigationStack {
+            List {
                 if appViewModel.isVertical {
-                    VStack(alignment: .leading) {
-                        HStack {
-                            Text("Swipe Down").font(.headline)
-                            
-                            TimerView(proxy: proxy).disabled(true)
-                                .frame(width: proxy.size.width * fraction, height: proxy.size.height * fraction)
-                        }
-                        HStack {
-                            Text("Swipe Up").font(.headline)
-                            TasksView().disabled(true)
-                                .frame(width: proxy.size.width * fraction, height: proxy.size.height * fraction)
-                        }
-                        HStack {
-                            Text("Zoom In/Out").font(.headline)
-                            ContentView().disabled(true)
-                                .frame(width: proxy.size.width * fraction, height: proxy.size.height * fraction)
-                        }
-                    }
-                    .padding()
+                    Label("Swipe Down For Full Screen Timer", systemImage: "arrow.down")
+                    Label("Swipe Up For Full Screen Tasks", systemImage: "arrow.up")
+                    Label("Zoom In/Out For Default Screen", systemImage: "arrow.up.left.and.down.right.magnifyingglass")
                 } else {
-                    VStack {
-                        
-                    }
+                    Label("Swipe Left For Full Screen Timer", systemImage: "arrow.left")
+                    Label("Swipe Right For Full Screen Tasks", systemImage: "arrow.right")
+                    Label("Zoom In/Out For Default Screen", systemImage: "arrow.up.left.and.down.right.magnifyingglass")
                 }
             }
-            .frame(maxWidth: .infinity)
+            .navigationTitle("Gesture")
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button("Close") { dismiss.callAsFunction() }
+                }
+            }
         }
     }
 }

@@ -43,13 +43,13 @@ struct iJustFocusApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
-                .persistentSystemOverlays(.hidden)
                 .environmentObject(timerViewModel)
                 .environmentObject(tasksViewModel)
                 .environmentObject(appViewModel)
                 .environmentObject(dataController)
                 .environment(\.managedObjectContext, DataController.shared.container.viewContext)
-                .statusBarHidden()
+                .statusBarHidden(appViewModel.isStatusBarHidden)
+                .toolbarColorScheme(.dark, for: .navigationBar)
                 .onAppear(perform: configNav)
                 .onChange(of: appViewModel.color) { _ in configNav() }
                 .onChange(of: colorScheme) { _ in configNav() }

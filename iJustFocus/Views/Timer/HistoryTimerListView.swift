@@ -38,7 +38,12 @@ struct HistoryTimerListView: View {
                 }
                 Divider()
             }
+            .onDelete(perform: onDeleteRow(_:))
         }
+    }
+    
+    func onDeleteRow(_ indexSet: IndexSet) {
+        
     }
     
     var body: some View {
@@ -65,6 +70,7 @@ struct HistoryTimerListView: View {
                     if appViewModel.currentOrientation == .focusTodos {
                         MenuButton(false)
                     }
+                    EditButton()
                 }
             }
         }

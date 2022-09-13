@@ -54,6 +54,22 @@ struct SettingsView: View {
                     }
                 }
                 .tint(Color(appViewModel.color))
+                
+                Toggle(isOn: $appViewModel.isStatusBarHidden) {
+                    HStack {
+                        Label {
+                            Text("Hide Status Bar")
+                        } icon: {
+                            Image(systemName: "antenna.radiowaves.left.and.right")
+                                .imageScale(.large)
+                                .symbolVariant(.square.fill)
+                                .symbolRenderingMode(.monochrome)
+                                .foregroundColor(Color(appViewModel.color))
+                        }
+                        Spacer()
+                    }
+                }
+                .tint(Color(appViewModel.color))
             }
             .navigationTitle("Settings")
             .toolbar {

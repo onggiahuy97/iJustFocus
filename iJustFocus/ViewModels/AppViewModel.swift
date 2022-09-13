@@ -56,6 +56,12 @@ class AppViewModel: ObservableObject {
         }
     }
     
+    @Published var isStatusBarHidden = true {
+        didSet {
+            UserDefaults.standard.setValue(isStatusBarHidden, forKey: "isStatusBarHidden")
+        }
+    }
+    
     var boolCheck: Bool = false
     var isVertical: Bool = false
         
@@ -66,6 +72,7 @@ class AppViewModel: ObservableObject {
         isShowingTimerBackground = UserDefaults.standard.bool(forKey: "isShowingTimerBackground")
         goalInMinutes = UserDefaults.standard.integer(forKey: "goalInMinutes")
         enableGesture = UserDefaults.standard.bool(forKey: "enableGesture")
+        isStatusBarHidden = UserDefaults.standard.bool(forKey: "isStatusBarHidden")
     }
     
     func loadBackgroundImage() {
