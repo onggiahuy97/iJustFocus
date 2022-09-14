@@ -14,6 +14,7 @@ struct TimerView: View {
     @State private var showPickingTime = false
     @State private var showPickingImage = false
     @State private var showSetting = false
+    @State private var showStopAlert = false
     
     var proxy: GeometryProxy
     
@@ -127,7 +128,13 @@ struct TimerView: View {
                 
                 let isStopped = timerViewModel.isStopped
                 SystemImageButton(isStopped ? "play.circle" : "pause.circle", appViewModel.color){
-                    isStopped ? timerViewModel.start() : timerViewModel.stop()
+                    isStopped ? timerViewModel.start() : showStopAlert.toggle()
+                }
+                .alert("Stop Now?", isPresented: $showStopAlert) {
+                    Button("Cancel") { }
+                    Button("Yes!") {
+                        timerViewModel.stop()
+                    }
                 }
             }
             .padding()

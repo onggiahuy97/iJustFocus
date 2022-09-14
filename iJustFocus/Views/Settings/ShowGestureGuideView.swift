@@ -24,6 +24,7 @@ struct ShowGestureGuideView: View {
                     Label("Zoom In/Out For Default Screen", systemImage: "arrow.up.left.and.down.right.magnifyingglass")
                 }
             }
+            .truncationMode(.middle)
             .navigationTitle("Gesture")
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
