@@ -131,7 +131,7 @@ struct TimerView: View {
                     isStopped ? timerViewModel.start() : showStopAlert.toggle()
                 }
                 .alert("Stop Now?", isPresented: $showStopAlert) {
-                    Button("Cancel") { }
+                    Button("Cancel", role: .cancel) { }
                     Button("Yes!") {
                         timerViewModel.stop()
                     }
