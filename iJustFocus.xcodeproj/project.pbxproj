@@ -50,6 +50,7 @@
 		3E1F777728AAC30800B2867D /* Button+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Button+Extension.swift"; sourceTree = "<group>"; };
 		3E2739ED28B481B90093B827 /* SetGoalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetGoalView.swift; sourceTree = "<group>"; };
 		3E2739F128B48E2D0093B827 /* ShowGestureGuideView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowGestureGuideView.swift; sourceTree = "<group>"; };
+		3E736E7128D372C100B50E70 /* stop_sound.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = stop_sound.m4a; sourceTree = "<group>"; };
 		3E88E739288748FE0041173A /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		3E88E73B28874DDF0041173A /* HistoryTimerListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryTimerListView.swift; sourceTree = "<group>"; };
 		3E88E73D2887511D0041173A /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
@@ -93,6 +94,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3E736E7028D372AE00B50E70 /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				3E736E7128D372C100B50E70 /* stop_sound.m4a */,
+			);
+			path = Sounds;
+			sourceTree = "<group>";
+		};
 		3E88E73F288751200041173A /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -218,6 +227,7 @@
 				3E88E7472888760D0041173A /* Extensions */,
 				3E88E7402887515E0041173A /* Main.xcdatamodeld */,
 				3EE8E168287522C7008AB34E /* Assets.xcassets */,
+				3E736E7028D372AE00B50E70 /* Sounds */,
 				3EE8E16A287522C7008AB34E /* Preview Content */,
 			);
 			path = iJustFocus;

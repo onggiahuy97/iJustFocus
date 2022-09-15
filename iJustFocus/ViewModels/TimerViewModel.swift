@@ -9,10 +9,12 @@ import Foundation
 import Combine
 import CoreData
 import SwiftUI
+import AVFoundation
 
 class TimerViewModel: NSObject, ObservableObject, NSFetchedResultsControllerDelegate {
     private let timesController: NSFetchedResultsController<Timing>
     
+    var soundEffect: AVAudioPlayer?
     var dataController: DataController
     var timer: Timer?
     var times = [Timing]() {
@@ -28,6 +30,7 @@ class TimerViewModel: NSObject, ObservableObject, NSFetchedResultsControllerDele
     @Published var timeType = TimeType.Timer {
         didSet {
             stop()
+            playStopSound()
         }
     }
     
@@ -85,6 +88,7 @@ class TimerViewModel: NSObject, ObservableObject, NSFetchedResultsControllerDele
                 timer = nil
                 self.isStopped = true
                 addTiming(currentPickedTime - pickedTimer)
+                playStopSound()
             }
         case .Stopwatch:
             if stopWatch != 0 {
@@ -93,6 +97,17 @@ class TimerViewModel: NSObject, ObservableObject, NSFetchedResultsControllerDele
                 self.isStopped = true
                 addTiming(stopWatch)
             }
+        }
+    }
+    
+    func playStopSound() {
+        guard let path = Bundle.main.path(forResource: "stop_sound.m4a", ofType: nil) else { return }
+        let url = URL(filePath: path)
+        do {
+            soundEffect = try AVAudioPlayer(contentsOf: url)
+            soundEffect?.play()
+        } catch {
+            
         }
     }
     
