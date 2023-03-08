@@ -23,10 +23,10 @@ extension View {
     }
     
     @ViewBuilder
-    func SystemImageButton(_ systemName: String,_ backgroundColor: UIColor, action: @escaping (() -> Void)) -> some View {
+  func SystemImageButton(_ systemName: String,_ backgroundColor: UIColor, _ imageScale: Image.Scale = .large, action: @escaping (() -> Void)) -> some View {
         Button(action: action) {
             Image(systemName: systemName)
-                .imageScale(.large)
+                .imageScale(imageScale)
                 .padding(10)
                 .foregroundColor(.white)
                 .background(Color(backgroundColor))

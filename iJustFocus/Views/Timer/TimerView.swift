@@ -9,6 +9,7 @@ import SwiftUI
 
 struct TimerView: View {
   static let tag: String? = "TimerView"
+  
   @EnvironmentObject var timerViewModel: TimerViewModel
   @EnvironmentObject var appViewModel: AppViewModel
   
@@ -59,9 +60,7 @@ struct TimerView: View {
     } label: {
       Text("Time Type")
     }
-    .padding()
     .pickerStyle(.segmented)
-    //            .colorMultiply(Color(appViewModel.color.withAlphaComponent(0.75)))
     .onAppear {
       UISegmentedControl.appearance().selectedSegmentTintColor = appViewModel.color.withAlphaComponent(0.75)
       UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor: UIColor.white], for: .selected)
@@ -105,11 +104,16 @@ struct TimerView: View {
         
         Spacer()
       }
+      
       // Buttons
       HStack(alignment: .center) {
-        MenuButton()
-        
-        Spacer()
+        SystemImageButton(appViewModel.currentOrientation == .halfHalf ? "xmark" : "square.split.1x2", appViewModel.color, .small) {
+          if appViewModel.currentOrientation == .halfHalf {
+            appViewModel.currentOrientation = .focusTodos
+          } else {
+            appViewModel.currentOrientation = .halfHalf
+          }
+        }
         
         if appViewModel.boolCheck {
           segmentedController
@@ -117,8 +121,7 @@ struct TimerView: View {
           segmentedController
         }
         
-        
-        SystemImageButton("timer", appViewModel.color) {
+        SystemImageButton("timer", appViewModel.color, .small) {
           showPickingTime.toggle()
         }
         .opacity(timerViewModel.timeType == .Timer ? 1 : 0)
@@ -128,7 +131,7 @@ struct TimerView: View {
         }
         
         let isStopped = timerViewModel.isStopped
-        SystemImageButton(isStopped ? "play.circle" : "pause.circle", appViewModel.color){
+        SystemImageButton(isStopped ? "play.circle" : "pause.circle", appViewModel.color, .small){
           isStopped ? timerViewModel.start() : showStopAlert.toggle()
         }
         .alert("Stop Now?", isPresented: $showStopAlert) {
@@ -140,27 +143,21 @@ struct TimerView: View {
       }
       .padding()
       
-      VStack {
-        HStack {
-          SystemImageButton("gear", appViewModel.color) {
-            showSetting.toggle()
-          }
-          .sheet(isPresented: $showSetting) {
-            SettingsView()
-          }
-          .opacity(appViewModel.currentOrientation == .focusTimer ? 1 : 0)
-          Spacer()
-          ProgressView(value: progressGoal)
-            .foregroundColor(Color(appViewModel.color))
-            .frame(width: proxy.size.width * 0.15)
-        }
-        Spacer()
-      }
-      .padding()
+//      VStack {
+//        HStack(alignment: .center) {
+//          Spacer()
+//          ProgressView(value: progressGoal)
+//            .foregroundColor(Color(appViewModel.color))
+//            .frame(width: proxy.size.width * 0.15)
+//        }
+//        Spacer()
+//      }
+//      .padding()
+      
       
     }
     .background(timerBackground())
-    .edgesIgnoringSafeArea(.top)
+    .edgesIgnoringSafeArea([.top, .horizontal])
   }
 }
 
