@@ -15,7 +15,7 @@ struct ContentView: View {
         GeometryReader { proxy in
             
             let timerView = TimerView(proxy: proxy)
-            let homeView = HomeView()
+            let homeView = HomeView(timerView: timerView)
             
             let width = appViewModel.calculateGeometryProxy(proxy).width
             let height = appViewModel.calculateGeometryProxy(proxy).height
