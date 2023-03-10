@@ -143,18 +143,6 @@ struct TimerView: View {
       }
       .padding()
       
-//      VStack {
-//        HStack(alignment: .center) {
-//          Spacer()
-//          ProgressView(value: progressGoal)
-//            .foregroundColor(Color(appViewModel.color))
-//            .frame(width: proxy.size.width * 0.15)
-//        }
-//        Spacer()
-//      }
-//      .padding()
-      
-      
     }
     .background(timerBackground())
     .edgesIgnoringSafeArea([.top, .horizontal])

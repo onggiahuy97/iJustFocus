@@ -46,30 +46,6 @@ struct SettingsView: View {
                 }
                 .tint(Color(appViewModel.color))
                 
-                Toggle(isOn: $appViewModel.enableGesture) {
-                    HStack {
-                        Label {
-                            Text("Gesture")
-                        } icon: {
-                            Image(systemName: "hand.draw.fill")
-                                .imageScale(.large)
-                                .symbolVariant(.square.fill)
-                                .symbolRenderingMode(.monochrome)
-                                .foregroundColor(Color(appViewModel.color))
-                        }
-                        Spacer()
-                        Image(systemName: "info.circle")
-                            .imageScale(.small)
-                            .foregroundColor(Color(appViewModel.color))
-                            .onTapGesture {
-                                showGestureGuide.toggle()
-                            }
-                            .sheet(isPresented: $showGestureGuide) {
-                                ShowGestureGuideView()
-                            }
-                    }
-                }
-                .tint(Color(appViewModel.color))
             }
             .navigationTitle("Settings")
             .toolbar {

@@ -12,36 +12,59 @@ struct TasksView: View {
   @EnvironmentObject var dataController: DataController
   @EnvironmentObject var appViewModel: AppViewModel
   
+  @FocusState private var isTextFieldFocus: Bool
+  
   @State private var showAddTask = false
   @State private var taskName = ""
+  @State private var showCompleted = false
   
   var body: some View {
     NavigationStack {
-      Form {
+      List {
         Section("To-do") {
           ForEach(tasksViewModel.todoTasks, content: taskView(_:))
             .onDelete(perform: tasksViewModel.deleteTask(_:))
           
           Label {
-            TextField("New Task", text: $taskName, axis: .vertical)
-              .lineLimit(5)
-              .onSubmit {
-                guard !taskName.isEmpty else { return }
-                tasksViewModel.addTask(taskName)
-                taskName = ""
-              }
+            VStack {
+              TextField("New Task", text: $taskName)
+                .onSubmit {
+                  guard !taskName.isEmpty else { return }
+                  tasksViewModel.addTask(taskName)
+                  taskName = ""
+                  isTextFieldFocus = true
+                }
+                .focused($isTextFieldFocus)
+            }
           } icon: {
             Image(systemName: "pencil")
               .foregroundColor(Color(appViewModel.color))
           }
         }
-        Section("Done") {
-          ForEach(tasksViewModel.doneTasks, content: taskView(_:))
-            .onDelete(perform: tasksViewModel.deleteTask(_:))
+        
+        Section {
+          if showCompleted {
+            ForEach(tasksViewModel.doneTasks, content: taskView(_:))
+              .onDelete(perform: tasksViewModel.deleteTask(_:))
+          }
+        } header: {
+          HStack {
+            Text("Completed")
+            Spacer()
+            Text("\(tasksViewModel.doneTasks.count)")
+            Button {
+              self.showCompleted.toggle()
+            } label: {
+              Image(systemName: "chevron.down")
+                .imageScale(.small)
+                .rotationEffect(Angle(degrees: showCompleted ? 0 : -90))
+            }
+          }
         }
       }
-      .listStyle(.plain)
       .navigationTitle("Tasks")
+      .scrollDismissesKeyboard(.immediately)
+      .animation(.default, value: showCompleted)
       .toolbar {
         ToolbarItem(placement: .navigationBarTrailing) {
           HStack {
@@ -90,7 +113,7 @@ struct TasksView: View {
         Text(task.unwrappedName)
           .foregroundColor(Color(uiColor: .label))
       } icon: {
-        Image(systemName: task.isDone ? "checkmark.circle.fill" : "circle")
+        Image(systemName: task.isDone ? "checkmark.square.fill" : "square")
       }
       
     }

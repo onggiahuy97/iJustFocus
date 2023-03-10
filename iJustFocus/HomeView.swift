@@ -18,9 +18,6 @@ struct HomeView: View {
       TasksView()
         .tabItem { Label("Tasks", systemImage: "checklist") }
         .tag(TasksView.tag)
-      HistoryTimerListView()
-        .tabItem { Label("List", systemImage: "list.bullet.clipboard") }
-        .tag(HistoryTimerListView.tag)
       
       if appViewModel.currentOrientation == .focusTodos {
         timerView
@@ -29,6 +26,10 @@ struct HomeView: View {
           }
           .tag(TimerView.tag)
       }
+      
+      HistoryTimerListView()
+        .tabItem { Label("List", systemImage: "list.bullet.clipboard") }
+        .tag(HistoryTimerListView.tag)
       
       SettingsView()
         .tabItem { Label("System", systemImage: "gear") }

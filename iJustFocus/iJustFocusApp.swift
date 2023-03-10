@@ -55,8 +55,6 @@ struct iJustFocusApp: App {
                 .onChange(of: colorScheme) { _ in configNav() }
                 .accentColor(Color(appViewModel.color))
                 .edgesIgnoringSafeArea(.all)
-                .gesture(swipeGesture)
-                .gesture(magnificationGesture)
                 .persistentSystemOverlays(.hidden)
                 .onChange(of: scenePhase) { newSP in
                     switch newSP {
