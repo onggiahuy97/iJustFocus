@@ -28,7 +28,6 @@
 		3EB328B528823A0900FC4548 /* Time+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB328B428823A0900FC4548 /* Time+Extension.swift */; };
 		3EB328B928844D0600FC4548 /* TimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB328B828844D0600FC4548 /* TimerView.swift */; };
 		3EB328BB28844D1100FC4548 /* TasksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB328BA28844D1100FC4548 /* TasksView.swift */; };
-		3EB328BF2884606600FC4548 /* TaskCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB328BE2884606600FC4548 /* TaskCellView.swift */; };
 		3EBD7F97289DF4AB00E4353C /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EBD7F96289DF4AB00E4353C /* SettingsView.swift */; };
 		3EBD7F99289E04C300E4353C /* FontDesignSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EBD7F98289E04C300E4353C /* FontDesignSettingView.swift */; };
 		3EBD7F9B28A1833E00E4353C /* UserDefault+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EBD7F9A28A1833E00E4353C /* UserDefault+Extension.swift */; };
@@ -41,6 +40,7 @@
 		3EE8E173287522E5008AB34E /* Background+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE8E172287522E5008AB34E /* Background+Extension.swift */; };
 		3EE8E17528752491008AB34E /* TimerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE8E17428752491008AB34E /* TimerViewModel.swift */; };
 		3EF3DD4D2884AF9200DA57DD /* TaskViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EF3DD4C2884AF9200DA57DD /* TaskViewModel.swift */; };
+		5928406E29BBE701007DB75A /* TaskDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5928406D29BBE701007DB75A /* TaskDetailView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -67,7 +67,6 @@
 		3EB328B428823A0900FC4548 /* Time+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Time+Extension.swift"; sourceTree = "<group>"; };
 		3EB328B828844D0600FC4548 /* TimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerView.swift; sourceTree = "<group>"; };
 		3EB328BA28844D1100FC4548 /* TasksView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksView.swift; sourceTree = "<group>"; };
-		3EB328BE2884606600FC4548 /* TaskCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCellView.swift; sourceTree = "<group>"; };
 		3EBD7F96289DF4AB00E4353C /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		3EBD7F98289E04C300E4353C /* FontDesignSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontDesignSettingView.swift; sourceTree = "<group>"; };
 		3EBD7F9A28A1833E00E4353C /* UserDefault+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefault+Extension.swift"; sourceTree = "<group>"; };
@@ -81,6 +80,7 @@
 		3EE8E172287522E5008AB34E /* Background+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Background+Extension.swift"; sourceTree = "<group>"; };
 		3EE8E17428752491008AB34E /* TimerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerViewModel.swift; sourceTree = "<group>"; };
 		3EF3DD4C2884AF9200DA57DD /* TaskViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskViewModel.swift; sourceTree = "<group>"; };
+		5928406D29BBE701007DB75A /* TaskDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskDetailView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -153,7 +153,7 @@
 			isa = PBXGroup;
 			children = (
 				3EB328BA28844D1100FC4548 /* TasksView.swift */,
-				3EB328BE2884606600FC4548 /* TaskCellView.swift */,
+				5928406D29BBE701007DB75A /* TaskDetailView.swift */,
 			);
 			path = Tasks;
 			sourceTree = "<group>";
@@ -331,9 +331,9 @@
 				3EBD7F9B28A1833E00E4353C /* UserDefault+Extension.swift in Sources */,
 				3EA2B77A288B1994008A0852 /* ColorSettingView.swift in Sources */,
 				3EA2B77C288C6F93008A0852 /* PickingTimeView.swift in Sources */,
+				5928406E29BBE701007DB75A /* TaskDetailView.swift in Sources */,
 				3E0537B5289182F1004570D4 /* HistoryBarChart.swift in Sources */,
 				3E2739F228B48E2D0093B827 /* ShowGestureGuideView.swift in Sources */,
-				3EB328BF2884606600FC4548 /* TaskCellView.swift in Sources */,
 				3EDE818928AEAE5600CC99AD /* MenuButton.swift in Sources */,
 				3EB328BB28844D1100FC4548 /* TasksView.swift in Sources */,
 				3E88E7422887515E0041173A /* Main.xcdatamodeld in Sources */,

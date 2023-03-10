@@ -12,59 +12,61 @@ struct TasksView: View {
   @EnvironmentObject var dataController: DataController
   @EnvironmentObject var appViewModel: AppViewModel
   
-  @FocusState private var isTextFieldFocus: Bool
-  
   @State private var showAddTask = false
   @State private var taskName = ""
   @State private var showCompleted = false
   
   var body: some View {
     NavigationStack {
-      List {
-        Section("To-do") {
-          ForEach(tasksViewModel.todoTasks, content: taskView(_:))
-            .onDelete(perform: tasksViewModel.deleteTask(_:))
-          
-          Label {
-            VStack {
-              TextField("New Task", text: $taskName)
-                .onSubmit {
-                  guard !taskName.isEmpty else { return }
-                  tasksViewModel.addTask(taskName)
-                  taskName = ""
-                  isTextFieldFocus = true
-                }
-                .focused($isTextFieldFocus)
-            }
-          } icon: {
-            Image(systemName: "pencil")
-              .foregroundColor(Color(appViewModel.color))
-          }
-        }
-        
-        Section {
-          if showCompleted {
-            ForEach(tasksViewModel.doneTasks, content: taskView(_:))
+      ScrollView {
+        ScrollViewReader { scrollProxy in
+          VStack(alignment: .leading, spacing: 12) {
+            
+            ForEach(tasksViewModel.todoTasks, content: taskView(_:))
               .onDelete(perform: tasksViewModel.deleteTask(_:))
-          }
-        } header: {
-          HStack {
-            Text("Completed")
-            Spacer()
-            Text("\(tasksViewModel.doneTasks.count)")
-            Button {
-              self.showCompleted.toggle()
-            } label: {
-              Image(systemName: "chevron.down")
-                .imageScale(.small)
-                .rotationEffect(Angle(degrees: showCompleted ? 0 : -90))
+            
+            Label {
+              VStack {
+                TextField("New Task", text: $taskName)
+                  .onSubmit {
+                    guard !taskName.isEmpty else { return }
+                    tasksViewModel.addTask(taskName)
+                    taskName = ""
+                  }
+              }
+            } icon: {
+              Image(systemName: "pencil")
+                .foregroundColor(Color(appViewModel.color))
             }
+            
+            
+            VStack(spacing: 10) {
+              HStack {
+                Text("COMPLETED")
+                Spacer()
+                Text("\(tasksViewModel.doneTasks.count)")
+                  .foregroundColor(.secondary)
+                Image(systemName: "chevron.down")
+                  .imageScale(.small)
+                  .rotationEffect(Angle(degrees: showCompleted ? 0 : -90))
+              }
+              .onTapGesture {
+                self.showCompleted.toggle()
+              }
+              .foregroundColor(Color(appViewModel.color))
+              if showCompleted {
+                ForEach(tasksViewModel.doneTasks, content: taskView(_:))
+                  .onDelete(perform: tasksViewModel.deleteTask(_:))
+              }
+            }
+            
           }
+          .padding()
+          .frame(maxHeight: .infinity)
         }
       }
       .navigationTitle("Tasks")
       .scrollDismissesKeyboard(.immediately)
-      .animation(.default, value: showCompleted)
       .toolbar {
         ToolbarItem(placement: .navigationBarTrailing) {
           HStack {
@@ -103,20 +105,30 @@ struct TasksView: View {
   }
   
   func taskView(_ task: Tasking) -> some View {
-    Button {
-      withAnimation {
-        task.isDone.toggle()
-        dataController.save()
+    VStack(alignment: .leading) {
+      HStack(alignment: .center) {
+        Button {
+          task.isDone.toggle()
+          dataController.save()
+        } label: {
+          Image(systemName: task.isDone ? "checkmark.square.fill" : "square")
+        }
+        NavigationLink {
+          TaskDetailView(task: task)
+        } label: {
+          HStack {
+            Text(task.unwrappedName)
+              .lineLimit(1)
+              .truncationMode(.tail)
+              .foregroundColor(Color(uiColor: .label))
+            Spacer()
+          }
+        }
       }
-    } label: {
-      Label {
-        Text(task.unwrappedName)
-          .foregroundColor(Color(uiColor: .label))
-      } icon: {
-        Image(systemName: task.isDone ? "checkmark.square.fill" : "square")
-      }
-      
+      Divider()
     }
+    .foregroundColor(task.isDone ? .secondary : .accentColor)
+    .opacity(task.isDone ? 0.5 : 1.0)
   }
 }
 
