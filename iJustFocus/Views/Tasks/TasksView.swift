@@ -16,29 +16,27 @@ struct TasksView: View {
   @State private var taskName = ""
   @State private var showCompleted = false
   
+  @FocusState private var focusKeyboard: Bool
+  
   var body: some View {
     NavigationStack {
-      ScrollView {
-        ScrollViewReader { scrollProxy in
+      ScrollViewReader { scrollProxy in
+        ScrollView {
           VStack(alignment: .leading, spacing: 12) {
+            if showAddTask {
+              Label {
+                VStack {
+                  TextField("New Task", text: $taskName)
+                    .focused($focusKeyboard)
+                }
+              } icon: {
+                Image(systemName: "pencil")
+                  .foregroundColor(Color(appViewModel.color))
+              }
+            }
             
             ForEach(tasksViewModel.todoTasks, content: taskView(_:))
               .onDelete(perform: tasksViewModel.deleteTask(_:))
-            
-            Label {
-              VStack {
-                TextField("New Task", text: $taskName)
-                  .onSubmit {
-                    guard !taskName.isEmpty else { return }
-                    tasksViewModel.addTask(taskName)
-                    taskName = ""
-                  }
-              }
-            } icon: {
-              Image(systemName: "pencil")
-                .foregroundColor(Color(appViewModel.color))
-            }
-            
             
             VStack(spacing: 10) {
               HStack {
@@ -50,6 +48,7 @@ struct TasksView: View {
                   .imageScale(.small)
                   .rotationEffect(Angle(degrees: showCompleted ? 0 : -90))
               }
+              .font(.headline)
               .onTapGesture {
                 self.showCompleted.toggle()
               }
@@ -59,14 +58,42 @@ struct TasksView: View {
                   .onDelete(perform: tasksViewModel.deleteTask(_:))
               }
             }
-            
           }
           .padding()
-          .frame(maxHeight: .infinity)
         }
+        .overlay(
+          VStack {
+            Spacer()
+            SystemImageButton("plus", appViewModel.color) {
+              showAddTask = true
+              focusKeyboard = true
+            }
+            .padding(5)
+            .toolbar {
+              ToolbarItemGroup(placement: .keyboard) {
+                Button("Cancel") {
+                  taskName = ""
+                  focusKeyboard = false
+                }
+                Spacer()
+                Button("Save") {
+                  withAnimation {
+                    guard !taskName.isEmpty else { return }
+                    tasksViewModel.addTask(taskName)
+                    taskName = ""
+                  }
+                }
+                .bold()
+              }
+            }
+          }
+            .opacity(showAddTask ? 0 : 1.0)
+        )
       }
       .navigationTitle("Tasks")
       .scrollDismissesKeyboard(.immediately)
+      .onAppear(perform: listenOnAppear)
+      .onDisappear(perform: listenOnDisappear)
       .toolbar {
         ToolbarItem(placement: .navigationBarTrailing) {
           HStack {
@@ -102,6 +129,17 @@ struct TasksView: View {
         }
       }
     }
+  }
+  
+  private func listenOnAppear() {
+    NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillHideNotification, object: nil, queue: .main) { _ in
+      showAddTask = false
+      focusKeyboard = false
+    }
+  }
+  
+  private func listenOnDisappear() {
+    NotificationCenter.default.removeObserver(self)
   }
   
   func taskView(_ task: Tasking) -> some View {
