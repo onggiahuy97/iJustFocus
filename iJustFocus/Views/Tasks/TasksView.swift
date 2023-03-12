@@ -18,6 +18,8 @@ struct TasksView: View {
   
   @FocusState private var focusKeyboard: Bool
   
+  private var taskTime: DispatchWorkItem?
+  
   var body: some View {
     NavigationStack {
       ScrollViewReader { scrollProxy in
@@ -35,8 +37,16 @@ struct TasksView: View {
               }
             }
             
-            ForEach(tasksViewModel.todoTasks, content: taskView(_:))
-              .onDelete(perform: tasksViewModel.deleteTask(_:))
+            ForEach(tasksViewModel.sortedTasks, content: taskView(_:))
+            
+            ForEach(tasksViewModel.justDoneTasks, content: taskView(_:))
+              .onChange(of: tasksViewModel.justDoneTasks) { newValue in
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) {
+                  newValue.forEach { task in
+                    self.tasksViewModel.justDoneTasks.removeAll(where: { $0 == task })
+                  }
+                }
+              }
             
             VStack(spacing: 10) {
               HStack {
@@ -148,6 +158,12 @@ struct TasksView: View {
         Button {
           task.isDone.toggle()
           dataController.save()
+          if task.isDone {
+            tasksViewModel.justDoneTasks.append(task)
+            tasksViewModel.justDoneTasks =  tasksViewModel.justDoneTasks.sorted { t1, t2 in
+              return (t1.createdDate ?? Date()) < (t2.createdDate ?? Date())
+            }
+          }
         } label: {
           Image(systemName: task.isDone ? "checkmark.square.fill" : "square")
         }

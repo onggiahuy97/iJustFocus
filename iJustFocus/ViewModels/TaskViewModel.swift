@@ -14,17 +14,24 @@ class TaskViewModel: NSObject, ObservableObject, NSFetchedResultsControllerDeleg
   var dataController: DataController
   
   @Published var tasks = [Tasking]()
-  
-  var todoTasks: [Tasking] {
-    tasks.filter { !$0.isDone }.sorted { t1, t2 in
-      return (t1.createdDate ?? Date()) < (t2.createdDate ?? Date())
-    }
+  @Published var justDoneTasks: [Tasking] = []
+
+  var sortedTasks: [Tasking] {
+    tasks
+      .filter { !$0.isDone }
+      .sorted { t1, t2 in
+        return (t1.createdDate ?? Date()) < (t2.createdDate ?? Date())
+      }
   }
   
   var doneTasks: [Tasking] {
-    tasks.filter { $0.isDone }
+    tasks
+      .filter { $0.isDone }
+      .sorted { t1, t2 in
+        return (t1.createdDate ?? Date()) < (t2.createdDate ?? Date())
+      }
   }
-  
+
   init(dataController: DataController) {
     self.dataController = dataController
     
@@ -80,7 +87,7 @@ class TaskViewModel: NSObject, ObservableObject, NSFetchedResultsControllerDeleg
   }
   
   func deleteToDoTasks() {
-    for task in todoTasks {
+    for task in sortedTasks {
       dataController.delete(task)
     }
     dataController.save()
