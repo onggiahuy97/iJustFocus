@@ -159,10 +159,9 @@ struct TasksView: View {
           task.isDone.toggle()
           dataController.save()
           if task.isDone {
-            tasksViewModel.justDoneTasks.append(task)
-            tasksViewModel.justDoneTasks =  tasksViewModel.justDoneTasks.sorted { t1, t2 in
-              return (t1.createdDate ?? Date()) < (t2.createdDate ?? Date())
-            }
+            tasksViewModel.justDoneTasks.insert(task, at: 0)
+          } else {
+            tasksViewModel.justDoneTasks.removeAll(where: { $0 == task })
           }
         } label: {
           Image(systemName: task.isDone ? "checkmark.square.fill" : "square")
