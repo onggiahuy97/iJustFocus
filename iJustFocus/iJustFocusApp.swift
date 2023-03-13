@@ -55,8 +55,7 @@ struct iJustFocusApp: App {
   
   var body: some Scene {
     WindowGroup {
-      ContentView()
-//        .applyTheme()
+      appView
         .environmentObject(timerViewModel)
         .environmentObject(tasksViewModel)
         .environmentObject(appViewModel)
@@ -82,6 +81,15 @@ struct iJustFocusApp: App {
             print("defualt unknown")
           }
         }
+    }
+  }
+  
+  @ViewBuilder
+  private var appView: some View {
+    if UIDevice.current.userInterfaceIdiom == .pad || UIDevice.current.userInterfaceIdiom == .mac {
+      
+    } else {
+      ContentView()
     }
   }
   

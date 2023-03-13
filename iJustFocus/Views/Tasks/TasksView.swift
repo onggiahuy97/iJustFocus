@@ -97,7 +97,7 @@ struct TasksView: View {
               }
             }
           }
-            .opacity(showAddTask ? 0 : 1.0)
+            .opacity(showAddTask && appViewModel.currentOrientation != .halfHalf ? 0 : 1.0)
         )
       }
       .navigationTitle("Tasks")
