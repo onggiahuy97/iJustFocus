@@ -8,6 +8,14 @@
 import SwiftUI
 
 struct TasksView: View {
+  struct AlertDetail: Identifiable {
+    let name: String
+    let error: String
+    let id = UUID()
+  }
+  
+  let feedback = UIImpactFeedbackGenerator(style: .medium)
+  
   @EnvironmentObject var tasksViewModel: TaskViewModel
   @EnvironmentObject var dataController: DataController
   @EnvironmentObject var appViewModel: AppViewModel
@@ -15,6 +23,8 @@ struct TasksView: View {
   @State private var showAddTask = false
   @State private var taskName = ""
   @State private var showCompleted = false
+  @State private var alertDetail: AlertDetail?
+  @State private var showAlert = false
   
   @FocusState private var focusKeyboard: Bool
   
@@ -25,17 +35,6 @@ struct TasksView: View {
       ScrollViewReader { scrollProxy in
         ScrollView {
           VStack(alignment: .leading, spacing: 12) {
-            if showAddTask {
-              Label {
-                VStack {
-                  TextField("New Task", text: $taskName)
-                    .focused($focusKeyboard)
-                }
-              } icon: {
-                Image(systemName: "pencil")
-                  .foregroundColor(Color(appViewModel.color))
-              }
-            }
             
             ForEach(tasksViewModel.sortedTasks, content: taskView(_:))
             
@@ -72,32 +71,54 @@ struct TasksView: View {
           .padding()
         }
         .overlay(
-          VStack {
-            Spacer()
-            SystemImageButton("plus", appViewModel.color) {
-              showAddTask = true
-              focusKeyboard = true
-            }
-            .padding(5)
-            .toolbar {
-              ToolbarItemGroup(placement: .keyboard) {
-                Button("Cancel") {
-                  taskName = ""
-                  focusKeyboard = false
+          ZStack {
+            if showAddTask {
+              Color(appViewModel.color)
+                .opacity(0.75)
+                .onTapGesture {
+                  self.showAddTask = false
+                  self.focusKeyboard = false
                 }
-                Spacer()
-                Button("Save") {
-                  withAnimation {
-                    guard !taskName.isEmpty else { return }
-                    tasksViewModel.addTask(taskName)
-                    taskName = ""
+            }
+            VStack() {
+              Spacer()
+              if !showAddTask {
+                SystemImageButton("plus", appViewModel.color) {
+                  self.feedback.impactOccurred()
+                  showAddTask = true
+                  focusKeyboard = true
+                }
+                .padding(5)
+              } else {
+                VStack(spacing: 12) {
+                  Label {
+                    VStack {
+                      TextField("New Task", text: $taskName)
+                        .focused($focusKeyboard)
+                    }
+                  } icon: {
+                    Image(systemName: "pencil")
+                      .foregroundColor(Color(appViewModel.color))
+                  }
+                  HStack {
+                    Spacer()
+                    Button {
+                      guard !taskName.isEmpty else { return }
+                      tasksViewModel.addTask(taskName)
+                      taskName = ""
+                      showAddTask = false
+                    } label: {
+                      Image(systemName: "paperplane.fill")
+                        .rotationEffect(Angle(degrees: 45))
+                    }
                   }
                 }
-                .bold()
+                .padding()
+                .background(.white)
               }
             }
           }
-            .opacity(showAddTask && appViewModel.currentOrientation != .halfHalf ? 0 : 1.0)
+            .edgesIgnoringSafeArea(.top)
         )
       }
       .navigationTitle("Tasks")
@@ -156,6 +177,7 @@ struct TasksView: View {
     VStack(alignment: .leading) {
       HStack(alignment: .center) {
         Button {
+          self.feedback.impactOccurred()
           task.isDone.toggle()
           dataController.save()
           if task.isDone {

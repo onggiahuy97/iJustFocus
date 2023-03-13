@@ -20,7 +20,7 @@ class TaskViewModel: NSObject, ObservableObject, NSFetchedResultsControllerDeleg
     tasks
       .filter { !$0.isDone }
       .sorted { t1, t2 in
-        return (t1.createdDate ?? Date()) < (t2.createdDate ?? Date())
+        return (t1.createdDate ?? Date()) > (t2.createdDate ?? Date())
       }
   }
   
@@ -28,7 +28,7 @@ class TaskViewModel: NSObject, ObservableObject, NSFetchedResultsControllerDeleg
     tasks
       .filter { $0.isDone }
       .sorted { t1, t2 in
-        return (t1.createdDate ?? Date()) < (t2.createdDate ?? Date())
+        return (t1.createdDate ?? Date()) > (t2.createdDate ?? Date())
       }
   }
 

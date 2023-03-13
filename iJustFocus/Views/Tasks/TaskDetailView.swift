@@ -9,17 +9,13 @@ import SwiftUI
 
 struct TaskDetailView: View {
   @EnvironmentObject var dataController: DataController
+  @EnvironmentObject var appViewMode: AppViewModel
+  @Environment(\.dismiss) private var dismiss
   
   @ObservedObject var task: Tasking
   
-  @State private var note: String
-  @State private var taskName: String
-  
-  init(task: Tasking) {
-    self.task = task
-    note = task.note ?? ""
-    taskName = task.unwrappedName
-  }
+  @State private var note: String = ""
+  @State private var taskName: String = ""
   
   var body: some View {
     ScrollView {
@@ -48,9 +44,29 @@ struct TaskDetailView: View {
         TextField("Note", text: $note, axis: .vertical)
       }
       .padding()
+
     }
     .navigationBarTitleDisplayMode(.inline)
     .scrollDismissesKeyboard(.immediately)
+    .toolbar {
+      ToolbarItem {
+        Menu {
+          Button(role: .destructive) {
+            dataController.delete(task)
+            dataController.save()
+            dismiss()
+          } label: {
+            Label("Delete Task", systemImage: "trash")
+          }
+        } label: {
+          Image(systemName: "ellipsis")
+        }
+      }
+    }
+    .onAppear {
+      note = task.note ?? ""
+      taskName = task.unwrappedName
+    }
     .onDisappear {
       task.name = taskName.isEmpty ? task.unwrappedName : taskName
       task.note = note

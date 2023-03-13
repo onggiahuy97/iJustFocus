@@ -40,6 +40,8 @@
 		3EE8E173287522E5008AB34E /* Background+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE8E172287522E5008AB34E /* Background+Extension.swift */; };
 		3EE8E17528752491008AB34E /* TimerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE8E17428752491008AB34E /* TimerViewModel.swift */; };
 		3EF3DD4D2884AF9200DA57DD /* TaskViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EF3DD4C2884AF9200DA57DD /* TaskViewModel.swift */; };
+		5926DA5829BF814600A40425 /* KeyboardAwareModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5926DA5729BF814600A40425 /* KeyboardAwareModifier.swift */; };
+		5926DA5B29BFA20800A40425 /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5926DA5A29BFA20800A40425 /* CalendarView.swift */; };
 		5928406E29BBE701007DB75A /* TaskDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5928406D29BBE701007DB75A /* TaskDetailView.swift */; };
 /* End PBXBuildFile section */
 
@@ -80,6 +82,8 @@
 		3EE8E172287522E5008AB34E /* Background+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Background+Extension.swift"; sourceTree = "<group>"; };
 		3EE8E17428752491008AB34E /* TimerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerViewModel.swift; sourceTree = "<group>"; };
 		3EF3DD4C2884AF9200DA57DD /* TaskViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskViewModel.swift; sourceTree = "<group>"; };
+		5926DA5729BF814600A40425 /* KeyboardAwareModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardAwareModifier.swift; sourceTree = "<group>"; };
+		5926DA5A29BFA20800A40425 /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
 		5928406D29BBE701007DB75A /* TaskDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskDetailView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -140,6 +144,8 @@
 		3E88E749288876370041173A /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				5926DA5929BFA1FE00A40425 /* Calendar */,
+				5926DA5629BF813200A40425 /* Modifiers */,
 				3EDE818728AEAE3D00CC99AD /* Helper Views */,
 				3ECFC7AA28A69C860035EB77 /* Charts */,
 				3ECFC7A928A69C760035EB77 /* Settings */,
@@ -241,6 +247,22 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
+		5926DA5629BF813200A40425 /* Modifiers */ = {
+			isa = PBXGroup;
+			children = (
+				5926DA5729BF814600A40425 /* KeyboardAwareModifier.swift */,
+			);
+			path = Modifiers;
+			sourceTree = "<group>";
+		};
+		5926DA5929BFA1FE00A40425 /* Calendar */ = {
+			isa = PBXGroup;
+			children = (
+				5926DA5A29BFA20800A40425 /* CalendarView.swift */,
+			);
+			path = Calendar;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -334,6 +356,8 @@
 				5928406E29BBE701007DB75A /* TaskDetailView.swift in Sources */,
 				3E0537B5289182F1004570D4 /* HistoryBarChart.swift in Sources */,
 				3E2739F228B48E2D0093B827 /* ShowGestureGuideView.swift in Sources */,
+				5926DA5829BF814600A40425 /* KeyboardAwareModifier.swift in Sources */,
+				5926DA5B29BFA20800A40425 /* CalendarView.swift in Sources */,
 				3EDE818928AEAE5600CC99AD /* MenuButton.swift in Sources */,
 				3EB328BB28844D1100FC4548 /* TasksView.swift in Sources */,
 				3E88E7422887515E0041173A /* Main.xcdatamodeld in Sources */,
