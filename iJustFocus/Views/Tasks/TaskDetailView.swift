@@ -34,9 +34,9 @@ struct TaskDetailView: View {
           .font(.callout)
           Spacer()
           Button {
-            
+            task.isPinned.toggle()
           } label: {
-            Image(systemName: "flag")
+            Image(systemName: task.isPinned ? "flag.fill" : "flag")
           }
         }
         TextField("Name", text: $taskName)

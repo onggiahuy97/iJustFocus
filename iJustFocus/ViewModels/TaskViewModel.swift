@@ -15,10 +15,18 @@ class TaskViewModel: NSObject, ObservableObject, NSFetchedResultsControllerDeleg
   
   @Published var tasks = [Tasking]()
   @Published var justDoneTasks: [Tasking] = []
+  
+  var pinnedTasks: [Tasking] {
+    tasks
+      .filter { !$0.isDone && $0.isPinned }
+      .sorted { t1, t2 in
+        return (t1.createdDate ?? Date()) > (t2.createdDate ?? Date())
+      }
+  }
 
   var sortedTasks: [Tasking] {
     tasks
-      .filter { !$0.isDone }
+      .filter { !$0.isDone && !$0.isPinned }
       .sorted { t1, t2 in
         return (t1.createdDate ?? Date()) > (t2.createdDate ?? Date())
       }
@@ -62,11 +70,12 @@ class TaskViewModel: NSObject, ObservableObject, NSFetchedResultsControllerDeleg
     }
   }
   
-  func addTask(_ name: String) {
+  func addTask(_ name: String, isPinned: Bool = false) {
     guard !name.isEmpty else { return }
     let task = Tasking(context: dataController.container.viewContext)
     task.name = name
     task.createdDate = Date()
+    task.isPinned = isPinned
     dataController.save()
   }
   

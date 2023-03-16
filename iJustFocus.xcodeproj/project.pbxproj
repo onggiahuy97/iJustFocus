@@ -43,6 +43,9 @@
 		5926DA5829BF814600A40425 /* KeyboardAwareModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5926DA5729BF814600A40425 /* KeyboardAwareModifier.swift */; };
 		5926DA5B29BFA20800A40425 /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5926DA5A29BFA20800A40425 /* CalendarView.swift */; };
 		5928406E29BBE701007DB75A /* TaskDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5928406D29BBE701007DB75A /* TaskDetailView.swift */; };
+		59BF90AE29BFF39A00A3EC0E /* AddTaskButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59BF90AD29BFF39A00A3EC0E /* AddTaskButton.swift */; };
+		59BF90B029BFF47100A3EC0E /* HapticFeedBack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59BF90AF29BFF47100A3EC0E /* HapticFeedBack.swift */; };
+		59BF90B229BFF87100A3EC0E /* TaskRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59BF90B129BFF87100A3EC0E /* TaskRowView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -85,6 +88,9 @@
 		5926DA5729BF814600A40425 /* KeyboardAwareModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardAwareModifier.swift; sourceTree = "<group>"; };
 		5926DA5A29BFA20800A40425 /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
 		5928406D29BBE701007DB75A /* TaskDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskDetailView.swift; sourceTree = "<group>"; };
+		59BF90AD29BFF39A00A3EC0E /* AddTaskButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTaskButton.swift; sourceTree = "<group>"; };
+		59BF90AF29BFF47100A3EC0E /* HapticFeedBack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticFeedBack.swift; sourceTree = "<group>"; };
+		59BF90B129BFF87100A3EC0E /* TaskRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskRowView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -159,7 +165,9 @@
 			isa = PBXGroup;
 			children = (
 				3EB328BA28844D1100FC4548 /* TasksView.swift */,
+				59BF90AD29BFF39A00A3EC0E /* AddTaskButton.swift */,
 				5928406D29BBE701007DB75A /* TaskDetailView.swift */,
+				59BF90B129BFF87100A3EC0E /* TaskRowView.swift */,
 			);
 			path = Tasks;
 			sourceTree = "<group>";
@@ -199,6 +207,7 @@
 			isa = PBXGroup;
 			children = (
 				3EDE818828AEAE5600CC99AD /* MenuButton.swift */,
+				59BF90AF29BFF47100A3EC0E /* HapticFeedBack.swift */,
 			);
 			path = "Helper Views";
 			sourceTree = "<group>";
@@ -337,6 +346,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				59BF90B229BFF87100A3EC0E /* TaskRowView.swift in Sources */,
 				3EDE818B28AEB10400CC99AD /* TimerBackgroundSettingView.swift in Sources */,
 				3E88E73C28874DDF0041173A /* HistoryTimerListView.swift in Sources */,
 				3EA43060288898ED00AB687F /* Timing+Extension.swift in Sources */,
@@ -362,6 +372,7 @@
 				3EB328BB28844D1100FC4548 /* TasksView.swift in Sources */,
 				3E88E7422887515E0041173A /* Main.xcdatamodeld in Sources */,
 				3EB328B528823A0900FC4548 /* Time+Extension.swift in Sources */,
+				59BF90B029BFF47100A3EC0E /* HapticFeedBack.swift in Sources */,
 				3E1F777828AAC30800B2867D /* Button+Extension.swift in Sources */,
 				3EBD7F99289E04C300E4353C /* FontDesignSettingView.swift in Sources */,
 				3EE8E17528752491008AB34E /* TimerViewModel.swift in Sources */,
@@ -371,6 +382,7 @@
 				3EE8E165287522C6008AB34E /* iJustFocusApp.swift in Sources */,
 				3E0537B1288F0C7E004570D4 /* View+Extension.swift in Sources */,
 				3EA430622888A66F00AB687F /* Date+Extension.swift in Sources */,
+				59BF90AE29BFF39A00A3EC0E /* AddTaskButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

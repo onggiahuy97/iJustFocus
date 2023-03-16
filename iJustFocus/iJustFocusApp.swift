@@ -7,19 +7,6 @@
 
 import SwiftUI
 
-//extension View {
-//  func applyTheme() -> some View {
-//    modifier(ThemeModify())
-//  }
-//}
-//
-//struct ThemeModify: ViewModifier {
-//  func body(content: Content) -> some View {
-//    content
-//      .tint(Color.red)
-//  }
-//}
-
 @main
 struct iJustFocusApp: App {
   @StateObject var dataController: DataController
@@ -87,7 +74,7 @@ struct iJustFocusApp: App {
   @ViewBuilder
   private var appView: some View {
     if UIDevice.current.userInterfaceIdiom == .pad || UIDevice.current.userInterfaceIdiom == .mac {
-      
+      ContentView()
     } else {
       ContentView()
     }
@@ -100,13 +87,24 @@ struct iJustFocusApp: App {
   }
 }
 
-class AppDeletegate: NSObject, UIApplicationDelegate, ObservableObject {
+class AppDeletegate: NSObject, UIApplicationDelegate, UISceneDelegate, ObservableObject {
   func applicationDidFinishLaunching(_ application: UIApplication) {
     print("Did finish launching")
   }
   
   func applicationDidEnterBackground(_ application: UIApplication) {
     print("Hello enter background")
+  }
+  
+  func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
+    guard let windowScene = (scene as? UIWindowScene) else { return }
+    
+    #if targetEnvironment(macCatalyst)
+    if let titlebar = windowScene.titlebar {
+      titlebar.titleVisibility = .hidden
+      titlebar.toolbar = nil
+    }
+    #endif
   }
 }
 

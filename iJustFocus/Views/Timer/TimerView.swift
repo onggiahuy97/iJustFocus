@@ -55,7 +55,7 @@ struct TimerView: View {
   var segmentedController: some View {
     Picker(selection: $timerViewModel.timeType) {
       ForEach(TimerViewModel.TimeType.allCases) { type in
-        Text(type.rawValue).tag(type)
+        Image(systemName: type.systemImage).tag(type)
       }
     } label: {
       Text("Time Type")
@@ -99,14 +99,37 @@ struct TimerView: View {
           .font(.system(size: textSize, weight: .bold, design: appViewModel.fontDesign?.toFontCase()).monospacedDigit())
           .foregroundColor(appViewModel.isShowingTimerBackground ? Color(appViewModel.color) : .white)
           .fontWeight(.bold)
-        //                    .font(Font(.init(.message, size: 46)))
           .minimumScaleFactor(0.01)
+          .onTapGesture {
+            if timerViewModel.timeType == .Timer {
+              self.showPickingTime.toggle()
+            }
+          }
+          .sheet(isPresented: $showPickingTime) {
+            PickingTimeView()
+              .presentationDetents([.medium])
+          }
         
+        HStack {
+          Spacer()
+          let isStopped = timerViewModel.isStopped
+          SystemImageButton(isStopped ? "play.circle" : "pause.circle", appViewModel.color, .large){
+            isStopped ? timerViewModel.start() : showStopAlert.toggle()
+          }
+          .alert("Stop Now?", isPresented: $showStopAlert) {
+            Button("Cancel", role: .cancel) { }
+            Button("Yes!") {
+              timerViewModel.stop()
+            }
+          }
+          Spacer()
+        }
         Spacer()
       }
       
       // Buttons
       HStack(alignment: .center) {
+        Spacer()
         SystemImageButton(appViewModel.currentOrientation == .halfHalf ? "xmark" : "square.split.1x2", appViewModel.color, .small) {
           if appViewModel.currentOrientation == .halfHalf {
             appViewModel.currentOrientation = .focusTodos
@@ -120,26 +143,7 @@ struct TimerView: View {
         } else {
           segmentedController
         }
-        
-        SystemImageButton("timer", appViewModel.color, .small) {
-          showPickingTime.toggle()
-        }
-        .opacity(timerViewModel.timeType == .Timer ? 1 : 0)
-        .sheet(isPresented: $showPickingTime) {
-          PickingTimeView()
-            .presentationDetents([.medium])
-        }
-        
-        let isStopped = timerViewModel.isStopped
-        SystemImageButton(isStopped ? "play.circle" : "pause.circle", appViewModel.color, .small){
-          isStopped ? timerViewModel.start() : showStopAlert.toggle()
-        }
-        .alert("Stop Now?", isPresented: $showStopAlert) {
-          Button("Cancel", role: .cancel) { }
-          Button("Yes!") {
-            timerViewModel.stop()
-          }
-        }
+        Spacer()
       }
       .padding()
       
