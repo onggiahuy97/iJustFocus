@@ -7,6 +7,33 @@
 
 import SwiftUI
 
+struct RemindDatePickerView: View {
+  
+  @Binding var showDatePicker: Bool
+  @Binding var selectedDate: Date
+  
+  let action: (() -> Void)
+  
+  var body: some View {
+    VStack(alignment: .leading) {
+      HStack {
+        Button("Cancel", role: .destructive) {
+          showDatePicker = false
+        }
+        Spacer()
+        Button("Save") {
+          action()
+          showDatePicker = false
+        }
+      }
+      .padding(.horizontal)
+      DatePicker("Pick A Date", selection: $selectedDate, displayedComponents: .date)
+        .datePickerStyle(.graphical)
+        .presentationDetents([.medium, .large])
+    }
+  }
+}
+
 struct TaskDetailView: View {
   @EnvironmentObject var dataController: DataController
   @EnvironmentObject var appViewMode: AppViewModel
@@ -16,6 +43,8 @@ struct TaskDetailView: View {
   
   @State private var note: String = ""
   @State private var taskName: String = ""
+  @State private var showDatePicker = false
+  @State private var selectedDate = Date()
   
   var body: some View {
     ScrollView {
@@ -27,12 +56,22 @@ struct TaskDetailView: View {
             Image(systemName: task.isDone ? "square.fill" : "square")
           }
           Spacer()
+          
           Button("Date & Repeat") {
-            
+            showDatePicker = true
           }
           .foregroundColor(.secondary)
           .font(.callout)
+          .sheet(isPresented: $showDatePicker) {
+            RemindDatePickerView(showDatePicker: $showDatePicker, selectedDate: $selectedDate) {
+              task.remindDate = selectedDate
+              dataController.save()
+              showDatePicker = false
+            }
+          }
+          
           Spacer()
+          
           Button {
             task.isPinned.toggle()
           } label: {

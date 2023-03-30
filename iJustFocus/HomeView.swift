@@ -15,9 +15,9 @@ struct HomeView: View {
   
   var body: some View {
     TabView(selection: $selectedTab) {
-//      TasksView()
-//        .tabItem { Label("Tasks", systemImage: "checklist") }
-//        .tag(TasksView.tag)
+      TasksView()
+        .tabItem { Label("Tasks", systemImage: "checklist") }
+        .tag(TasksView.tag)
       
       CalendarView()
         .tabItem { Label("Calendar", systemImage: "calendar") }

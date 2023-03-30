@@ -47,7 +47,7 @@ struct iJustFocusApp: App {
         .environmentObject(tasksViewModel)
         .environmentObject(appViewModel)
         .environmentObject(dataController)
-        .environment(\.managedObjectContext, DataController.shared.container.viewContext)
+        .environment(\.managedObjectContext, dataController.container.viewContext)
         .statusBarHidden(appViewModel.isStatusBarHidden)
         .toolbarColorScheme(.dark, for: .navigationBar)
         .onAppear(perform: configNav)

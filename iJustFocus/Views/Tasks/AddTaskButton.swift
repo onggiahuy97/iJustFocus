@@ -8,7 +8,9 @@
 import SwiftUI
 
 struct AddTaskButton: View {
+  @Environment(\.managedObjectContext) private var viewContext
   
+  @EnvironmentObject var dataController: DataController
   @EnvironmentObject var appViewModel: AppViewModel
   @EnvironmentObject var tasksViewModel: TaskViewModel
   
@@ -17,6 +19,9 @@ struct AddTaskButton: View {
   @State private var showAddTask: Bool = false
   @State private var taskName = ""
   @State private var isPinned = false
+  @State private var showDatePicker = false
+  @State private var selectedDate = Date()
+  @State private var selectedDateWithOptional: Date?
   
   @FocusState private var focusKeyboard: Bool
   
@@ -57,10 +62,16 @@ struct AddTaskButton: View {
             }
             HStack(spacing: 12) {
               Button {
-                
+                showDatePicker = true
               } label: {
                 Image(systemName: "calendar")
               }
+              .sheet(isPresented: $showDatePicker) {
+                RemindDatePickerView(showDatePicker: $showDatePicker, selectedDate: $selectedDate) {
+                  selectedDateWithOptional = selectedDate
+                }
+              }
+              
               Button {
                 
               } label: {
@@ -94,7 +105,14 @@ struct AddTaskButton: View {
   
   private func addNewTask() {
     guard !taskName.isEmpty else { return }
-    tasksViewModel.addTask(taskName, isPinned: isPinned)
+    let task = Tasking(context: viewContext)
+    task.name = taskName
+    task.createdDate = Date()
+    task.isPinned = isPinned
+    if let selectedDateWithOptional {
+      task.remindDate = selectedDateWithOptional
+    }
+    dataController.save()
     taskName = ""
     generateFeedback()
   }

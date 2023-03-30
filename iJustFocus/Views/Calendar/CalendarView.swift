@@ -9,10 +9,27 @@ import SwiftUI
 
 struct CalendarView: View {
   static let tag: String? = "CalendarView"
+  
+  @EnvironmentObject var tasksViewModel: TaskViewModel
+  @EnvironmentObject var dataController: DataController
+  @EnvironmentObject var appViewModel: AppViewModel
+  
+  @State private var currentDay = Date()
+  @State private var showTodo = true
+  
   var body: some View {
     NavigationStack {
       ScrollView {
-        WeekRowView()
+        WeekRowView(currentDay: $currentDay)
+        Divider()
+        
+        let tasks = tasksViewModel.selectedDateTasks(currentDate: currentDay)
+        CustomGroup(title: "TO-DO", isExpanded: $showTodo, count: tasks.count) {
+          ForEach(tasks) { task in
+            TaskRowView(task: task)
+          }
+        }
+        .padding()
       }
       .navigationTitle("Calendar")
     }
@@ -22,7 +39,7 @@ struct CalendarView: View {
 struct WeekRowView: View {
   @EnvironmentObject var appVM: AppViewModel
   
-  @State private var currentDay = Date()
+  @Binding var currentDay: Date
   
   var body: some View {
     HStack(spacing: 0) {

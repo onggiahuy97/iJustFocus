@@ -81,27 +81,31 @@ struct TasksView: View {
                 }
             }
             
-            VStack(spacing: 10) {
-              HStack {
-                Text("COMPLETED")
-                Spacer()
-                Text("\(tasksViewModel.doneTasks.count)")
-                  .foregroundColor(.secondary)
-                Image(systemName: "chevron.down")
-                  .imageScale(.small)
-                  .rotationEffect(Angle(degrees: showCompleted ? 0 : -90))
-              }
-              .font(.headline)
-              .onTapGesture {
-                self.showCompleted.toggle()
-              }
-              .foregroundColor(Color(appViewModel.color))
-              
-              if showCompleted {
-                ForEach(tasksViewModel.doneTasks, content: TaskRowView.init)
-                  .onDelete(perform: tasksViewModel.deleteTask(_:))
-              }
+            CustomGroup(title: "COMPLETED", isExpanded: $showCompleted, count: tasksViewModel.doneTasks.count) {
+              ForEach(tasksViewModel.doneTasks, content: TaskRowView.init)
             }
+            
+//            VStack(spacing: 10) {
+//              HStack {
+//                Text("COMPLETED")
+//                Spacer()
+//                Text("\(tasksViewModel.doneTasks.count)")
+//                  .foregroundColor(.secondary)
+//                Image(systemName: "chevron.down")
+//                  .imageScale(.small)
+//                  .rotationEffect(Angle(degrees: showCompleted ? 0 : -90))
+//              }
+//              .font(.headline)
+//              .onTapGesture {
+//                self.showCompleted.toggle()
+//              }
+//              .foregroundColor(Color(appViewModel.color))
+//
+//              if showCompleted {
+//                ForEach(tasksViewModel.doneTasks, content: TaskRowView.init)
+//                  .onDelete(perform: tasksViewModel.deleteTask(_:))
+//              }
+//            }
           }
           .padding()
         }

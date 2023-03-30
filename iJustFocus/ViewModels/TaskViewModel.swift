@@ -39,6 +39,13 @@ class TaskViewModel: NSObject, ObservableObject, NSFetchedResultsControllerDeleg
         return (t1.createdDate ?? Date()) > (t2.createdDate ?? Date())
       }
   }
+  
+  func selectedDateTasks(currentDate: Date) -> [Tasking] {
+    return tasks.filter { task in
+      guard let remindDate = task.remindDate else { return false }
+      return Calendar.current.isDate(remindDate, equalTo: currentDate, toGranularity: .day)
+    }
+  }
 
   init(dataController: DataController) {
     self.dataController = dataController
