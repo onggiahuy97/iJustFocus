@@ -26,11 +26,11 @@ struct RemindDatePickerView: View {
           showDatePicker = false
         }
       }
-      .padding(.horizontal)
       DatePicker("Pick A Date", selection: $selectedDate, displayedComponents: .date)
         .datePickerStyle(.graphical)
-        .presentationDetents([.medium, .large])
+        .presentationDetents([.medium])
     }
+    .padding()
   }
 }
 
@@ -46,6 +46,12 @@ struct TaskDetailView: View {
   @State private var showDatePicker = false
   @State private var selectedDate = Date()
   
+  @State private var regex: NSRegularExpression = {
+    let regexPattern = "(https?://([\\w-]+\\.)+[\\w-]+(/[\\w- ./?%&=]*)?)"
+    let regex = try! NSRegularExpression(pattern: regexPattern)
+    return regex
+  }()
+  
   var body: some View {
     ScrollView {
       VStack(alignment: .leading, spacing: 12) {
@@ -55,6 +61,13 @@ struct TaskDetailView: View {
           } label: {
             Image(systemName: task.isDone ? "square.fill" : "square")
           }
+          
+          Button {
+            
+          } label: {
+            Image(systemName: "bell.badge")
+          }
+          
           Spacer()
           
           Button("Date & Repeat") {
@@ -73,6 +86,12 @@ struct TaskDetailView: View {
           Spacer()
           
           Button {
+            
+          } label: {
+            Image(systemName: "square.and.arrow.up")
+          }
+          
+          Button {
             task.isPinned.toggle()
           } label: {
             Image(systemName: task.isPinned ? "flag.fill" : "flag")
@@ -81,6 +100,16 @@ struct TaskDetailView: View {
         TextField("Name", text: $taskName)
           .font(.system(.title3, design: .rounded, weight: .bold))
         TextField("Note", text: $note, axis: .vertical)
+          .onChange(of: note) { newValue in
+            let range = NSRange(newValue.startIndex..<newValue.endIndex, in: newValue)
+            if let match = regex.firstMatch(in: newValue, range: range) {
+              let urlRange = Range(match.range, in: newValue)!
+              let url = newValue[urlRange]
+              print("Found url: \(url)")
+            } else {
+              print("No URL")
+            }
+          }
       }
       .padding()
 

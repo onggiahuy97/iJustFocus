@@ -28,6 +28,8 @@ struct iJustFocusApp: App {
     
     // Turn of auto turn off / dim screen
     UIApplication.shared.isIdleTimerDisabled = true
+    
+    registerForPushNotification()
   }
   
   var swipeGesture: some Gesture {
@@ -74,6 +76,7 @@ struct iJustFocusApp: App {
   @ViewBuilder
   private var appView: some View {
     if UIDevice.current.userInterfaceIdiom == .pad || UIDevice.current.userInterfaceIdiom == .mac {
+//      SplitContentView()
       ContentView()
     } else {
       ContentView()
@@ -85,9 +88,30 @@ struct iJustFocusApp: App {
     UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: color]
     UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: color]
   }
+  
+  private func registerForPushNotification() {
+    UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { granted, _ in
+      guard granted else { return }
+      DispatchQueue.main.async {
+        UIApplication.shared.registerForRemoteNotifications()
+      }
+    }
+  }
 }
 
 class AppDeletegate: NSObject, UIApplicationDelegate, UISceneDelegate, ObservableObject {
+  func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+    print(deviceToken)
+  }
+  
+  func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
+    print(error)
+  }
+  
+  func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+    
+  }
+  
   func applicationDidFinishLaunching(_ application: UIApplication) {
     print("Did finish launching")
   }

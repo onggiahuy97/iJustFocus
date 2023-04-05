@@ -32,6 +32,16 @@ struct CalendarView: View {
         .padding()
       }
       .navigationTitle("Calendar")
+      .toolbar {
+        ToolbarItem {
+          Button {
+            
+          } label: {
+            Image(systemName: "square.stack")
+              .rotationEffect(.init(degrees: 180))
+          }
+        }
+      }
     }
   }
 }
@@ -73,6 +83,55 @@ struct WeekRowView: View {
   }
 }
 
+//struct WeekRowView: View {
+//  @EnvironmentObject var appVM: AppViewModel
+//
+//  @Binding var currentDay: Date
+//
+//  let calendar = Calendar.current
+//  let weeksToShow = 7
+//
+//  var body: some View {
+//    ScrollView(.horizontal, showsIndicators: false) {
+//      HStack(spacing: 0) {
+//        ForEach(0..<weeksToShow) { weekIndex in
+//          let firstWeekdayOfCurrentWeek = calendar.dateInterval(of: .weekOfMonth, for: currentDay)?.start
+//          let weekStartDate = calendar.date(byAdding: .weekOfMonth, value: weekIndex, to: firstWeekdayOfCurrentWeek ?? Date())
+//          let week = calendar.weekDays(for: weekStartDate ?? Date())
+//
+//          ForEach(week) { weekday in
+//            let status = calendar.isDate(weekday.date, inSameDayAs: currentDay)
+//            VStack(spacing: 6) {
+//              Text(weekday.string.prefix(3))
+//                .font(.system(size: 11))
+//              Text(weekday.date.toString("dd"))
+//                .font(.system(size: 14))
+//            }
+//            .overlay(alignment: .bottom, content: {
+//              if weekday.isToday {
+//                Circle()
+//                  .frame(width: 6, height: 6)
+//                  .offset(y: 12)
+//                  .foregroundColor(status ? Color(appVM.color) : .gray)
+//              }
+//            })
+//            .foregroundColor(status ? Color(appVM.color) : .gray)
+//            .lineLimit(1)
+//            .frame(maxWidth: .infinity, alignment: .center)
+//            .onTapGesture {
+//              withAnimation {
+//                currentDay = weekday.date
+//              }
+//            }
+//            .padding()
+//          }
+//        }
+//      }
+//    }
+//    .frame(height: 60) // set the height of the scroll view
+//  }
+//}
+
 extension Date {
   func toString(_ format: String) -> String {
     let formatter = DateFormatter()
@@ -82,11 +141,37 @@ extension Date {
 }
 
 extension Calendar {
-  var currentWeek: [WeekDay] {
-    guard let firstWeekDay = self.dateInterval(of: .weekOfMonth, for: Date())?.start else { return [] }
+  func weekDays(for date: Date) -> [WeekDay] {
+    let firstWeekDay = self.dateInterval(of: .weekOfMonth, for: date)?.start ?? Date()
     var week: [WeekDay] = []
     for index in 0..<7 {
       if let day = self.date(byAdding: .day, value: index, to: firstWeekDay) {
+        let weekDaySymbol: String = day.toString("EEEE")
+        let isToday = self.isDateInToday(day)
+        week.append(.init(string: weekDaySymbol, date: day, isToday: isToday))
+      }
+    }
+    return week
+  }
+  
+  //  var currentWeek: [WeekDay] {
+  //    guard let firstWeekDay = self.dateInterval(of: .weekOfMonth, for: Date())?.start else { return [] }
+  //    var week: [WeekDay] = []
+  //    for index in 0..<7 {
+  //      if let day = self.date(byAdding: .day, value: index, to: firstWeekDay) {
+  //        let weekDaySymbol: String = day.toString("EEEE")
+  //        let isToday = self.isDateInToday(day)
+  //        week.append(.init(string: weekDaySymbol, date: day, isToday: isToday))
+  //      }
+  //    }
+  //    return week
+  //  }
+  
+  var currentWeek: [WeekDay] {
+    let today = Date()
+    var week: [WeekDay] = []
+    for index in 0..<7 {
+      if let day = self.date(byAdding: .day, value: index, to: today) {
         let weekDaySymbol: String = day.toString("EEEE")
         let isToday = self.isDateInToday(day)
         week.append(.init(string: weekDaySymbol, date: day, isToday: isToday))

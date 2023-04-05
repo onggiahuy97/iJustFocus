@@ -43,10 +43,46 @@
 		5926DA5829BF814600A40425 /* KeyboardAwareModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5926DA5729BF814600A40425 /* KeyboardAwareModifier.swift */; };
 		5926DA5B29BFA20800A40425 /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5926DA5A29BFA20800A40425 /* CalendarView.swift */; };
 		5928406E29BBE701007DB75A /* TaskDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5928406D29BBE701007DB75A /* TaskDetailView.swift */; };
+		59706BAC29D7E4030069D15A /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 59706BAB29D7E4030069D15A /* WidgetKit.framework */; };
+		59706BAE29D7E4030069D15A /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 59706BAD29D7E4030069D15A /* SwiftUI.framework */; };
+		59706BB129D7E4030069D15A /* iJustFocusWidgetExtensionBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59706BB029D7E4030069D15A /* iJustFocusWidgetExtensionBundle.swift */; };
+		59706BB329D7E4030069D15A /* iJustFocusWidgetExtensionLiveActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59706BB229D7E4030069D15A /* iJustFocusWidgetExtensionLiveActivity.swift */; };
+		59706BB529D7E4030069D15A /* iJustFocusWidgetExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59706BB429D7E4030069D15A /* iJustFocusWidgetExtension.swift */; };
+		59706BB829D7E4040069D15A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 59706BB729D7E4040069D15A /* Assets.xcassets */; };
+		59706BBA29D7E4040069D15A /* iJustFocusWidgetExtension.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 59706BB629D7E4030069D15A /* iJustFocusWidgetExtension.intentdefinition */; };
+		59706BBB29D7E4040069D15A /* iJustFocusWidgetExtension.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 59706BB629D7E4030069D15A /* iJustFocusWidgetExtension.intentdefinition */; };
+		59706BBE29D7E4040069D15A /* iJustFocusWidgetExtensionExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 59706BA929D7E4030069D15A /* iJustFocusWidgetExtensionExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		59706BC329D7E6120069D15A /* Main.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3E88E7402887515E0041173A /* Main.xcdatamodeld */; };
+		5972BAF029DCE087001FD4D2 /* SplitContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5972BAEF29DCE087001FD4D2 /* SplitContentView.swift */; };
 		59BF90AE29BFF39A00A3EC0E /* AddTaskButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59BF90AD29BFF39A00A3EC0E /* AddTaskButton.swift */; };
 		59BF90B029BFF47100A3EC0E /* HapticFeedBack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59BF90AF29BFF47100A3EC0E /* HapticFeedBack.swift */; };
 		59BF90B229BFF87100A3EC0E /* TaskRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59BF90B129BFF87100A3EC0E /* TaskRowView.swift */; };
+		59CA852A29DBD07B00248697 /* CalendarUIKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59CA852929DBD07B00248697 /* CalendarUIKit.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		59706BBC29D7E4040069D15A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3EE8E159287522C6008AB34E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 59706BA829D7E4030069D15A;
+			remoteInfo = iJustFocusWidgetExtensionExtension;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		59706BBF29D7E4040069D15A /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				59706BBE29D7E4040069D15A /* iJustFocusWidgetExtensionExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		3E0537B0288F0C7E004570D4 /* View+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extension.swift"; sourceTree = "<group>"; };
@@ -88,9 +124,21 @@
 		5926DA5729BF814600A40425 /* KeyboardAwareModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardAwareModifier.swift; sourceTree = "<group>"; };
 		5926DA5A29BFA20800A40425 /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
 		5928406D29BBE701007DB75A /* TaskDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskDetailView.swift; sourceTree = "<group>"; };
+		59706BA929D7E4030069D15A /* iJustFocusWidgetExtensionExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = iJustFocusWidgetExtensionExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		59706BAB29D7E4030069D15A /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		59706BAD29D7E4030069D15A /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		59706BB029D7E4030069D15A /* iJustFocusWidgetExtensionBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iJustFocusWidgetExtensionBundle.swift; sourceTree = "<group>"; };
+		59706BB229D7E4030069D15A /* iJustFocusWidgetExtensionLiveActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iJustFocusWidgetExtensionLiveActivity.swift; sourceTree = "<group>"; };
+		59706BB429D7E4030069D15A /* iJustFocusWidgetExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iJustFocusWidgetExtension.swift; sourceTree = "<group>"; };
+		59706BB629D7E4030069D15A /* iJustFocusWidgetExtension.intentdefinition */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; path = iJustFocusWidgetExtension.intentdefinition; sourceTree = "<group>"; };
+		59706BB729D7E4040069D15A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		59706BB929D7E4040069D15A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		59706BC429D7EE790069D15A /* iJustFocus.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = iJustFocus.entitlements; sourceTree = "<group>"; };
+		5972BAEF29DCE087001FD4D2 /* SplitContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitContentView.swift; sourceTree = "<group>"; };
 		59BF90AD29BFF39A00A3EC0E /* AddTaskButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTaskButton.swift; sourceTree = "<group>"; };
 		59BF90AF29BFF47100A3EC0E /* HapticFeedBack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticFeedBack.swift; sourceTree = "<group>"; };
 		59BF90B129BFF87100A3EC0E /* TaskRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskRowView.swift; sourceTree = "<group>"; };
+		59CA852929DBD07B00248697 /* CalendarUIKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarUIKit.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,6 +146,15 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		59706BA629D7E4030069D15A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				59706BAE29D7E4030069D15A /* SwiftUI.framework in Frameworks */,
+				59706BAC29D7E4030069D15A /* WidgetKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -216,6 +273,8 @@
 			isa = PBXGroup;
 			children = (
 				3EE8E163287522C6008AB34E /* iJustFocus */,
+				59706BAF29D7E4030069D15A /* iJustFocusWidgetExtension */,
+				59706BAA29D7E4030069D15A /* Frameworks */,
 				3EE8E162287522C6008AB34E /* Products */,
 			);
 			sourceTree = "<group>";
@@ -224,6 +283,7 @@
 			isa = PBXGroup;
 			children = (
 				3EE8E161287522C6008AB34E /* iJustFocus.app */,
+				59706BA929D7E4030069D15A /* iJustFocusWidgetExtensionExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -231,9 +291,11 @@
 		3EE8E163287522C6008AB34E /* iJustFocus */ = {
 			isa = PBXGroup;
 			children = (
+				59706BC429D7EE790069D15A /* iJustFocus.entitlements */,
 				3EB2931028D0F05B004F26BE /* Info.plist */,
 				3EE8E164287522C6008AB34E /* iJustFocusApp.swift */,
 				3EE8E166287522C6008AB34E /* ContentView.swift */,
+				5972BAEF29DCE087001FD4D2 /* SplitContentView.swift */,
 				3E88E739288748FE0041173A /* HomeView.swift */,
 				3EAEA83F28AC105D000B6444 /* ImagePickerView.swift */,
 				3E88E748288876220041173A /* ViewModels */,
@@ -268,8 +330,31 @@
 			isa = PBXGroup;
 			children = (
 				5926DA5A29BFA20800A40425 /* CalendarView.swift */,
+				59CA852929DBD07B00248697 /* CalendarUIKit.swift */,
 			);
 			path = Calendar;
+			sourceTree = "<group>";
+		};
+		59706BAA29D7E4030069D15A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				59706BAB29D7E4030069D15A /* WidgetKit.framework */,
+				59706BAD29D7E4030069D15A /* SwiftUI.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		59706BAF29D7E4030069D15A /* iJustFocusWidgetExtension */ = {
+			isa = PBXGroup;
+			children = (
+				59706BB029D7E4030069D15A /* iJustFocusWidgetExtensionBundle.swift */,
+				59706BB229D7E4030069D15A /* iJustFocusWidgetExtensionLiveActivity.swift */,
+				59706BB429D7E4030069D15A /* iJustFocusWidgetExtension.swift */,
+				59706BB629D7E4030069D15A /* iJustFocusWidgetExtension.intentdefinition */,
+				59706BB729D7E4040069D15A /* Assets.xcassets */,
+				59706BB929D7E4040069D15A /* Info.plist */,
+			);
+			path = iJustFocusWidgetExtension;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -282,10 +367,12 @@
 				3EE8E15D287522C6008AB34E /* Sources */,
 				3EE8E15E287522C6008AB34E /* Frameworks */,
 				3EE8E15F287522C6008AB34E /* Resources */,
+				59706BBF29D7E4040069D15A /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				59706BBD29D7E4040069D15A /* PBXTargetDependency */,
 			);
 			name = iJustFocus;
 			packageProductDependencies = (
@@ -294,6 +381,23 @@
 			productReference = 3EE8E161287522C6008AB34E /* iJustFocus.app */;
 			productType = "com.apple.product-type.application";
 		};
+		59706BA829D7E4030069D15A /* iJustFocusWidgetExtensionExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 59706BC229D7E4040069D15A /* Build configuration list for PBXNativeTarget "iJustFocusWidgetExtensionExtension" */;
+			buildPhases = (
+				59706BA529D7E4030069D15A /* Sources */,
+				59706BA629D7E4030069D15A /* Frameworks */,
+				59706BA729D7E4030069D15A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = iJustFocusWidgetExtensionExtension;
+			productName = iJustFocusWidgetExtensionExtension;
+			productReference = 59706BA929D7E4030069D15A /* iJustFocusWidgetExtensionExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -301,11 +405,14 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1400;
+				LastSwiftUpdateCheck = 1420;
 				LastUpgradeCheck = 1400;
 				TargetAttributes = {
 					3EE8E160287522C6008AB34E = {
 						CreatedOnToolsVersion = 14.0;
+					};
+					59706BA829D7E4030069D15A = {
+						CreatedOnToolsVersion = 14.2;
 					};
 				};
 			};
@@ -325,6 +432,7 @@
 			projectRoot = "";
 			targets = (
 				3EE8E160287522C6008AB34E /* iJustFocus */,
+				59706BA829D7E4030069D15A /* iJustFocusWidgetExtensionExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -339,6 +447,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		59706BA729D7E4030069D15A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				59706BB829D7E4040069D15A /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -346,7 +462,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				59CA852A29DBD07B00248697 /* CalendarUIKit.swift in Sources */,
 				59BF90B229BFF87100A3EC0E /* TaskRowView.swift in Sources */,
+				59706BBB29D7E4040069D15A /* iJustFocusWidgetExtension.intentdefinition in Sources */,
+				5972BAF029DCE087001FD4D2 /* SplitContentView.swift in Sources */,
 				3EDE818B28AEB10400CC99AD /* TimerBackgroundSettingView.swift in Sources */,
 				3E88E73C28874DDF0041173A /* HistoryTimerListView.swift in Sources */,
 				3EA43060288898ED00AB687F /* Timing+Extension.swift in Sources */,
@@ -386,7 +505,27 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		59706BA529D7E4030069D15A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				59706BB129D7E4030069D15A /* iJustFocusWidgetExtensionBundle.swift in Sources */,
+				59706BB529D7E4030069D15A /* iJustFocusWidgetExtension.swift in Sources */,
+				59706BB329D7E4030069D15A /* iJustFocusWidgetExtensionLiveActivity.swift in Sources */,
+				59706BBA29D7E4040069D15A /* iJustFocusWidgetExtension.intentdefinition in Sources */,
+				59706BC329D7E6120069D15A /* Main.xcdatamodeld in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		59706BBD29D7E4040069D15A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 59706BA829D7E4030069D15A /* iJustFocusWidgetExtensionExtension */;
+			targetProxy = 59706BBC29D7E4040069D15A /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		3EE8E16D287522C7008AB34E /* Debug */ = {
@@ -506,8 +645,10 @@
 		3EE8E170287522C7008AB34E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = iJustFocus/iJustFocus.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"iJustFocus/Preview Content\"";
@@ -540,8 +681,10 @@
 		3EE8E171287522C7008AB34E /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = iJustFocus/iJustFocus.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"iJustFocus/Preview Content\"";
@@ -571,6 +714,64 @@
 			};
 			name = Release;
 		};
+		59706BC029D7E4040069D15A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = B6LXP9JCNK;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = iJustFocusWidgetExtension/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = iJustFocusWidgetExtension;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.HuyOng.iJustFocus.iJustFocusWidgetExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		59706BC129D7E4040069D15A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = B6LXP9JCNK;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = iJustFocusWidgetExtension/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = iJustFocusWidgetExtension;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.HuyOng.iJustFocus.iJustFocusWidgetExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -588,6 +789,15 @@
 			buildConfigurations = (
 				3EE8E170287522C7008AB34E /* Debug */,
 				3EE8E171287522C7008AB34E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		59706BC229D7E4040069D15A /* Build configuration list for PBXNativeTarget "iJustFocusWidgetExtensionExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				59706BC029D7E4040069D15A /* Debug */,
+				59706BC129D7E4040069D15A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

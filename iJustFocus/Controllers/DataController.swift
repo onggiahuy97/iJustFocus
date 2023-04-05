@@ -7,41 +7,48 @@
 
 import Foundation
 import CoreData
+import CloudKit
 
 class DataController: ObservableObject {
-   
-    static let shared = DataController()
+  
+  static let shared = DataController()
+  
+  let container: NSPersistentCloudKitContainer
+  
+  init(inMemory: Bool = false) {
+    container = NSPersistentCloudKitContainer(name: "Main")
     
-    let container: NSPersistentContainer
-    
-    init(inMemory: Bool = false) {
-        container = NSPersistentContainer(name: "Main")
-        
-        if inMemory {
-            container.persistentStoreDescriptions.first?.url = URL(fileURLWithPath: "/dev/null")
-        } else {
-            let groupID = "group.com.HuyOng"
-            if let url = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: groupID) {
-                container.persistentStoreDescriptions.first?.url = url.appendingPathComponent("Main.sqlite")
-            }
-        }
-        
-        container.loadPersistentStores { _, error in
-            if let error = error {
-                fatalError("Fatal error loading store: \(error.localizedDescription)")
-            }
-            
-            self.container.viewContext.automaticallyMergesChangesFromParent = true
-        }
+    if inMemory {
+      container.persistentStoreDescriptions.first?.url = URL(fileURLWithPath: "/dev/null")
+    } else {
     }
     
-    func save() {
-        if container.viewContext.hasChanges {
-            try? container.viewContext.save()
-        }
+    if let description = container.persistentStoreDescriptions.first {
+      description.setOption(true as NSNumber, forKey: NSPersistentHistoryTrackingKey)
+      description.setOption(true as NSNumber, forKey: NSPersistentStoreRemoteChangeNotificationPostOptionKey)
     }
     
-    func delete(_ object: NSManagedObject) {
-        container.viewContext.delete(object)
+    container.viewContext.automaticallyMergesChangesFromParent = true
+    container.viewContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
+
+    
+    container.loadPersistentStores { _, error in
+      if let error = error {
+        fatalError("Fatal error loading store: \(error.localizedDescription)")
+      }
+      
+      self.container.viewContext.automaticallyMergesChangesFromParent = true
     }
+  }
+  
+  func save() {
+    if container.viewContext.hasChanges {
+      try? container.viewContext.save()
+    }
+  }
+  
+  func delete(_ object: NSManagedObject) {
+    container.viewContext.delete(object)
+  }
 }
+
